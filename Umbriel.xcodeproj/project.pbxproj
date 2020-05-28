@@ -1,0 +1,616 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D025E247D5C1D00E17095 /* AppDelegate.swift */; };
+		940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0260247D5C1D00E17095 /* SceneDelegate.swift */; };
+		940D0264247D5C1D00E17095 /* Umbriel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */; };
+		940D0266247D5C1D00E17095 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0265247D5C1D00E17095 /* ContentView.swift */; };
+		940D0268247D5C1E00E17095 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 940D0267247D5C1E00E17095 /* Assets.xcassets */; };
+		940D026B247D5C1E00E17095 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 940D026A247D5C1E00E17095 /* Preview Assets.xcassets */; };
+		940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */; };
+		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
+		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		940D0275247D5C1E00E17095 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940D0253247D5C1D00E17095 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 940D025A247D5C1D00E17095;
+			remoteInfo = Umbriel;
+		};
+		940D0280247D5C1E00E17095 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940D0253247D5C1D00E17095 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 940D025A247D5C1D00E17095;
+			remoteInfo = Umbriel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		940D025B247D5C1D00E17095 /* Umbriel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umbriel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		940D025E247D5C1D00E17095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		940D0260247D5C1D00E17095 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		940D0263247D5C1D00E17095 /* Umbriel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Umbriel.xcdatamodel; sourceTree = "<group>"; };
+		940D0265247D5C1D00E17095 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		940D0267247D5C1E00E17095 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		940D026A247D5C1E00E17095 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		940D026D247D5C1E00E17095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		940D026F247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		940D0274247D5C1E00E17095 /* UmbrielTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		940D0278247D5C1E00E17095 /* UmbrielTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielTests.swift; sourceTree = "<group>"; };
+		940D027A247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
+		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		940D0258247D5C1D00E17095 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D0271247D5C1E00E17095 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D027C247D5C1E00E17095 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		940D0252247D5C1D00E17095 = {
+			isa = PBXGroup;
+			children = (
+				940D025D247D5C1D00E17095 /* Umbriel */,
+				940D0277247D5C1E00E17095 /* UmbrielTests */,
+				940D0282247D5C1E00E17095 /* UmbrielUITests */,
+				940D025C247D5C1D00E17095 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		940D025C247D5C1D00E17095 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				940D025B247D5C1D00E17095 /* Umbriel.app */,
+				940D0274247D5C1E00E17095 /* UmbrielTests.xctest */,
+				940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		940D025D247D5C1D00E17095 /* Umbriel */ = {
+			isa = PBXGroup;
+			children = (
+				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
+				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
+				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				940D0267247D5C1E00E17095 /* Assets.xcassets */,
+				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
+				940D026F247D5C1E00E17095 /* Info.plist */,
+				940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */,
+				940D0269247D5C1E00E17095 /* Preview Content */,
+			);
+			path = Umbriel;
+			sourceTree = "<group>";
+		};
+		940D0269247D5C1E00E17095 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				940D026A247D5C1E00E17095 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		940D0277247D5C1E00E17095 /* UmbrielTests */ = {
+			isa = PBXGroup;
+			children = (
+				940D0278247D5C1E00E17095 /* UmbrielTests.swift */,
+				940D027A247D5C1E00E17095 /* Info.plist */,
+			);
+			path = UmbrielTests;
+			sourceTree = "<group>";
+		};
+		940D0282247D5C1E00E17095 /* UmbrielUITests */ = {
+			isa = PBXGroup;
+			children = (
+				940D0283247D5C1E00E17095 /* UmbrielUITests.swift */,
+				940D0285247D5C1E00E17095 /* Info.plist */,
+			);
+			path = UmbrielUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		940D025A247D5C1D00E17095 /* Umbriel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 940D0288247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "Umbriel" */;
+			buildPhases = (
+				940D0257247D5C1D00E17095 /* Sources */,
+				940D0258247D5C1D00E17095 /* Frameworks */,
+				940D0259247D5C1D00E17095 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Umbriel;
+			productName = Umbriel;
+			productReference = 940D025B247D5C1D00E17095 /* Umbriel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		940D0273247D5C1E00E17095 /* UmbrielTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 940D028B247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielTests" */;
+			buildPhases = (
+				940D0270247D5C1E00E17095 /* Sources */,
+				940D0271247D5C1E00E17095 /* Frameworks */,
+				940D0272247D5C1E00E17095 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				940D0276247D5C1E00E17095 /* PBXTargetDependency */,
+			);
+			name = UmbrielTests;
+			productName = UmbrielTests;
+			productReference = 940D0274247D5C1E00E17095 /* UmbrielTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		940D027E247D5C1E00E17095 /* UmbrielUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 940D028E247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielUITests" */;
+			buildPhases = (
+				940D027B247D5C1E00E17095 /* Sources */,
+				940D027C247D5C1E00E17095 /* Frameworks */,
+				940D027D247D5C1E00E17095 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				940D0281247D5C1E00E17095 /* PBXTargetDependency */,
+			);
+			name = UmbrielUITests;
+			productName = UmbrielUITests;
+			productReference = 940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		940D0253247D5C1D00E17095 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = "Ryan Mottram";
+				TargetAttributes = {
+					940D025A247D5C1D00E17095 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+					940D0273247D5C1E00E17095 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 940D025A247D5C1D00E17095;
+					};
+					940D027E247D5C1E00E17095 = {
+						CreatedOnToolsVersion = 11.5;
+						TestTargetID = 940D025A247D5C1D00E17095;
+					};
+				};
+			};
+			buildConfigurationList = 940D0256247D5C1D00E17095 /* Build configuration list for PBXProject "Umbriel" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 940D0252247D5C1D00E17095;
+			productRefGroup = 940D025C247D5C1D00E17095 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				940D025A247D5C1D00E17095 /* Umbriel */,
+				940D0273247D5C1E00E17095 /* UmbrielTests */,
+				940D027E247D5C1E00E17095 /* UmbrielUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		940D0259247D5C1D00E17095 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */,
+				940D026B247D5C1E00E17095 /* Preview Assets.xcassets in Resources */,
+				940D0268247D5C1E00E17095 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D0272247D5C1E00E17095 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D027D247D5C1E00E17095 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		940D0257247D5C1D00E17095 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
+				940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */,
+				940D0266247D5C1D00E17095 /* ContentView.swift in Sources */,
+				940D0264247D5C1D00E17095 /* Umbriel.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D0270247D5C1E00E17095 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		940D027B247D5C1E00E17095 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		940D0276247D5C1E00E17095 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 940D025A247D5C1D00E17095 /* Umbriel */;
+			targetProxy = 940D0275247D5C1E00E17095 /* PBXContainerItemProxy */;
+		};
+		940D0281247D5C1E00E17095 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 940D025A247D5C1D00E17095 /* Umbriel */;
+			targetProxy = 940D0280247D5C1E00E17095 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				940D026D247D5C1E00E17095 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		940D0286247D5C1E00E17095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		940D0287247D5C1E00E17095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		940D0289247D5C1E00E17095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Umbriel/Preview Content\"";
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Umbriel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.Umbriel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		940D028A247D5C1E00E17095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Umbriel/Preview Content\"";
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Umbriel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.Umbriel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		940D028C247D5C1E00E17095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				INFOPLIST_FILE = UmbrielTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.UmbrielTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Umbriel.app/Umbriel";
+			};
+			name = Debug;
+		};
+		940D028D247D5C1E00E17095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				INFOPLIST_FILE = UmbrielTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.UmbrielTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Umbriel.app/Umbriel";
+			};
+			name = Release;
+		};
+		940D028F247D5C1E00E17095 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				INFOPLIST_FILE = UmbrielUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.UmbrielUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Umbriel;
+			};
+			name = Debug;
+		};
+		940D0290247D5C1E00E17095 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LBVLR48R2V;
+				INFOPLIST_FILE = UmbrielUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.UmbrielUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Umbriel;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		940D0256247D5C1D00E17095 /* Build configuration list for PBXProject "Umbriel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				940D0286247D5C1E00E17095 /* Debug */,
+				940D0287247D5C1E00E17095 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		940D0288247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "Umbriel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				940D0289247D5C1E00E17095 /* Debug */,
+				940D028A247D5C1E00E17095 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		940D028B247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				940D028C247D5C1E00E17095 /* Debug */,
+				940D028D247D5C1E00E17095 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		940D028E247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				940D028F247D5C1E00E17095 /* Debug */,
+				940D0290247D5C1E00E17095 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				940D0263247D5C1D00E17095 /* Umbriel.xcdatamodel */,
+			);
+			currentVersion = 940D0263247D5C1D00E17095 /* Umbriel.xcdatamodel */;
+			path = Umbriel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 940D0253247D5C1D00E17095 /* Project object */;
+}
