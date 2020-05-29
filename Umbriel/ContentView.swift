@@ -40,8 +40,8 @@ struct ContentView: View
                     
                     Button(action: { self.hidden.toggle() })
                     {
-                        Image(systemName: self.hidden ? "eye.fill" : "eye.slash.fill")
-                            .foregroundColor((self.hidden == true ) ? Color.green : Color.secondary)
+                        Image(systemName: self.hidden ? "eye.slash.fill" : "eye.fill")
+                            .foregroundColor((self.hidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
                             .padding(.horizontal, 30).padding(.top, 30)
                     }
                 }.padding(.top, 60)
