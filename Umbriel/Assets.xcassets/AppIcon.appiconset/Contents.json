@@ -13,6 +13,12 @@
       "size" : "20x20"
     },
     {
+      "filename" : "Icon-Small.png",
+      "idiom" : "iphone",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
       "filename" : "Icon-Small@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
@@ -31,13 +37,13 @@
       "size" : "40x40"
     },
     {
-      "filename" : "Icon-60@2x.png",
+      "filename" : "Icon-Spotlight-40@3x.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
-      "filename" : "Icon-60@2x-1.png",
+      "filename" : "Icon-60@2x.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
@@ -49,7 +55,7 @@
       "size" : "60x60"
     },
     {
-      "filename" : "App Icon.png",
+      "filename" : "Icon.jpeg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
@@ -58,5 +64,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "pre-rendered" : true
   }
 }
