@@ -14,12 +14,12 @@ struct ContentView: View
     @State var isAnimated = false
     @State var password = ""
     @State var hidden = false
+    @State var score = 0.0
     
     var state = 1
     
     var body: some View
     {
-        
         VStack
         {
             
@@ -30,12 +30,14 @@ struct ContentView: View
                     if self.hidden
                     {
                         SecureField("Enter Password...", text: self.$password).padding(10)
-                            .padding(.horizontal, 30).padding(.top, 30)
+                            .padding(.horizontal, 10).padding(.top, 20)
+                            .font(.system(size: 30, design: .rounded))
                             
                     } else
                     {
                         TextField("Enter Password...", text: self.$password).padding(10)
-                            .padding(.horizontal, 30).padding(.top, 30)
+                            .padding(.horizontal, 10).padding(.top, 20)
+                            .font(.system(size: 30, design: .rounded))
                     }
                     
                     Button(action: { self.hidden.toggle() })
@@ -48,8 +50,43 @@ struct ContentView: View
             }
             Divider()
                 .padding(.horizontal, 20)
-                
             
+            Button(action: {
+                if self.password == "^{0}$"
+                {
+                    self.score = 0.0
+                }
+                if self.password == "^{6}$"
+                {
+                    self.score += 0.5
+                }
+                if self.password == "^{8}$"
+                {
+                    self.score += 0.5
+                }
+                if self.password == "^(?=.*[A-Z])$"
+                {
+                    self.score += 0.5
+                }
+                if self.password == "^(?=.*[a-z])$"
+                {
+                    self.score += 0.5
+                }
+                if self.password == "^(?=.*[!@#$&*])$"
+                {
+                    self.score += 0.5
+                }
+                if self.password == "^(?=.*[0-9])$"
+                {
+                    self.score += 0.5
+                }
+            })
+            {
+                Text("Test Password")
+            }.padding().font(.system(size: 20, design: .rounded))
+            
+            Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
+
             
             ZStack
             {
@@ -182,12 +219,56 @@ func Wave(interval:CGFloat, amplitude:CGFloat = 100, baseline: CGFloat = UIScree
     }
 }
 
-enum trafficLights
+var password = ""
+
+func CheckStrength(password:String) -> Double
 {
-    case weak
-    case average
-    case strong
-    case veryStrong
+    var score: Double = 0.0
+    
+    if password == "^{0}$"
+    {
+        score = 0.0
+    }
+    if password == "^{6}$"
+    {
+        score += 0.5
+    }
+    if password == "^{8}$"
+    {
+        score += 0.5
+    }
+    if password == "^(?=.*[A-Z])$"
+    {
+        score += 0.5
+    }
+    if password == "^(?=.*[a-z])$"
+    {
+        score += 0.5
+    }
+    if password == "^(?=.*[!@#$&*])$"
+    {
+        score += 0.5
+    }
+    if password == "^(?=.*[0-9])$"
+    {
+        score += 0.5
+    }
+    
+    return score
+}
+
+enum PasswordScore
+{
+    case blank(Int)
+    case weak(Int)
+    case average(Int)
+    case strong(Int)
+    case veryStrong(Int)
+}
+
+func OneDecimal(number: Double) -> String
+{
+    return String(format: "%.1f", number)
 }
 
 struct ContentView_Previews: PreviewProvider
