@@ -52,7 +52,10 @@ struct ContentView: View
                 .padding(.horizontal, 20)
             
             Button(action: {
-                if self.password == "^{0}$"
+                
+                regex = try NSRegularExpression(pattern: "[A-Z]", options: .caseInsensitive)
+                
+                if self.password ==
                 {
                     self.score = 0.0
                 }

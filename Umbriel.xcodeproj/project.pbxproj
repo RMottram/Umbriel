@@ -51,6 +51,7 @@
 		940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		946F00F7248966EC002C40AC /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +105,7 @@
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
 				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				946F00F7248966EC002C40AC /* MyPlayground.playground */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
 				940D026F247D5C1E00E17095 /* Info.plist */,
