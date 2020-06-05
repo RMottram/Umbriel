@@ -15,8 +15,8 @@ struct ContentView: View
     @State var password = ""
     @State var hidden = false
     @State var score = 0.0
-    
-    @State var weak = true
+    @State var standby = true
+    @State var weak = false
     @State var average = false
     @State var strong = false
     @State var veryStrong = false
@@ -67,6 +67,30 @@ struct ContentView: View
             
             ZStack
             {
+                // standby animation
+                if standby
+                {
+                    // background wave
+                    Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/6)
+                            .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.4))
+                            .offset(x: isAnimated ? -1 * universalSize.width : 0)
+                            .animation(Animation.linear(duration: 6)
+                            .repeatForever(autoreverses: false))
+                        
+                        // midground wave
+                        Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/6)
+                            .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.6))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
+                        
+                        //foreground
+                        Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/6)
+                            .foregroundColor(Color.init(red: 130/255, green: 140/255, blue: 140/255, opacity: 1))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
+                }
                 
                 // weak password
                 if weak
