@@ -35,7 +35,6 @@ struct ContentView: View
                         SecureField("Enter Password...", text: self.$password).padding(10)
                             .padding(.horizontal, 10).padding(.top, 20)
                             .font(.system(size: 30, design: .rounded))
-                            
                     } else
                     {
                         TextField("Enter Password...", text: self.$password).padding(10)
