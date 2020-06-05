@@ -54,13 +54,13 @@ struct ContentView: View
             Divider()
                 .padding(.horizontal, 20)
             
-            Button(action:
-                {
-                    
-            })
-            {
-                Text("Test Password")
-            }.padding().font(.system(size: 20, design: .rounded))
+//            Button(action:
+//                {
+//
+//            })
+//            {
+//                Text("Test Password")
+//            }.padding().font(.system(size: 20, design: .rounded))
             
             Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
 
@@ -72,25 +72,25 @@ struct ContentView: View
                 if weak
                 {
                     // background wave
-                    Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
+                    Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/6)
                             .foregroundColor(Color.init(red: 253/255, green: 169/255, blue: 169/255, opacity: 0.4))
                             .offset(x: isAnimated ? -1 * universalSize.width : 0)
                             .animation(Animation.linear(duration: 6)
                             .repeatForever(autoreverses: false))
                         
                         // midground wave
-                        Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
+                        Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/6)
                             .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 0.6))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                         
                         //foreground
-                        Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
+                        Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/6)
                             .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 1))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                 }
                 
                 // average password
@@ -106,16 +106,16 @@ struct ContentView: View
                         // midground wave
                         Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
                             .foregroundColor(Color.init(red: 255/255, green: 190/255, blue: 101/255, opacity: 0.6))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
                             .foregroundColor(Color.init(red: 255/255, green: 190/255, blue: 101/255, opacity: 1))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                 }
                 
                 // strong password
@@ -131,16 +131,16 @@ struct ContentView: View
                         // midground wave
                         Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
                             .foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255, opacity: 0.6))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
                             .foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255, opacity: 1))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                 }
                 
                 // very strong password
@@ -156,16 +156,16 @@ struct ContentView: View
                         // midground wave
                         Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
                             .foregroundColor(Color.init(red: 127/255, green: 73/255, blue: 255/255, opacity: 0.6))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
                             .foregroundColor(Color.init(red: 127/255, green: 73/255, blue: 255/255, opacity: 1))
-                        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
-                        .animation(Animation.linear(duration: 4)
-                        .repeatForever(autoreverses: false))
+                            .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+                            .animation(Animation.linear(duration: 4)
+                            .repeatForever(autoreverses: false))
                 }
                 
             }.onAppear()
@@ -194,33 +194,6 @@ func Wave(interval:CGFloat, amplitude:CGFloat = 100, baseline: CGFloat = UIScree
             path.addLine(to: CGPoint(x: 2 * interval, y: UIScreen.main.bounds.height))
             path.addLine(to: CGPoint(x: 0, y: UIScreen.main.bounds.height))
     }
-}
-
-func WeakWave()
-{
-    let universalSize = UIScreen.main.bounds
-    let isAnimated: Bool = true
-    
-    // background wave
-    Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
-            .foregroundColor(Color.init(red: 253/255, green: 169/255, blue: 169/255, opacity: 0.4))
-            .offset(x: isAnimated ? -1 * universalSize.width : 0)
-            .animation(Animation.linear(duration: 6)
-            .repeatForever(autoreverses: false))
-        
-        // midground wave
-        Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
-            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 0.6))
-        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
-        .animation(Animation.linear(duration: 4)
-        .repeatForever(autoreverses: false))
-        
-        //foreground
-        Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
-            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 1))
-        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
-        .animation(Animation.linear(duration: 4)
-        .repeatForever(autoreverses: false))
 }
 
 enum PasswordScore
