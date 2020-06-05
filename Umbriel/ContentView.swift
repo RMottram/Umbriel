@@ -16,7 +16,10 @@ struct ContentView: View
     @State var hidden = false
     @State var score = 0.0
     
-    var state = 1
+    @State var weak = true
+    @State var average = false
+    @State var strong = false
+    @State var veryStrong = false
     
     var body: some View
     {
@@ -51,38 +54,9 @@ struct ContentView: View
             Divider()
                 .padding(.horizontal, 20)
             
-            Button(action: {
-                
-                regex = try NSRegularExpression(pattern: "[A-Z]", options: .caseInsensitive)
-                
-                if self.password ==
+            Button(action:
                 {
-                    self.score = 0.0
-                }
-                if self.password == "^{6}$"
-                {
-                    self.score += 0.5
-                }
-                if self.password == "^{8}$"
-                {
-                    self.score += 0.5
-                }
-                if self.password == "^(?=.*[A-Z])$"
-                {
-                    self.score += 0.5
-                }
-                if self.password == "^(?=.*[a-z])$"
-                {
-                    self.score += 0.5
-                }
-                if self.password == "^(?=.*[!@#$&*])$"
-                {
-                    self.score += 0.5
-                }
-                if self.password == "^(?=.*[0-9])$"
-                {
-                    self.score += 0.5
-                }
+                    
             })
             {
                 Text("Test Password")
@@ -95,7 +69,7 @@ struct ContentView: View
             {
                 
                 // weak password
-                if state == 1
+                if weak
                 {
                     // background wave
                     Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
@@ -113,14 +87,14 @@ struct ContentView: View
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
-                            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 0.8))
+                            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 1))
                         .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
                         .animation(Animation.linear(duration: 4)
                         .repeatForever(autoreverses: false))
                 }
                 
                 // average password
-                if state == 2
+                if average
                 {
                     // background wave
                         Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
@@ -138,14 +112,14 @@ struct ContentView: View
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
-                            .foregroundColor(Color.init(red: 255/255, green: 190/255, blue: 101/255, opacity: 0.8))
+                            .foregroundColor(Color.init(red: 255/255, green: 190/255, blue: 101/255, opacity: 1))
                         .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
                         .animation(Animation.linear(duration: 4)
                         .repeatForever(autoreverses: false))
                 }
                 
                 // strong password
-                if state == 3
+                if strong
                 {
                     // background wave
                         Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
@@ -163,14 +137,14 @@ struct ContentView: View
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
-                            .foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255, opacity: 0.8))
+                            .foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255, opacity: 1))
                         .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
                         .animation(Animation.linear(duration: 4)
                         .repeatForever(autoreverses: false))
                 }
                 
                 // very strong password
-                if state == 4
+                if veryStrong
                 {
                     // background wave
                         Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
@@ -188,7 +162,7 @@ struct ContentView: View
                         
                         //foreground
                         Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
-                            .foregroundColor(Color.init(red: 127/255, green: 73/255, blue: 255/255, opacity: 0.8))
+                            .foregroundColor(Color.init(red: 127/255, green: 73/255, blue: 255/255, opacity: 1))
                         .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
                         .animation(Animation.linear(duration: 4)
                         .repeatForever(autoreverses: false))
@@ -222,42 +196,31 @@ func Wave(interval:CGFloat, amplitude:CGFloat = 100, baseline: CGFloat = UIScree
     }
 }
 
-var password = ""
-
-func CheckStrength(password:String) -> Double
+func WeakWave()
 {
-    var score: Double = 0.0
+    let universalSize = UIScreen.main.bounds
+    let isAnimated: Bool = true
     
-    if password == "^{0}$"
-    {
-        score = 0.0
-    }
-    if password == "^{6}$"
-    {
-        score += 0.5
-    }
-    if password == "^{8}$"
-    {
-        score += 0.5
-    }
-    if password == "^(?=.*[A-Z])$"
-    {
-        score += 0.5
-    }
-    if password == "^(?=.*[a-z])$"
-    {
-        score += 0.5
-    }
-    if password == "^(?=.*[!@#$&*])$"
-    {
-        score += 0.5
-    }
-    if password == "^(?=.*[0-9])$"
-    {
-        score += 0.5
-    }
-    
-    return score
+    // background wave
+    Wave(interval: universalSize.width, amplitude:100, baseline: universalSize.height/4)
+            .foregroundColor(Color.init(red: 253/255, green: 169/255, blue: 169/255, opacity: 0.4))
+            .offset(x: isAnimated ? -1 * universalSize.width : 0)
+            .animation(Animation.linear(duration: 6)
+            .repeatForever(autoreverses: false))
+        
+        // midground wave
+        Wave(interval: universalSize.width * 2, amplitude: 80, baseline: universalSize.height/4)
+            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 0.6))
+        .offset(x: isAnimated ? -1 * (universalSize.width * 2) : 0)
+        .animation(Animation.linear(duration: 4)
+        .repeatForever(autoreverses: false))
+        
+        //foreground
+        Wave(interval: universalSize.width * 4, amplitude: 60, baseline: 60 + universalSize.height/4)
+            .foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255, opacity: 1))
+        .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
+        .animation(Animation.linear(duration: 4)
+        .repeatForever(autoreverses: false))
 }
 
 enum PasswordScore
