@@ -16,6 +16,7 @@
 		940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */; };
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
+		94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF6C8249230E200E2E6A2 /* WaveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94FAF6C5248E427400E2E6A2 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		94FAF6C8249230E200E2E6A2 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
-				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
+				94FAF6C5248E427400E2E6A2 /* MyPlayground.playground */,
+				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
 				940D026F247D5C1E00E17095 /* Info.plist */,
@@ -271,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
+				94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */,
 				940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */,
 				940D0266247D5C1D00E17095 /* ContentView.swift in Sources */,
 				940D0264247D5C1D00E17095 /* Umbriel.xcdatamodeld in Sources */,
