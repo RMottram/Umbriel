@@ -212,7 +212,31 @@ func TestStrength(password: String) -> Double
     return score
 }
 
-TestStrength(password: "zH3£qQP8*)(m9mB0")
+//TestStrength(password: "zH3£qQP8*)(m9mB0")
+
+
+func myFunc(password: String)
+{
+    let input: StrengthScore
+    
+    switch input {
+        case .Blank:
+        print("DEBUG: Password is blank!")
+        case .Weak:
+        print("DEBUG: Password is weak!")
+        case .Average:
+        print("DEBUG: Password is average!")
+        case .Strong:
+        print("DEBUG: Password is strong!")
+        case .VeryStrong:
+        print("DEBUG: Password is very strong!")
+    }
+}
+
+myFunc(password: mypassword)
+
+
+
 
 
 //let passwordRegex = ("^(?=.*[@#$%^&*])$")

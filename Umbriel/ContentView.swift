@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View
 {
-    let universalSize = UIScreen.main.bounds
+    //let universalSize = UIScreen.main.bounds
 
     @State var password = ""
     @State var hidden = false
@@ -31,24 +31,24 @@ struct ContentView: View
     @State private var blue:Double = 101
     
     // average
-    @State private var avgred:Double = 255
-    @State private var avggreen:Double = 190
-    @State private var avgblue:Double = 101
+    @State private var avgRed:Double = 255
+    @State private var avgGreen:Double = 190
+    @State private var avgBlue:Double = 101
     
     // strong
-    @State private var strongred:Double = 117
-    @State private var stronggreen:Double = 211
-    @State private var strongblue:Double = 99
+    @State private var strongRed:Double = 117
+    @State private var strongGreen:Double = 211
+    @State private var strongBlue:Double = 99
     
     // very strong
-    @State private var vstrongred:Double = 127
-    @State private var vstronggreen:Double = 73
-    @State private var vstrongblue:Double = 255
+    @State private var vstrongRed:Double = 127
+    @State private var vstrongGreen:Double = 73
+    @State private var vstrongBlue:Double = 255
     
     // standby
-    @State private var stbred:Double = 135
-    @State private var stbgreen:Double = 140
-    @State private var stbblue:Double = 140
+    @State private var stbRed:Double = 135
+    @State private var stbGreen:Double = 140
+    @State private var stbBlue:Double = 140
     
     @State private var opacity:Double = 0.2
     
@@ -86,8 +86,9 @@ struct ContentView: View
                     .padding(.horizontal, 20)
                 
                 Button(action: {
-                    self.standby.toggle()
-                    self.veryStrong.toggle()
+                    
+                    
+                    
                 })
                 {
                     Text("Test Password")
@@ -104,20 +105,20 @@ struct ContentView: View
                         }
                         if average
                         {
-                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $avgred, green: $avggreen, blue: $avgblue, opacity: $opacity)
+                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $avgRed, green: $avgGreen, blue: $avgBlue, opacity: $opacity)
                         }
                         if strong
                         {
-                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $strongred, green: $stronggreen, blue: $strongblue, opacity: $opacity)
+                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $strongRed, green: $strongGreen, blue: $strongBlue, opacity: $opacity)
 
                         }
                         if veryStrong
                         {
-                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $vstrongred, green: $vstronggreen, blue: $vstrongblue, opacity: $opacity)
+                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $vstrongRed, green: $vstrongGreen, blue: $vstrongBlue, opacity: $opacity)
                         }
                         if standby
                         {
-                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $stbred, green: $stbgreen, blue: $stbblue, opacity: $opacity)
+                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $stbRed, green: $stbGreen, blue: $stbBlue, opacity: $opacity)
                         }
                 }
         }
