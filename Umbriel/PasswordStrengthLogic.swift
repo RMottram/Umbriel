@@ -10,7 +10,7 @@ import Foundation
 
 class PasswordLogic
 {
-    let password = ""
+    let mypassword = ""
     
     // works
     func isMoreThanOneUpper(password: String) -> Bool
@@ -18,7 +18,7 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[A-Z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanOneUpper(password: mypassword)
+
     
     // works
     func isMoreThanTwoUpper(password: String) -> Bool
@@ -26,7 +26,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[A-Z].*[A-Z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanTwoUpper(password: mypassword)
     
     // works
     func isMoreThanThreeUpper(password: String) -> Bool
@@ -34,7 +33,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[A-Z].*[A-Z].*[A-Z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanThreeUpper(password: mypassword)
     
     // works
     func isMoreThanOneLower(password: String) -> Bool
@@ -42,7 +40,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[a-z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanOneLower(password: mypassword)
     
     // works
     func isMoreThanTwoLower(password: String) -> Bool
@@ -50,7 +47,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[a-z].*[a-z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanTwoLower(password: mypassword)
     
     // works
     func isMoreThanThreeLower(password: String) -> Bool
@@ -58,7 +54,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[a-z].*[a-z].*[a-z]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanThreeLower(password: mypassword)
     
     // works
     func isMoreThanOneNumber(password: String) -> Bool
@@ -66,7 +61,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[0-9]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanOneNumber(password: mypassword)
     
     // works
     func isMoreThanTwoNumbers(password: String) -> Bool
@@ -74,7 +68,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[0-9].*[0-9]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanTwoNumbers(password: mypassword)
     
     // works
     func isMoreThanThreeNumbers(password: String) -> Bool
@@ -82,7 +75,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[0-9].*[0-9].*[0-9]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanThreeNumbers(password: mypassword)
     
     // works
     func isMoreThanOneSpecial(password: String) -> Bool
@@ -90,7 +82,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[-{};:,.<>£!@#_$&*]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanOneSpecial(password: mypassword)
     
     // works
     func isMoreThanTwoSpecial(password: String) -> Bool
@@ -98,7 +89,6 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[-{};:,.<>£!@#_$&*].*[-{};:,.<>£!@#_$&*]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanTwoSpecial(password: mypassword)
     
     // works
     func isMoreThanThreeSpecial(password: String) -> Bool
@@ -106,9 +96,8 @@ class PasswordLogic
         let passwordRegex = "^(?=.*[-{};:,.<>£!@#_$&*].*[-{};:,.<>£!@#_$&*].*[-{};:,.<>£!@#_$&*]).{1,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    isMoreThanTwoSpecial(password: mypassword)
     
-    func TestStrength(password: String) -> Double
+    func TestStrength(password: String) -> StrengthScore
     {
         var score:Double = 0
         
@@ -194,7 +183,30 @@ class PasswordLogic
         }
         
         print("DEBUG: End of scoring, final score = \(score)")
-        return score
+        
+        switch score {
+            case 0:
+                return .Blank
+            case 1...2:
+                return .Weak
+            case 3...5:
+                return .Average
+            case 6...8:
+                return .Strong
+            case 9...:
+                return .VeryStrong
+            default:
+                return .Blank
+        }
+    }
+    
+    enum StrengthScore: Int
+    {
+        case Blank = 0
+        case Weak = 2
+        case Average = 5
+        case Strong = 8
+        case VeryStrong = 10
     }
 }
 

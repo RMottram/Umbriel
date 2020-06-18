@@ -11,6 +11,7 @@ import SwiftUI
 struct ContentView: View
 {
     //let universalSize = UIScreen.main.bounds
+    let test = PasswordLogic()
 
     @State var password = ""
     @State var hidden = false
@@ -26,9 +27,9 @@ struct ContentView: View
     @State private var animationDuration:Double = 4
     
     // weak
-    @State private var red:Double = 255
-    @State private var green:Double = 101
-    @State private var blue:Double = 101
+    @State private var weakRed:Double = 255
+    @State private var weakGreen:Double = 101
+    @State private var weakBlue:Double = 101
     
     // average
     @State private var avgRed:Double = 255
@@ -86,8 +87,31 @@ struct ContentView: View
                     .padding(.horizontal, 20)
                 
                 Button(action: {
+                    self.standby = false
                     
-                    
+                    switch self.test.TestStrength(password: self.password)
+                    {
+                        case .Blank, .Weak:
+                            self.weak = true
+                            self.average = false
+                            self.strong = false
+                            self.veryStrong = false
+                        case .Average:
+                            self.weak = false
+                            self.average = true
+                            self.strong = false
+                            self.veryStrong = false
+                        case .Strong:
+                            self.weak = false
+                            self.average = false
+                            self.strong = true
+                            self.veryStrong = false
+                        case .VeryStrong:
+                            self.weak = false
+                            self.average = false
+                            self.strong = false
+                            self.veryStrong = true
+                    }
                     
                 })
                 {
@@ -101,7 +125,7 @@ struct ContentView: View
                     {
                         if weak
                         {
-                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $red, green: $green, blue: $blue, opacity: $opacity)
+                            WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $weakRed, green: $weakGreen, blue: $weakBlue, opacity: $opacity)
                         }
                         if average
                         {
