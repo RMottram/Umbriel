@@ -10,17 +10,16 @@ import SwiftUI
 
 struct ContentView: View
 {
-    //let universalSize = UIScreen.main.bounds
-    let test = PasswordLogic()
-
+    let passwordTester = PasswordLogic()
+    
     @State var password = ""
-    @State var hidden = false
+    @State var isHidden = false
     @State var score: Double = 0
-    @State var standby = true
-    @State var weak = false
-    @State var average = false
-    @State var strong = false
-    @State var veryStrong = false
+    @State var isStandby = true
+    @State var isWeak = false
+    @State var isAverage = false
+    @State var isStrong = false
+    @State var isVeryStrong = false
     
     @State private var baseline:CGFloat = UIScreen.main.bounds.height/4
     @State private var amplitude:CGFloat = 60
@@ -62,55 +61,59 @@ struct ContentView: View
                     {
                         HStack
                             {
-                                if self.hidden
+                                if self.isHidden
                                 {
                                     SecureField("Enter Password...", text: self.$password).padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
-                                        .font(.system(size: 30, design: .rounded))
+                                        .font(.system(size: 20, design: .rounded))
+                                        .disableAutocorrection(true)
+                                        .autocapitalization(.none)
                                 } else
                                 {
                                     TextField("Enter Password...", text: self.$password).padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
-                                        .font(.system(size: 30, design: .rounded))
+                                        .font(.system(size: 20, design: .rounded))
+                                        .disableAutocorrection(true)
+                                        .autocapitalization(.none)
                                 }
                                 
-                                Button(action: { self.hidden.toggle() })
+                                Button(action: { self.isHidden.toggle() })
                                 {
-                                    Image(systemName: self.hidden ? "eye.slash.fill" : "eye.fill")
-                                        .foregroundColor((self.hidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
+                                    Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
+                                        .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
                                         .padding(.horizontal, 30).padding(.top, 30)
                                 }
-                        }.padding(.top, 60)
+                        }.padding(.top, 40)
                 }
                 
                 Divider()
                     .padding(.horizontal, 20)
                 
                 Button(action: {
-                    self.standby = false
+                    self.isStandby = false
                     
-                    switch self.test.TestStrength(password: self.password)
+                    switch self.passwordTester.TestStrength(password: self.password)
                     {
                         case .Blank, .Weak:
-                            self.weak = true
-                            self.average = false
-                            self.strong = false
-                            self.veryStrong = false
+                            self.isWeak = true
+                            self.isAverage = false
+                            self.isStrong = false
+                            self.isVeryStrong = false
                         case .Average:
-                            self.weak = false
-                            self.average = true
-                            self.strong = false
-                            self.veryStrong = false
+                            self.isWeak = false
+                            self.isAverage = true
+                            self.isStrong = false
+                            self.isVeryStrong = false
                         case .Strong:
-                            self.weak = false
-                            self.average = false
-                            self.strong = true
-                            self.veryStrong = false
+                            self.isWeak = false
+                            self.isAverage = false
+                            self.isStrong = true
+                            self.isVeryStrong = false
                         case .VeryStrong:
-                            self.weak = false
-                            self.average = false
-                            self.strong = false
-                            self.veryStrong = true
+                            self.isWeak = false
+                            self.isAverage = false
+                            self.isStrong = false
+                            self.isVeryStrong = true
                     }
                     
                 })
@@ -119,32 +122,68 @@ struct ContentView: View
                         .font(.system(size: 30, design: .rounded))
                 }
                 
-                Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
+                // displays the password score. not for user viewing
+                //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
+                
+                Button(action: { UIPasteboard.general.string = self.password })
+                {
+                    Image(systemName: "doc.on.clipboard")
+                        .resizable()
+                        .frame(width: 30, height: 35)
+                        .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.4))
+
+                }
                 
                 ZStack
                     {
-                        if weak
+                        if isWeak
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $weakRed, green: $weakGreen, blue: $weakBlue, opacity: $opacity)
+                            
+                            Text("Password is blank or too weak. Try make your password 6 characters minimum!")
+                                .font(.system(.title, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
                         }
-                        if average
+                        if isAverage
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $avgRed, green: $avgGreen, blue: $avgBlue, opacity: $opacity)
+                            
+                            Text("Your password is average, try mix upper, lower case letters, numbers and special symbols!")
+                               .font(.system(.title, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
                         }
-                        if strong
+                        if isStrong
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $strongRed, green: $strongGreen, blue: $strongBlue, opacity: $opacity)
-
+                            
+                            Text("Your password is strong but can be stronger. Try and incorporate more of what you already have done!")
+                                .font(.system(.title, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
+                            
                         }
-                        if veryStrong
+                        if isVeryStrong
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $vstrongRed, green: $vstrongGreen, blue: $vstrongBlue, opacity: $opacity)
+                            
+                            Text("Well Done, This password is very strong!")
+                                .font(.system(.title, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
+
                         }
-                        if standby
+                        if isStandby
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $stbRed, green: $stbGreen, blue: $stbBlue, opacity: $opacity)
+                            
+                            Text("Please enter a password to test its strength")
+                                .font(.system(.title, design: .rounded))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 40)
                         }
-                }
+                }.padding(.top, 80)
         }
     }
     
