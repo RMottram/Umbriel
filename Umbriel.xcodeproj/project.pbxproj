@@ -16,6 +16,7 @@
 		940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */; };
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
+		94990101249D12CA00615F2F /* InformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94990100249D12CA00615F2F /* InformationView.swift */; };
 		94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */; };
 		94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF6C8249230E200E2E6A2 /* WaveView.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		94990100249D12CA00615F2F /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
 		94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrengthLogic.swift; sourceTree = "<group>"; };
 		94FAF6C8249230E200E2E6A2 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +116,7 @@
 				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
+				94990100249D12CA00615F2F /* InformationView.swift */,
 				940D026F247D5C1E00E17095 /* Info.plist */,
 				940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */,
 				940D0269247D5C1E00E17095 /* Preview Content */,
@@ -278,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94990101249D12CA00615F2F /* InformationView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
 				94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */,
