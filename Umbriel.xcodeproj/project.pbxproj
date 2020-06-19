@@ -92,6 +92,7 @@
 				940D0277247D5C1E00E17095 /* UmbrielTests */,
 				940D0282247D5C1E00E17095 /* UmbrielUITests */,
 				940D025C247D5C1D00E17095 /* Products */,
+				949E10D2249D50C4000F782F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +149,13 @@
 				940D0285247D5C1E00E17095 /* Info.plist */,
 			);
 			path = UmbrielUITests;
+			sourceTree = "<group>";
+		};
+		949E10D2249D50C4000F782F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
