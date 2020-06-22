@@ -64,6 +64,31 @@ func Wave(interval: CGFloat, amplitude: CGFloat = 100, baseline: CGFloat = UIScr
 
 struct WaveView_Previews: PreviewProvider {
     static var previews: some View {
-        WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(180), green: Binding.constant(20), blue: Binding.constant(20), opacity: Binding.constant(0.4))
+        Group {
+            
+            // maya blue - 7
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(76), green: Binding.constant(189), blue: Binding.constant(250), opacity: Binding.constant(0.4))
+            
+            // blue jeans - 0
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(69), green: Binding.constant(177), blue: Binding.constant(244), opacity: Binding.constant(0.4))
+            
+            // cyan process - 7
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(10), green: Binding.constant(175), blue: Binding.constant(240), opacity: Binding.constant(0.4))
+            
+            // little boy blue - 8
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(92), green: Binding.constant(146), blue: Binding.constant(236), opacity: Binding.constant(0.4))
+            
+            // tufts blue - 7
+            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(58), green: Binding.constant(146), blue: Binding.constant(236), opacity: Binding.constant(0.4))
+            
+            // azure - 6
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(69), green: Binding.constant(130), blue: Binding.constant(245), opacity: Binding.constant(0.4))
+            
+            // crayola blue - 8
+//            WaveView(baselineAdjustment: Binding.constant(3), amplitudeAdjustment: Binding.constant(100), animationDuration: Binding.constant(4), red: Binding.constant(20), green: Binding.constant(117), blue: Binding.constant(243), opacity: Binding.constant(0.4))
+        }
+        
+        
+        
     }
 }

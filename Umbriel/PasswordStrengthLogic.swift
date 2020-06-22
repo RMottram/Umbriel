@@ -182,16 +182,16 @@ class PasswordLogic
             print("DEBUG: at least 1 special entered. Score =  \(score)")
         }
         
-        print("DEBUG: End of scoring, final score = \(score)")
+        print("DEBUG: End of scoring, final score = \(score)\n")
         
         switch score {
             case 0:
                 return .Blank
-            case 1...2:
+            case 0.5...2.5:
                 return .Weak
-            case 3...5:
+            case 3...5.5:
                 return .Average
-            case 6...8:
+            case 6...8.5:
                 return .Strong
             case 9...:
                 return .VeryStrong

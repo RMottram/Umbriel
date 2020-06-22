@@ -12,6 +12,10 @@ struct ContentView: View
 {
     let passwordTester = PasswordLogic()
     
+    @State var showBanner:Bool = false
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
+    
+    @State var showCopyNote = false
     @State var password = ""
     @State var isHidden = false
     @State var score: Double = 0
@@ -46,9 +50,9 @@ struct ContentView: View
     @State private var vstrongBlue:Double = 255
     
     // standby
-    @State private var stbRed:Double = 135
-    @State private var stbGreen:Double = 140
-    @State private var stbBlue:Double = 140
+    @State private var stbRed:Double = 58
+    @State private var stbGreen:Double = 146
+    @State private var stbBlue:Double = 236
     
     @State private var opacity:Double = 0.2
     
@@ -89,28 +93,37 @@ struct ContentView: View
                     .padding(.horizontal, 20)
                 
                 HStack {
-                    Spacer()
                     Button(action: {
                         self.isStandby = false
                         
                         switch self.passwordTester.TestStrength(password: self.password)
                         {
-                            case .Blank, .Weak:
+                            case .Blank:
+                                self.isStandby = true
+                                self.isWeak = false
+                                self.isAverage = false
+                                self.isStrong = false
+                                self.isVeryStrong = false
+                            case .Weak:
+                                self.isStandby = false
                                 self.isWeak = true
                                 self.isAverage = false
                                 self.isStrong = false
                                 self.isVeryStrong = false
                             case .Average:
+                                self.isStandby = false
                                 self.isWeak = false
                                 self.isAverage = true
                                 self.isStrong = false
                                 self.isVeryStrong = false
                             case .Strong:
+                                self.isStandby = false
                                 self.isWeak = false
                                 self.isAverage = false
                                 self.isStrong = true
                                 self.isVeryStrong = false
                             case .VeryStrong:
+                                self.isStandby = false
                                 self.isWeak = false
                                 self.isAverage = false
                                 self.isStrong = false
@@ -122,17 +135,23 @@ struct ContentView: View
                         Text("Test Password")
                             .font(.system(size: 25, design: .rounded))
                     }
-                    Spacer()
-
-                    Button(action: { UIPasteboard.general.string = self.password })
-                    {
-                        Image(systemName: "doc.on.clipboard")
-                            .resizable()
-                            .frame(width: 30, height: 35)
-                            .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.4))
+                    
+                    VStack {
+                        Button(action: {
+                            UIPasteboard.general.string = self.password
+                            self.showBanner = true
+                        })
+                        {
+                            VStack
+                                {
+                                    Image(systemName: "doc.on.clipboard")
+                                        .resizable()
+                                        .frame(width: 20, height: 25)
+                                        .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.4))
+                            }
+                        }
                     }
-                    Spacer()
-                }
+                }.padding(.bottom, 40)
                 
                 // displays the password score. not for user viewing
                 //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
@@ -147,6 +166,8 @@ struct ContentView: View
                                 .font(.system(size: 25, design: .rounded))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .animation(.easeInOut(duration: 1.2))
+                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
                         if isAverage
                         {
@@ -156,6 +177,8 @@ struct ContentView: View
                                 .font(.system(size: 25, design: .rounded))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .animation(.easeInOut(duration: 1.2))
+                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                             
                         }
                         if isStrong
@@ -166,6 +189,8 @@ struct ContentView: View
                                 .font(.system(size: 25, design: .rounded))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .animation(.easeInOut(duration: 1.2))
+                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                             
                         }
                         if isVeryStrong
@@ -176,20 +201,23 @@ struct ContentView: View
                                 .font(.system(size: 25, design: .rounded))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .animation(.easeInOut(duration: 1.2))
+                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                             
                         }
                         if isStandby
                         {
                             WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $stbRed, green: $stbGreen, blue: $stbBlue, opacity: $opacity)
                             
-                            Text("Please enter a password to test its strength")
+                            Text("Enter a password to test its strength")
                                 .font(.system(size: 25, design: .rounded))
                                 .multilineTextAlignment(.center)
                                 .padding(.horizontal, 20)
+                                .animation(.easeInOut(duration: 1.2))
+                                .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         }
                 }.padding(.top, 40)
-        }
-        
+        }.banner(data: $bannerData, show: $showBanner)
     }
     
     enum PasswordScore
@@ -207,8 +235,6 @@ struct ContentView: View
     }
     
 }
-
-
 
 struct ContentView_Previews: PreviewProvider
 {
