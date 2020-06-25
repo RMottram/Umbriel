@@ -58,6 +58,8 @@ struct ContentView: View
     
     var body: some View
     {
+        NavigationView {
+            
         VStack
             {
                 ZStack
@@ -94,7 +96,6 @@ struct ContentView: View
                 
                 HStack {
                     Button(action: {
-                        self.isStandby = false
                         
                         switch self.passwordTester.TestStrength(password: self.password)
                         {
@@ -218,15 +219,10 @@ struct ContentView: View
                         }
                 }.padding(.top, 40)
         }.banner(data: $bannerData, show: $showBanner)
+            .offset(y: -100)
+            .navigationBarItems(trailing: Image(systemName: "info.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(red: 58/255, green: 146/255, blue: 236/255)))
+            
     }
-    
-    enum PasswordScore
-    {
-        case blank(Int)
-        case weak(Int)
-        case average(Int)
-        case strong(Int)
-        case veryStrong(Int)
     }
     
     func OneDecimal(number: Double) -> String
