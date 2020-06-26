@@ -58,8 +58,6 @@ struct ContentView: View
     
     var body: some View
     {
-        NavigationView {
-            
         VStack
             {
                 ZStack
@@ -135,6 +133,7 @@ struct ContentView: View
                     {
                         Text("Test Password")
                             .font(.system(size: 25, design: .rounded))
+                            .foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
                     }
                     
                     VStack {
@@ -219,8 +218,6 @@ struct ContentView: View
                         }
                 }.padding(.top, 40)
         }.banner(data: $bannerData, show: $showBanner)
-            .offset(y: -100)
-        }
     }
     
     func OneDecimal(number: Double) -> String
