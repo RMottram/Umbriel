@@ -220,9 +220,7 @@ struct ContentView: View
                 }.padding(.top, 40)
         }.banner(data: $bannerData, show: $showBanner)
             .offset(y: -100)
-            .navigationBarItems(trailing: Image(systemName: "info.circle.fill").resizable().frame(width: 20, height: 20).foregroundColor(Color(red: 58/255, green: 146/255, blue: 236/255)))
-            
-    }
+        }
     }
     
     func OneDecimal(number: Double) -> String
