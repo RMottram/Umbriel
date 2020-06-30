@@ -26,10 +26,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Add `@Environment(\.managedObjectContext)` in the views that will need the context.
         let contentView = ContentView().environment(\.managedObjectContext, context)
 
+        // THIS VERSION FOR SOME REASON PREVENTS A TAB VIEW FROM WORKING PROPERLY
+//        if let windowScene = scene as? UIWindowScene {
+//            let window = UIWindow(windowScene: windowScene)          // ALLOWS USER TO TAP OUTSIDE KEYBOARD TO HIDE
+//            window.rootViewController = UIHostingController(rootView: contentView.onTapGesture { window.endEditing(true)})
+//            self.window = window
+//            window.makeKeyAndVisible()
+//        }
+//
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
-            let window = UIWindow(windowScene: windowScene)          // ALLOWS USER TO TAP OUTSIDE KEYBOARD TO HIDE
-            window.rootViewController = UIHostingController(rootView: contentView.onTapGesture { window.endEditing(true)})
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = UIHostingController(rootView: contentView)
             self.window = window
             window.makeKeyAndVisible()
         }
