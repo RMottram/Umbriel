@@ -34,10 +34,12 @@ struct VaultView: View {
                         VStack {
                             VStack {
                                 
+                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and operating system.").font(.caption).padding(/*@START_MENU_TOKEN@*/.bottom, 20.0/*@END_MENU_TOKEN@*/)
+                                
                                 TextField("Password Description", text: self.$passwordTitle).font(.system(.largeTitle, design: .rounded))
                                 TextField("Password", text: self.$passwordEntry).font(.system(.subheadline, design: .rounded))
                                 
-                            }.padding()
+                            }.padding(.horizontal, 20)
                             
                             List {
                                 ForEach(createdPasswords){ passwords in
