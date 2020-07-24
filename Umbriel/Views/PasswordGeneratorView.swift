@@ -13,7 +13,7 @@ struct PasswordGeneratorView: View {
     @State var showBanner:Bool = false
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
-    @State var generatedPassword = "PASSWORD"
+    @State var generatedPassword = "Password generates here!"
     @State var passwordLength:Double = 8
     @State var numbersLength:Double = 2
     @State var symbolsLength:Double = 2
@@ -36,7 +36,7 @@ struct PasswordGeneratorView: View {
                 .lineLimit(1)
                 //.background(Color.red)
                 .multilineTextAlignment(.center)
-                .foregroundColor(self.buttonPressed ? .primary : .white)
+                //.foregroundColor(self.buttonPressed ? .primary : .white)
                 .offset(y: 20)
                 .disabled(true)
             

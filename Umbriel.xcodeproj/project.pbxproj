@@ -19,6 +19,8 @@
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
 		9492157924A6019600E6F956 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9492157824A6019600E6F956 /* InfoView.swift */; };
 		94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A57A9D24A0C9F7001548F7 /* BannerView.swift */; };
+		94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630624CB1A6C005C67A3 /* VaultView.swift */; };
+		94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630824CB27CD005C67A3 /* VaultExtensions.swift */; };
 		94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */; };
 		94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF6C8249230E200E2E6A2 /* WaveView.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,8 @@
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9492157824A6019600E6F956 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		94A57A9D24A0C9F7001548F7 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
+		94B3630624CB1A6C005C67A3 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
+		94B3630824CB27CD005C67A3 /* VaultExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultExtensions.swift; sourceTree = "<group>"; };
 		94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrengthLogic.swift; sourceTree = "<group>"; };
 		94FAF6C8249230E200E2E6A2 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +121,7 @@
 				94C2FDAA24B8C10300E83BF0 /* Views */,
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
 				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
+				94B3630824CB27CD005C67A3 /* VaultExtensions.swift */,
 				946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
@@ -168,6 +173,7 @@
 				9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */,
 				9492157824A6019600E6F956 /* InfoView.swift */,
 				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
+				94B3630624CB1A6C005C67A3 /* VaultView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,8 +318,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9492157924A6019600E6F956 /* InfoView.swift in Sources */,
+				94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,
 				9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */,
+				94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
 				94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */,
 				94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */,

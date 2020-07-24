@@ -231,17 +231,21 @@ struct ContentView: View
                     }.padding(.top, 40)
             }
                 .tabItem {
-                        Image(systemName: "lock.shield")
+                        Image(systemName: "checkmark.shield")
                         Text("Strength Tester")
             }.tag(0)
-            
-            // MARK: TabBar Buttons
             
             PasswordGeneratorView()
                 .tabItem {
                         Image(systemName: "wand.and.stars")
                         Text("Password Generator")
             }.tag(1)
+            
+            VaultView()
+                .tabItem {
+                        Image(systemName: "lock.shield")
+                        Text("TheVault")
+            }.tag(2)
             
         }
     }
