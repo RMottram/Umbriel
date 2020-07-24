@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct VaultView: View {
     
@@ -17,39 +18,54 @@ struct VaultView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Vault.dateCreated, ascending: false)]
     ) var createdPasswords: FetchedResults<Vault>
     
+    @State private var isUnlocked: Bool = false
     @State var passwordTitle = ""
     @State var passwordEntry = ""
     
     var body: some View {
         
         ZStack {
-            VStack {
-                NavigationView {
-                    
-                    VStack {
+            
+            if isUnlocked {
+                
+                VStack {
+                    NavigationView {
+                        
                         VStack {
+                            VStack {
+                                
+                                TextField("Password Description", text: self.$passwordTitle).font(.system(.largeTitle, design: .rounded))
+                                TextField("Password", text: self.$passwordEntry).font(.system(.subheadline, design: .rounded))
+                                
+                            }.padding()
                             
-                            TextField("Password Description", text: self.$passwordTitle).font(.system(.largeTitle, design: .rounded))
-                            TextField("Password", text: self.$passwordEntry).font(.system(.subheadline, design: .rounded))
-                            
-                        }.padding()
-                        
-                        List {
-                            ForEach(createdPasswords){ passwords in
-                                EntryRow(passwordEntry: passwords)
-                            }.onDelete(perform: removePasswordEntry)
+                            List {
+                                ForEach(createdPasswords){ passwords in
+                                    EntryRow(passwordEntry: passwords)
+                                }.onDelete(perform: removePasswordEntry)
+                            }
                         }
+                            
+                        .navigationBarTitle("TheVault")
+                        .navigationBarItems(leading: EditButton(), trailing:
+                            HStack {
+                                Button(action: { self.addPassword() }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.largeTitle)
+                                }.foregroundColor(.green)
+                        })
                     }
-                        
-                    .navigationBarTitle("TheVault")
-                    .navigationBarItems(leading: EditButton(), trailing:
-                        HStack {
-                            Button(action: { self.addPassword() }) {
-                                Image(systemName: "plus.circle.fill")
-                                    .font(.largeTitle)
-                            }.foregroundColor(.green)
-                    })
                 }
+            } else {
+                
+                Button("Unlock TheVault") {
+                    self.authenticate()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
+                
             }
         }
     }
@@ -78,6 +94,28 @@ struct VaultView: View {
         for index in offsets {
             let pword = createdPasswords[index]
             context.delete(pword)
+        }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authenticate to enter TheVault"
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                
+                DispatchQueue.main.async {
+                    if success {
+                        self.isUnlocked = true
+                    } else {
+                        // error
+                    }
+                }
+            }
+        } else {
+            // no biometrics
         }
     }
 }
