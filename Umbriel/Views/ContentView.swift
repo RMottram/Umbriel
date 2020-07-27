@@ -16,7 +16,7 @@ struct ContentView: View
     let passwordTester = PasswordLogic()
     
     @State private var showBanner:Bool = false
-    @State private var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
     @State private var showCopyNote = false
     @State private var password = ""
@@ -157,7 +157,7 @@ struct ContentView: View
                                         Image(systemName: "doc.on.clipboard")
                                             .resizable()
                                             .frame(width: 20, height: 25)
-                                            .foregroundColor(Color.init(red: 135/255, green: 140/255, blue: 140/255, opacity: 0.4))
+                                            .foregroundColor(.secondary)
                                 }
                             }
                         }
@@ -247,7 +247,7 @@ struct ContentView: View
                         Text("TheVault")
             }.tag(2)
             
-        }
+        }.banner(data: $bannerData, show: $showBanner)
     }
     
     func OneDecimal(number: Double) -> String
@@ -257,16 +257,10 @@ struct ContentView: View
     
 }
 
-struct MyView : View {
-    var body: some View {
-        Text("hello")
-    }
-}
-
 struct ContentView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ContentView()
+        ContentView().environment(\.colorScheme, .dark)
     }
 }

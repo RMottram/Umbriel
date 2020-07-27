@@ -18,6 +18,7 @@ struct VaultView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Vault.dateCreated, ascending: false)]
     ) var createdPasswords: FetchedResults<Vault>
     
+    @State private var noBiometrics:Bool = false
     @State private var isUnlocked: Bool = false
     @State var passwordTitle = ""
     @State var passwordEntry = ""
@@ -34,10 +35,12 @@ struct VaultView: View {
                         VStack {
                             VStack {
                                 
-                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and operating system.").font(.caption).padding(/*@START_MENU_TOKEN@*/.bottom, 20.0/*@END_MENU_TOKEN@*/)
+                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and operating system.").font(.system(.caption, design: .rounded)).fontWeight(.regular).padding(.bottom, 20)
                                 
                                 TextField("Password Description", text: self.$passwordTitle).font(.system(.largeTitle, design: .rounded))
                                 TextField("Password", text: self.$passwordEntry).font(.system(.subheadline, design: .rounded))
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
                                 
                             }.padding(.horizontal, 20)
                             
@@ -54,21 +57,29 @@ struct VaultView: View {
                                 Button(action: { self.addPassword() }) {
                                     Image(systemName: "plus.circle.fill")
                                         .font(.largeTitle)
-                                }.foregroundColor(.green)
+                                }.foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255))
                         })
-                    }
+                    }.onDisappear(perform: lockVault)
                 }
             } else {
                 
-                Button("Unlock TheVault") {
-                    self.authenticate()
+                VStack {
+                    Text("TheVault uses your devices biometric sensors to keep this section safe and secure.")
+                        .multilineTextAlignment(.center).padding().font(.system(.body, design: .rounded))
+                    Button("Unlock TheVault") {
+                        self.authenticate()
+                    }
+                    .font(.system(.title, design: .rounded))
+                    .padding()
+                    .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                    .foregroundColor(.white)
+                    .clipShape(Capsule())
+                    
                 }
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .clipShape(Capsule())
-                
             }
+        }
+        .alert(isPresented: $noBiometrics) {
+            Alert(title: Text("No biometrics available"), message: Text("This device does not support biometric security or has not had it setup. Please setup biometrics to use TheVault."), dismissButton: .default(Text("OK")))
         }
     }
     
@@ -118,24 +129,45 @@ struct VaultView: View {
             }
         } else {
             // no biometrics
+            self.noBiometrics = true
         }
+    }
+    
+    func lockVault() {
+        isUnlocked = false
     }
 }
 
 struct EntryRow: View {
     
     var passwordEntry: Vault
+    @State private var isHidden: Bool = true
+    @State private var showBanner:Bool = false
+    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            Text(passwordEntry.title ?? "No title given").font(.title).bold()
-            Text("\(passwordEntry.password!)").font(.body)
-        }
-        
+        HStack {
+            VStack(alignment: .leading) {
+                Text(passwordEntry.title ?? "No title given").font(.system(.title, design: .rounded)).bold()
+                if self.isHidden {
+                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
+                } else {
+                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded))
+                }
+            }.onTapGesture(count: 2) {
+                UIPasteboard.general.string = self.passwordEntry.password
+                self.showBanner = true
+            }
+            Spacer()
+            Button(action: { self.isHidden.toggle() })
+            {
+                Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill").resizable().frame(width: 30, height: 20)
+                    .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
+            }
+        }.banner(data: $bannerData, show: $showBanner)
     }
 }
-
 
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {

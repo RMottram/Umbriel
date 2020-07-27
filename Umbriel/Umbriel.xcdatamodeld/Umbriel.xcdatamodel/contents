@@ -3,8 +3,8 @@
     <entity name="Vault" representedClassName="Vault" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="password" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="password" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
     </entity>
     <elements>
         <element name="Vault" positionX="-63" positionY="-18" width="128" height="103"/>
