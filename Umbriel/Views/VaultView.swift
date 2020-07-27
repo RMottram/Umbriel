@@ -35,10 +35,10 @@ struct VaultView: View {
                         VStack {
                             VStack {
                                 
-                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and operating system.").font(.system(.caption, design: .rounded)).fontWeight(.regular).padding(.bottom, 20)
+                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and iOS.").font(.system(.callout, design: .rounded)).fontWeight(.regular).padding(.bottom, 20)
                                 
                                 TextField("Password Description", text: self.$passwordTitle).font(.system(.largeTitle, design: .rounded))
-                                TextField("Password", text: self.$passwordEntry).font(.system(.subheadline, design: .rounded))
+                                TextField("Password", text: self.$passwordEntry).font(.system(.body, design: .rounded))
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                 
@@ -64,7 +64,7 @@ struct VaultView: View {
             } else {
                 
                 VStack {
-                    Text("TheVault uses your devices biometric sensors to keep this section safe and secure.")
+                    Text("TheVault uses biometric security to keep this section safe and secure.")
                         .multilineTextAlignment(.center).padding().font(.system(.body, design: .rounded))
                     Button("Unlock TheVault") {
                         self.authenticate()
@@ -79,7 +79,7 @@ struct VaultView: View {
             }
         }
         .alert(isPresented: $noBiometrics) {
-            Alert(title: Text("No biometrics available"), message: Text("This device does not support biometric security or has not had it setup. Please setup biometrics to use TheVault."), dismissButton: .default(Text("OK")))
+            Alert(title: Text("No biometrics available"), message: Text("This device has no biometric security setup. Please setup biometrics in device settings to use TheVault."), dismissButton: .default(Text("OK")))
         }
     }
     
@@ -142,8 +142,6 @@ struct EntryRow: View {
     
     var passwordEntry: Vault
     @State private var isHidden: Bool = true
-    @State private var showBanner:Bool = false
-    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
     var body: some View {
         
@@ -155,17 +153,16 @@ struct EntryRow: View {
                 } else {
                     Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded))
                 }
-            }.onTapGesture(count: 2) {
-                UIPasteboard.general.string = self.passwordEntry.password
-                self.showBanner = true
             }
+            
             Spacer()
+            
             Button(action: { self.isHidden.toggle() })
             {
                 Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill").resizable().frame(width: 30, height: 20)
                     .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
             }
-        }.banner(data: $bannerData, show: $showBanner)
+        }
     }
 }
 
