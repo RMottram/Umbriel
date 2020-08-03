@@ -17,6 +17,7 @@
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
+		9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9491405F24D84F05005785E2 /* CloudKit.framework */; };
 		9492157924A6019600E6F956 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9492157824A6019600E6F956 /* InfoView.swift */; };
 		94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A57A9D24A0C9F7001548F7 /* BannerView.swift */; };
 		94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630624CB1A6C005C67A3 /* VaultView.swift */; };
@@ -60,6 +61,8 @@
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9491405E24D84EFE005785E2 /* Umbriel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Umbriel.entitlements; sourceTree = "<group>"; };
+		9491405F24D84F05005785E2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9492157824A6019600E6F956 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		94A57A9D24A0C9F7001548F7 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		94B3630624CB1A6C005C67A3 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +121,7 @@
 		940D025D247D5C1D00E17095 /* Umbriel */ = {
 			isa = PBXGroup;
 			children = (
+				9491405E24D84EFE005785E2 /* Umbriel.entitlements */,
 				94C2FDAB24B8C12D00E83BF0 /* Models */,
 				94C2FDAA24B8C10300E83BF0 /* Views */,
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
@@ -161,6 +166,7 @@
 		949E10D2249D50C4000F782F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9491405F24D84F05005785E2 /* CloudKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -492,8 +498,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Umbriel/Umbriel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Umbriel/Preview Content\"";
 				DEVELOPMENT_TEAM = LBVLR48R2V;
 				ENABLE_PREVIEWS = YES;
@@ -516,8 +524,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Umbriel/Umbriel.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_ASSET_PATHS = "\"Umbriel/Preview Content\"";
 				DEVELOPMENT_TEAM = LBVLR48R2V;
 				ENABLE_PREVIEWS = YES;
