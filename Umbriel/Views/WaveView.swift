@@ -41,7 +41,10 @@ struct WaveView: View {
                     .animation(Animation.linear(duration: animationDuration).repeatForever(autoreverses: false))
                 
         }.onAppear() { self.isAnimated = true }
-            .onDisappear() { self.isAnimated = false }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+            
+            self.isAnimated = false
+        }
     }
 }
 
