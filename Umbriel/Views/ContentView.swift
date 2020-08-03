@@ -13,7 +13,7 @@ struct ContentView: View
     
     @State private var selectedTab = 0
     
-    let passwordTester = PasswordLogic()
+    var passwordTester = PasswordLogic()
     
     @State private var showBanner:Bool = false
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
@@ -74,94 +74,68 @@ struct ContentView: View
                                 {
                                     if self.isHidden
                                     {
-                                        SecureField("Enter Password...", text: self.$password).padding(10)
+                                        SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
+                                            self.TestPass()
+                                        })
+                                            .padding(10)
                                             .padding(.horizontal, 10).padding(.top, 20)
                                             .font(.system(size: 20, design: .rounded))
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
+                                            .keyboardType(.webSearch)
                                     } else
                                     {
-                                        TextField("Enter Password...", text: self.$password).padding(10)
+                                        TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
+                                            //self.isHidden = true
+                                            self.TestPass()
+                                        })
+                                            .padding(10)
                                             .padding(.horizontal, 10).padding(.top, 20)
                                             .font(.system(size: 20, design: .rounded))
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
+                                            .keyboardType(.webSearch)
                                     }
 
                                     Button(action: { self.isHidden.toggle() })
                                     {
                                         Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
                                             .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
-                                            .padding(.horizontal, 30).padding(.top, 30)
+                                            .padding(.top, 30)
                                     }
-                            }.padding(.top, 40)
+                                    Button(action: {
+                                        UIPasteboard.general.string = self.password
+                                        self.showBanner = true
+                                    })
+                                    {
+                                                Image(systemName: "doc.on.clipboard")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 25)
+                                                    .foregroundColor(.secondary)
+                                                    .padding(.top, 30).padding(.trailing, 25)
+                                        
+                                    }
+                            }.padding(.top, 50)
                     }
 
                     Divider()
                         .padding(.horizontal, 20)
-                    
-                    // MARK: Strength Testing Call
 
-                    HStack {
-                        Button(action: {
-
-                            switch self.passwordTester.TestStrength(password: self.password)
-                            {
-                                case .Blank:
-                                    self.isStandby = true
-                                    self.isWeak = false
-                                    self.isAverage = false
-                                    self.isStrong = false
-                                    self.isVeryStrong = false
-                                case .Weak:
-                                    self.isStandby = false
-                                    self.isWeak = true
-                                    self.isAverage = false
-                                    self.isStrong = false
-                                    self.isVeryStrong = false
-                                case .Average:
-                                    self.isStandby = false
-                                    self.isWeak = false
-                                    self.isAverage = true
-                                    self.isStrong = false
-                                    self.isVeryStrong = false
-                                case .Strong:
-                                    self.isStandby = false
-                                    self.isWeak = false
-                                    self.isAverage = false
-                                    self.isStrong = true
-                                    self.isVeryStrong = false
-                                case .VeryStrong:
-                                    self.isStandby = false
-                                    self.isWeak = false
-                                    self.isAverage = false
-                                    self.isStrong = false
-                                    self.isVeryStrong = true
-                            }
-
-                        })
-                        {
-                            Text("Test Password")
-                                .font(.system(size: 25, design: .rounded))
-                                .foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
-                        }
-
-                        VStack {
-                            Button(action: {
-                                UIPasteboard.general.string = self.password
-                                self.showBanner = true
-                            })
-                            {
-                                VStack
-                                    {
-                                        Image(systemName: "doc.on.clipboard")
-                                            .resizable()
-                                            .frame(width: 20, height: 25)
-                                            .foregroundColor(.secondary)
-                                }
-                            }
-                        }
-                    }.padding(.bottom, 40)
+//                        HStack {
+//                            Button(action: {
+//                                UIPasteboard.general.string = self.password
+//                                self.showBanner = true
+//                            })
+//                            {
+//                                VStack
+//                                    {
+//                                        Image(systemName: "doc.on.clipboard")
+//                                            .resizable()
+//                                            .frame(width: 20, height: 25)
+//                                            .foregroundColor(.secondary)
+//                                }
+//                            }
+//                        }
 
                     // displays the password score. not for user viewing
                     //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
@@ -255,12 +229,49 @@ struct ContentView: View
         return String(format: "%.1f", number)
     }
     
+    func TestPass() {
+        
+        switch self.passwordTester.TestStrength(password: self.password)
+        {
+            case .Blank:
+                self.isStandby = true
+                self.isWeak = false
+                self.isAverage = false
+                self.isStrong = false
+                self.isVeryStrong = false
+            case .Weak:
+                self.isStandby = false
+                self.isWeak = true
+                self.isAverage = false
+                self.isStrong = false
+                self.isVeryStrong = false
+            case .Average:
+                self.isStandby = false
+                self.isWeak = false
+                self.isAverage = true
+                self.isStrong = false
+                self.isVeryStrong = false
+            case .Strong:
+                self.isStandby = false
+                self.isWeak = false
+                self.isAverage = false
+                self.isStrong = true
+                self.isVeryStrong = false
+            case .VeryStrong:
+                self.isStandby = false
+                self.isWeak = false
+                self.isAverage = false
+                self.isStrong = false
+                self.isVeryStrong = true
+        }
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider
 {
     static var previews: some View
     {
-        ContentView().environment(\.colorScheme, .dark)
+        ContentView()//.environment(\.colorScheme, .dark)
     }
 }
