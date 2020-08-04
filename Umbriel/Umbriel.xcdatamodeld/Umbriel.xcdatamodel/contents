@@ -4,11 +4,10 @@
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="loginItem" optional="YES" attributeType="String"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="password" attributeType="String" defaultValueString="DefaultPassword"/>
         <attribute name="title" attributeType="String" defaultValueString="Your  title"/>
     </entity>
     <elements>
-        <element name="Vault" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Vault" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

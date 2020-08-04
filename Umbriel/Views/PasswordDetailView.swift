@@ -116,10 +116,6 @@ struct PasswordDetailView: View {
                         Text("Blank").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
                     }
                 }
-                
-                Section(header: Text("Notes")) {
-                    
-                }
             }
             
         }.banner(data: $bannerData, show: $showBanner)
