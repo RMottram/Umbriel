@@ -17,9 +17,9 @@ struct PasswordDetailView: View {
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Copied to clipboard!", type: .Info)
     var passwordTester = PasswordLogic()
     
-    @ObservedObject var description:Vault
-    @ObservedObject var loginItem:Vault
-    @ObservedObject var password:Vault
+    @State var description:Vault
+    @State var loginItem:Vault
+    @State var password:Vault
     
     @State var isHidden:Bool = true
     @State private var isBlank:Bool = false
@@ -50,72 +50,75 @@ struct PasswordDetailView: View {
     
     var body: some View {
         
-        VStack {
+        NavigationView {
             
-            Text("\(description.title!)")
-                .fontWeight(.bold)
-                .font(.system(.largeTitle, design: .rounded))
-                //.padding(.top, -30)
-            
-            Form {
-                
-                Section(header: Text("Login Item")) {
+            VStack {
                     
-                    HStack {
-                        
-                        Text("\(loginItem.loginItem!)")
-                        Spacer()
-                        Image(systemName: "doc.on.clipboard").onTapGesture {
-                            UIPasteboard.general.string = self.loginItem.loginItem
-                            self.showBanner = true
-                        }
-                    }
-                }
-                
-                Section(header: Text("Password")) {
+                Text("\(description.title!)")
+                        .font(.system(.largeTitle, design: .rounded))
+                        .fontWeight(.bold)
+                        .offset(y: -20)
                     
-                    HStack {
+                    Form {
                         
-                        if self.isHidden {
-                            Text("\(password.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
-                        } else {
-                            Text("\(password.password!)")
+                        Section(header: Text("Login Item").font(.system(.body, design: .rounded))) {
+                            
+                            HStack {
+                                
+                                Text("\(loginItem.loginItem!)").font(.system(.body, design: .rounded))
+                                Spacer()
+                                Image(systemName: "doc.on.clipboard").onTapGesture {
+                                    UIPasteboard.general.string = self.loginItem.loginItem
+                                    self.showBanner = true
+                                }
+                            }
                         }
                         
-                        
-                        Spacer()
-                        
-                        Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255))).onTapGesture {
-                                self.isHidden.toggle()
+                        Section(header: Text("Password").font(.system(.body, design: .rounded))) {
+                            
+                            HStack {
+                                
+                                if self.isHidden {
+                                    Text("\(password.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
+                                } else {
+                                    Text("\(password.password!)").font(.system(.body, design: .rounded))
+                                }
+                                
+                                Spacer()
+                                
+                                Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
+                                    .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255))).onTapGesture {
+                                        self.isHidden.toggle()
+                                }
+                                Divider()
+                                Image(systemName: "doc.on.clipboard").onTapGesture {
+                                    UIPasteboard.general.string = self.password.password
+                                    self.showBanner = true
+                                }
+                            }.onAppear() {
+                                self.TestPass()
+                            }
                         }
-                        Divider()
-                        Image(systemName: "doc.on.clipboard").onTapGesture {
-                            UIPasteboard.general.string = self.password.password
-                            self.showBanner = true
+                        
+                        Section(header: Text("Password Strength")) {
+                            if isWeak {
+                                Text("Weak").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
+                            }
+                            if isAverage {
+                                Text("Average").foregroundColor(Color.init(red: avgRed/255, green: avgGreen/255, blue: avgBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
+                            }
+                            if isStrong {
+                                Text("Strong").foregroundColor(Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
+                            }
+                            if isVeryStrong {
+                                Text("Very Strong").foregroundColor(Color.init(red: vstrongRed/255, green: vstrongGreen/255, blue: vstrongBlue/255)).font(.system(.body, design: .rounded)).fontWeight(.bold)
+                            }
+                            if isBlank {
+                                Text("Blank").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)).font(.system(.body, design: .rounded)).fontWeight(.bold)
+                            }
                         }
-                    }.onAppear() {
-                        self.TestPass()
                     }
-                }
-                
-                Section(header: Text("Password Strength")) {
-                    if isWeak {
-                        Text("Weak").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
-                    }
-                    if isAverage {
-                        Text("Average").foregroundColor(Color.init(red: avgRed/255, green: avgGreen/255, blue: avgBlue/255))
-                    }
-                    if isStrong {
-                        Text("Strong").foregroundColor(Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255))
-                    }
-                    if isVeryStrong {
-                        Text("Very Strong").foregroundColor(Color.init(red: vstrongRed/255, green: vstrongGreen/255, blue: vstrongBlue/255))
-                    }
-                    if isBlank {
-                        Text("Blank").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
-                    }
-                }
+                    
             }
             
         }.banner(data: $bannerData, show: $showBanner)

@@ -71,7 +71,7 @@ struct BannerModifier: ViewModifier {
                     .animation(Animation.spring().speed(0.6))
                     .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .top)))
                 
-                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                    //.transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         .offset(y: -10)
                     .onTapGesture {
                         withAnimation {
@@ -79,7 +79,7 @@ struct BannerModifier: ViewModifier {
                         }
                     }.onAppear(perform:
                         {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 4)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2)
                             {
                                 withAnimation { self.show = false }
                             }

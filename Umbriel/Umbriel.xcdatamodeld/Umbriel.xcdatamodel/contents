@@ -3,7 +3,7 @@
     <entity name="Vault" representedClassName="Vault" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="loginItem" optional="YES" attributeType="String"/>
+        <attribute name="loginItem" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="password" attributeType="String" defaultValueString="DefaultPassword"/>
         <attribute name="title" attributeType="String" defaultValueString="Your  title"/>
     </entity>

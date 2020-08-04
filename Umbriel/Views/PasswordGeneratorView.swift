@@ -34,9 +34,7 @@ struct PasswordGeneratorView: View {
                 .font(Font.custom("Menlo", size: 30))
                 .minimumScaleFactor(0.0001)
                 .lineLimit(1)
-                //.background(Color.red)
                 .multilineTextAlignment(.center)
-                //.foregroundColor(self.buttonPressed ? .primary : .white)
                 .offset(y: 20)
                 .disabled(true)
             
@@ -103,7 +101,8 @@ struct PasswordGeneratorView: View {
                     }
                 }
             }.offset(y: 30)
-        }.banner(data: $bannerData, show: $showBanner)
+        }
+        .banner(data: $bannerData, show: $showBanner)
     }
 }
 
