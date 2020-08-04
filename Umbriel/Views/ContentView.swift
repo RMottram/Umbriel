@@ -121,22 +121,6 @@ struct ContentView: View
                     Divider()
                         .padding(.horizontal, 20)
 
-//                        HStack {
-//                            Button(action: {
-//                                UIPasteboard.general.string = self.password
-//                                self.showBanner = true
-//                            })
-//                            {
-//                                VStack
-//                                    {
-//                                        Image(systemName: "doc.on.clipboard")
-//                                            .resizable()
-//                                            .frame(width: 20, height: 25)
-//                                            .foregroundColor(.secondary)
-//                                }
-//                            }
-//                        }
-
                     // displays the password score. not for user viewing
                     //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
 

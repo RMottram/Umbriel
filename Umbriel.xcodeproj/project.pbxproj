@@ -17,6 +17,7 @@
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
+		944B2D8924D9A17200B4D60F /* PasswordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */; };
 		9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9491405F24D84F05005785E2 /* CloudKit.framework */; };
 		9492157924A6019600E6F956 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9492157824A6019600E6F956 /* InfoView.swift */; };
 		94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A57A9D24A0C9F7001548F7 /* BannerView.swift */; };
@@ -60,6 +61,7 @@
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
+		944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailView.swift; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9491405E24D84EFE005785E2 /* Umbriel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Umbriel.entitlements; sourceTree = "<group>"; };
 		9491405F24D84F05005785E2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -176,6 +178,7 @@
 			children = (
 				94A57A9D24A0C9F7001548F7 /* BannerView.swift */,
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */,
 				9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */,
 				9492157824A6019600E6F956 /* InfoView.swift */,
 				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944B2D8924D9A17200B4D60F /* PasswordDetailView.swift in Sources */,
 				9492157924A6019600E6F956 /* InfoView.swift in Sources */,
 				94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,

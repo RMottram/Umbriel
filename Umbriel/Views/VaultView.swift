@@ -8,6 +8,7 @@
 
 import SwiftUI
 import LocalAuthentication
+import CloudKit
 
 struct VaultView: View {
     
@@ -20,15 +21,15 @@ struct VaultView: View {
     
     @State private var noBiometrics:Bool = false
     @State private var isUnlocked: Bool = false
-    @State var passwordTitle = ""
-    @State var loginItem = ""
-    @State var passwordEntry = ""
+    @State var passwordTitle:String = ""
+    @State var loginItem:String = ""
+    @State var passwordEntry:String = ""
     
     var body: some View {
         
         ZStack {
             
-            if isUnlocked {
+            //if isUnlocked {
                 
                 VStack {
                     NavigationView {
@@ -47,10 +48,13 @@ struct VaultView: View {
                                     .autocapitalization(.none)
                                 
                             }.padding(.horizontal, 20)
-                                                        
+                                  
                             List {
                                 ForEach(createdPasswords){ passwords in
-                                    EntryRow(passwordEntry: passwords)
+                                    
+                                    NavigationLink(destination: PasswordDetailView(description: passwords, loginItem: passwords, password: passwords)) {
+                                        EntryRow(passwordEntry: passwords)
+                                    }
                                 }.onDelete(perform: removePasswordEntry)
                                 
                             }
@@ -66,22 +70,22 @@ struct VaultView: View {
                         })
                     }.onDisappear(perform: lockVault)
                 }
-            } else {
-                
-                VStack {
-                    Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
-                        .multilineTextAlignment(.center).padding(25).font(.system(.body, design: .rounded))
-                    Button("Unlock TheVault") {
-                        self.authenticate()
-                    }
-                    .font(.system(.title, design: .rounded))
-                    .padding()
-                    .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
-                    
-                }
-            }
+//            } else {
+//
+//                VStack {
+//                    Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
+//                        .multilineTextAlignment(.center).padding(25).font(.system(.body, design: .rounded))
+//                    Button("Unlock TheVault") {
+//                        self.authenticate()
+//                    }
+//                    .font(.system(.title, design: .rounded))
+//                    .padding()
+//                    .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+//                    .foregroundColor(.white)
+//                    .clipShape(Capsule())
+//
+//                }
+//            }
         }
         .alert(isPresented: $noBiometrics) {
             Alert(title: Text("No biometrics available"), message: Text("This device has no biometric security setup. Please setup biometrics in device settings to use TheVault."), dismissButton: .default(Text("OK")))
@@ -158,27 +162,26 @@ struct EntryRow: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(passwordEntry.title ?? "No title given").font(.system(.headline, design: .rounded)).bold()
-                Text(passwordEntry.loginItem ?? "No login item given").font(.system(.subheadline, design: .rounded))
-                if self.isHidden {
-                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
-                } else {
-                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded))
-                }
+//                Text(passwordEntry.loginItem ?? "No login item given").font(.system(.subheadline, design: .rounded))
+//                if self.isHidden {
+//                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
+//                } else {
+//                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded))
+//                }
             }
             
-            Spacer()
-            
-            Button(action: { self.isHidden.toggle() })
-            {
-                Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
-                    .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
-            }
+//            Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
+//                .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255))).onTapGesture {
+//                    self.isHidden.toggle()
+//            }
         }
     }
 }
 
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {
-        VaultView()
+        Group {
+            VaultView()
+        }
     }
 }
