@@ -3,9 +3,9 @@
     <entity name="Vault" representedClassName="Vault" syncable="YES" codeGenerationType="class">
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="loginItem" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="loginItem" attributeType="String" defaultValueString=""/>
         <attribute name="password" attributeType="String" defaultValueString="DefaultPassword"/>
-        <attribute name="title" attributeType="String" defaultValueString="Your  title"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
     </entity>
     <elements>
         <element name="Vault" positionX="-63" positionY="-18" width="128" height="118"/>

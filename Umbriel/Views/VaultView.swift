@@ -9,6 +9,7 @@
 import SwiftUI
 import LocalAuthentication
 import CloudKit
+import Combine
 
 struct VaultView: View {
     
@@ -85,12 +86,15 @@ struct VaultView: View {
                                 }
                         })
                     }.onDisappear(perform: lockVault)
+                    
                 }
             } else {
                 
                 VStack {
+                    
                     Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
                         .multilineTextAlignment(.center).padding(25).font(.system(.body, design: .rounded))
+                    
                     Button("Unlock TheVault") {
                         self.authenticate()
                     }
@@ -184,21 +188,12 @@ struct EntryRow: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(passwordEntry.title ?? "No title given").font(.system(.headline, design: .rounded)).bold()
-                //                Text(passwordEntry.loginItem ?? "No login item given").font(.system(.subheadline, design: .rounded))
-                //                if self.isHidden {
-                //                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
-                //                } else {
-                //                    Text("\(passwordEntry.password!)").font(.system(.body, design: .rounded))
-                //                }
             }
-            
-            //            Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
-            //                .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255))).onTapGesture {
-            //                    self.isHidden.toggle()
-            //            }
         }
     }
 }
+
+
 
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {
