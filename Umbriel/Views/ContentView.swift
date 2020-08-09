@@ -86,7 +86,6 @@ struct ContentView: View
                                     } else
                                     {
                                         TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
-                                            //self.isHidden = true
                                             self.TestPass()
                                         })
                                             .padding(10)
@@ -109,9 +108,7 @@ struct ContentView: View
                                     })
                                     {
                                                 Image(systemName: "doc.on.clipboard")
-                                                    .resizable()
-                                                    .frame(width: 20, height: 25)
-                                                    .foregroundColor(.secondary)
+                                                    .foregroundColor(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
                                                     .padding(.top, 30).padding(.trailing, 25)
                                         
                                     }

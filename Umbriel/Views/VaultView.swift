@@ -93,16 +93,21 @@ struct VaultView: View {
                 VStack {
                     
                     Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
-                        .multilineTextAlignment(.center).padding(25).font(.system(.body, design: .rounded))
+                        .multilineTextAlignment(.center).padding(10).font(.system(.body, design: .rounded))
                     
-                    Button("Unlock TheVault") {
-                        self.authenticate()
+                    ZStack {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/1.6, height: UIScreen.main.bounds.size.height/12)
+                        .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                        .cornerRadius(16)
+                        .onTapGesture {
+                                self.authenticate()
+                        }
+                        
+                        Text("Unlock TheVault")
+                        .font(.system(.title, design: .rounded))
                     }
-                    .font(.system(.title, design: .rounded))
-                    .padding()
-                    .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
-                    .foregroundColor(.white)
-                    .clipShape(Capsule())
                     
                 }
             }
@@ -193,7 +198,11 @@ struct EntryRow: View {
     }
 }
 
-
+//struct VisualEffectView: UIViewRepresentable {
+//    var effect: UIVisualEffect?
+//    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+//    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+//}
 
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {

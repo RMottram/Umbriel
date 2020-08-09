@@ -68,18 +68,22 @@ struct BannerModifier: ViewModifier {
                             Spacer()
                     }
                     .padding()
-                    .animation(Animation.spring().speed(0.6))
+                    .animation(Animation.spring().speed(0.4))
                     .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .top)))
                 
-                    //.transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-                        .offset(y: -10)
+                    .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
+                    .offset(y: UIScreen.main.bounds.height/50)
                     .onTapGesture {
                         withAnimation {
                             self.show = false
                         }
-                    }.onAppear(perform:
+                    }
+                .onDisappear(perform: {
+                    withAnimation { self.show = false }
+                })
+                    .onAppear(perform:
                         {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2)
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 4)
                             {
                                 withAnimation { self.show = false }
                             }

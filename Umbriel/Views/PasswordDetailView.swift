@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Combine
+import CoreData
 
 struct PasswordDetailView: View {
     
@@ -23,7 +24,7 @@ struct PasswordDetailView: View {
     @State var password:Vault
     
     @State var isHidden:Bool = true
-    @State var isEdit:Bool = false
+    @State private var isCopied:Bool = false
     @State private var isBlank:Bool = false
     @State private var isWeak:Bool = false
     @State private var isAverage:Bool = false
@@ -50,77 +51,162 @@ struct PasswordDetailView: View {
     @State private var vstrongGreen:Double = 73
     @State private var vstrongBlue:Double = 255
     
+    // copy
+    @State private var stbRed:Double = 58
+    @State private var stbGreen:Double = 146
+    @State private var stbBlue:Double = 236
+    
     var body: some View {
         
-        VStack {
+        ScrollView(.vertical, showsIndicators: false) {
+            ZStack {
+                VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/8)
+                    .cornerRadius(16)
+                
+                Text("\(description.title!)")
+                    .font(.system(.largeTitle, design: .rounded))
+                    .fontWeight(.bold)
+                    .minimumScaleFactor(0.0001)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.center)
+            }
+            .offset(y: -20)
             
-            Text("\(description.title!)")
-                .font(.system(.largeTitle, design: .rounded))
-                .fontWeight(.bold)
-                .offset(y: -30)
-            
-            Form {
-                
-                Section(header: Text("Login Item").font(.system(.body, design: .rounded))) {
+            VStack(alignment: .leading) {
+                Text("Login").padding(.top, 20).font(.system(.headline, design: .rounded))
+                ZStack {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                        .cornerRadius(16)
                     
-                    HStack {
-                        
-                        Text("\(loginItem.loginItem!)").font(.system(.body, design: .rounded))
-                        Spacer()
-                        Image(systemName: "doc.on.clipboard").onTapGesture {
-                            UIPasteboard.general.string = self.loginItem.loginItem
-                            self.showBanner = true
-                        }
-                    }
-                }
-                
-                Section(header: Text("Password").font(.system(.body, design: .rounded))) {
+                    Text("\(loginItem.loginItem!)")
+                        .font(.system(.title, design: .rounded))
+                        .minimumScaleFactor(0.0001)
+                        .lineLimit(1)
+                        .multilineTextAlignment(.center)
                     
-                    HStack {
-                        
-                        if self.isHidden {
-                            Text("\(password.password!)").font(.system(.body, design: .rounded)).blur(radius: 4, opaque: false)
-                        } else {
-                            Text("\(password.password!)").font(.system(.body, design: .rounded))
-                        }
-                        
-                        Spacer()
-                        
-                        Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255))).onTapGesture {
-                                self.isHidden.toggle()
-                        }
-                        Divider()
-                        Image(systemName: "doc.on.clipboard").onTapGesture {
-                            UIPasteboard.general.string = self.password.password
-                            self.showBanner = true
-                        }
-                    }.onAppear() {
-                        self.TestPass()
-                    }
                 }
-                
-                Section(header: Text("Password Strength").font(.system(.body, design: .rounded))) {
-                    if isWeak {
-                        Text("Weak").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
-                    }
-                    if isAverage {
-                        Text("Average").foregroundColor(Color.init(red: avgRed/255, green: avgGreen/255, blue: avgBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
-                    }
-                    if isStrong {
-                        Text("Strong").foregroundColor(Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255)).bold().font(.system(.body, design: .rounded)).fontWeight(.bold)
-                    }
-                    if isVeryStrong {
-                        Text("Very Strong").foregroundColor(Color.init(red: vstrongRed/255, green: vstrongGreen/255, blue: vstrongBlue/255)).font(.system(.body, design: .rounded)).fontWeight(.bold)
-                    }
-                    if isBlank {
-                        Text("Blank").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)).font(.system(.body, design: .rounded)).fontWeight(.bold)
-                    }
-                }
-                
             }
             
-        }.banner(data: $bannerData, show: $showBanner)
+            HStack(alignment: .center) {
+                ZStack {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.height/14)
+                        .background(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
+                        .cornerRadius(16)
+                        .onTapGesture {
+                            UIPasteboard.general.string = self.loginItem.loginItem
+                            self.showBanner = true
+                    }
+                    Image(systemName: "doc.on.clipboard")
+                }
+            }
+            
+            
+            VStack(alignment: .leading) {
+                Text("Password").padding(.top, 20).font(.system(.headline, design: .rounded))
+                HStack {
+                    ZStack {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                            .cornerRadius(16)
+                        
+                        Text("\(password.password!)")
+                            .font(.system(.title, design: .rounded))
+                            .minimumScaleFactor(0.0001)
+                            .lineLimit(1)
+                            .multilineTextAlignment(.center)
+                            .blur(radius: isHidden ? 6 : 0)
+                        
+                    }
+                    
+                }
+            }
+            
+            HStack(alignment: .center) {
+                Spacer()
+                ZStack {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.height/14)
+                        .background(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
+                        .cornerRadius(16)
+                        .onTapGesture {
+                            UIPasteboard.general.string = self.password.password
+                            self.showBanner = true
+                    }
+                    Image(systemName: "doc.on.clipboard")
+                }
+                ZStack {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.height/14)
+                        .background((self.isHidden == false ) ? Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255) : Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
+                        .cornerRadius(16)
+                        .onTapGesture {
+                            self.isHidden.toggle()
+                    }
+                    Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor((self.isHidden == false ) ? Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255) : (Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)))
+                }
+                Spacer()
+            }
+            
+            VStack(alignment: .leading) {
+                Text("Password Strength").padding(.top, 20).font(.system(.headline, design: .rounded))
+                ZStack {
+                    if isWeak {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                            .background(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
+                            .cornerRadius(16)
+                        
+                        Text("Weak").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255)).bold().font(.system(.title, design: .rounded)).fontWeight(.bold)
+                    }
+                    if isAverage {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                            .background(Color.init(red: avgRed/255, green: avgGreen/255, blue: avgBlue/255))
+                            .cornerRadius(16)
+                        
+                        Text("Average").foregroundColor(Color.init(red: avgRed/255, green: avgGreen/255, blue: avgBlue/255)).bold().font(.system(.title, design: .rounded)).fontWeight(.bold)
+                    }
+                    if isStrong {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                            .background(Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255))
+                            .cornerRadius(16)
+                        
+                        Text("Strong").foregroundColor(Color.init(red: strongRed/255, green: strongGreen/255, blue: strongBlue/255)).bold().font(.system(.title, design: .rounded)).fontWeight(.bold)
+                    }
+                    if isVeryStrong {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
+                            .background(Color.init(red: vstrongRed/255, green: vstrongGreen/255, blue: vstrongBlue/255))
+                            .cornerRadius(16)
+                        
+                        Text("Very Strong").foregroundColor(Color.init(red: vstrongRed/255, green: vstrongGreen/255, blue: vstrongBlue/255)).bold().font(.system(.title, design: .rounded)).fontWeight(.bold)
+                    }
+                }
+            }
+            .padding(.top, 20)
+            .onAppear() {
+                self.TestPass()
+            }
+            Spacer()
+            
+        }
+        .banner(data: $bannerData, show: $showBanner)
+        
     }
     
     func TestPass() {
@@ -159,6 +245,12 @@ struct PasswordDetailView: View {
                 self.isVeryStrong = true
         }
     }
+}
+
+struct VisualEffectView: UIViewRepresentable {
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
 
 //struct PasswordDetailView_Previews: PreviewProvider {
