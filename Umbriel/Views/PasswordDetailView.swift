@@ -72,18 +72,18 @@ struct PasswordDetailView: View {
                     .lineLimit(1)
                     .multilineTextAlignment(.center)
             }
-            .offset(y: -20)
+            //.offset(y: -20)
             
             VStack(alignment: .leading) {
-                Text("Login").padding(.top, 20).font(.system(.headline, design: .rounded))
+                Text("Login").font(.system(.headline, design: .rounded)).padding(.top, 20)
                 ZStack {
                     VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
                         .edgesIgnoringSafeArea(.all)
                         .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/10)
                         .cornerRadius(16)
                     
-                    Text("\(loginItem.loginItem!)")
-                        .font(.system(.title, design: .rounded))
+                    Text("\(loginItem.loginItem ?? "No login issued")")
+                        .font(.system(.body, design: .rounded))
                         .minimumScaleFactor(0.0001)
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
@@ -108,7 +108,7 @@ struct PasswordDetailView: View {
             
             
             VStack(alignment: .leading) {
-                Text("Password").padding(.top, 20).font(.system(.headline, design: .rounded))
+                Text("Password").font(.system(.headline, design: .rounded))
                 HStack {
                     ZStack {
                         VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
@@ -117,7 +117,7 @@ struct PasswordDetailView: View {
                             .cornerRadius(16)
                         
                         Text("\(password.password!)")
-                            .font(.system(.title, design: .rounded))
+                            .font(.system(.body, design: .rounded))
                             .minimumScaleFactor(0.0001)
                             .lineLimit(1)
                             .multilineTextAlignment(.center)
@@ -158,7 +158,7 @@ struct PasswordDetailView: View {
             }
             
             VStack(alignment: .leading) {
-                Text("Password Strength").padding(.top, 20).font(.system(.headline, design: .rounded))
+                Text("Password Strength").font(.system(.headline, design: .rounded))
                 ZStack {
                     if isWeak {
                         VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
@@ -198,7 +198,7 @@ struct PasswordDetailView: View {
                     }
                 }
             }
-            .padding(.top, 20)
+            //.padding(.top, 20)
             .onAppear() {
                 self.TestPass()
             }

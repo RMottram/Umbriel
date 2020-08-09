@@ -47,7 +47,7 @@ struct VaultView: View {
                                 TextField("*Password Description", text: self.$passwordTitle).font(.system(.title, design: .rounded))
                                 .disableAutocorrection(true)
                                 .autocapitalization(.none)
-                                TextField("*Login Item", text: self.$loginItem).font(.system(.body, design: .rounded))
+                                TextField("Login Item", text: self.$loginItem).font(.system(.body, design: .rounded))
                                 .disableAutocorrection(true)
                                 .autocapitalization(.none)
                                 TextField("*Password", text: self.$passwordEntry).font(.system(.body, design: .rounded))
@@ -71,7 +71,7 @@ struct VaultView: View {
                         .navigationBarItems(leading: EditButton(), trailing:
                             HStack {
                                 Button(action: {
-                                    if self.passwordTitle == "" || self.loginItem == "" || self.passwordEntry == "" {
+                                    if self.passwordTitle == "" || self.passwordEntry == "" {
                                         self.isAllInformationEntered = true
                                     } else {
                                         self.addPassword()
@@ -101,12 +101,12 @@ struct VaultView: View {
                         .frame(width: UIScreen.main.bounds.size.width/1.6, height: UIScreen.main.bounds.size.height/12)
                         .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
                         .cornerRadius(16)
-                        .onTapGesture {
-                                self.authenticate()
-                        }
                         
                         Text("Unlock TheVault")
                         .font(.system(.title, design: .rounded))
+                        .onTapGesture {
+                                self.authenticate()
+                        }
                     }
                     
                 }
@@ -197,12 +197,6 @@ struct EntryRow: View {
         }
     }
 }
-
-//struct VisualEffectView: UIViewRepresentable {
-//    var effect: UIVisualEffect?
-//    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
-//    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
-//}
 
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {
