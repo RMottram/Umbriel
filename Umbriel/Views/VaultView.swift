@@ -18,6 +18,7 @@ struct VaultView: View {
     @FetchRequest(entity: Vault.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Vault.title, ascending: true)])
     var createdPasswords: FetchedResults<Vault>
     
+    @State private var isActionSheetShowing:Bool = false
     @State private var noBiometrics:Bool = false
     @State private var isUnlocked: Bool = false
     @State private var isAnyInfoMissing:Bool = false
@@ -26,7 +27,7 @@ struct VaultView: View {
     @State var passwordTitle:String = ""
     @State var loginItem:String = ""
     @State var passwordEntry:String = ""
-    @State var note:String = "thid id a note"
+    //@State var note:String = "thid id a note"
     
     var body: some View {
         
@@ -101,6 +102,23 @@ struct VaultView: View {
                         .navigationBarItems(leading: EditButton(), trailing:
                             // if password description or password is empty, show alert
                             HStack {
+                                Button(action: {
+                                    self.isActionSheetShowing = true
+                                })
+                                {
+                                    Image(systemName: "line.horizontal.3.decrease.circle.fill").font(.largeTitle)
+                                    .foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                                }
+                                .actionSheet(isPresented: $isActionSheetShowing) {
+                                    ActionSheet(title: Text("Sort by:"), buttons: [
+                                        .default(Text("A-Z")) {  },
+                                        .default(Text("Z-A")) {  },
+                                        .default(Text("Date Created (Ascending)")) {  },
+                                        .default(Text("Date Created (Descending)")) { },
+                                        .cancel()
+                                    ])
+                                }
+                                
                                 Button(action: {
                                     if self.passwordTitle == "" || self.passwordEntry == "" {
                                         self.isAnyInfoMissing = true
@@ -187,7 +205,7 @@ struct VaultView: View {
         newPassword.loginItem = loginItem
         newPassword.password = passwordEntry
         newPassword.dateCreated = Date()
-        newPassword.notes = note
+        //newPassword.notes = note
         
         do {
             try context.save()
