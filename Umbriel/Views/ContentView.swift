@@ -18,6 +18,7 @@ struct ContentView: View
     @State private var showBanner:Bool = false
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
+    @State private var isInfoView = false
     @State private var showCopyNote = false
     @State private var password = ""
     @State private var isHidden = false
@@ -29,9 +30,9 @@ struct ContentView: View
     @State private var isVeryStrong = false
     
     // wave properties
-    @State private var baseline:CGFloat = UIScreen.main.bounds.height/4
-    @State private var amplitude:CGFloat = 60
-    @State private var animationDuration:Double = 4
+    @State private var baseline:CGFloat = UIScreen.main.bounds.height/50
+    @State private var amplitude:CGFloat = 50
+    @State private var animationDuration:Double = 6
     
     // weak
     @State private var weakRed:Double = 255
@@ -64,12 +65,23 @@ struct ContentView: View
     {
         TabView(selection: $selectedTab)
         {
-            // MARK: TextFields and buttons
-            
+            /*
+             ================================================================================================================================
+             MARK: Text Fields and Buttons
+             ================================================================================================================================
+            */
             VStack
                 {
-                    ZStack
+                    ZStack(alignment: .leading) {
+                        
+                        Button(action: {
+                            self.isInfoView = true
+                        })
                         {
+                            Image(systemName: "info.circle").font(.title).foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                        }
+                        .offset(x: 20, y: -40)
+                        
                             HStack
                                 {
                                     if self.isHidden
@@ -96,13 +108,14 @@ struct ContentView: View
                                             .keyboardType(.webSearch)
                                     }
 
-                                    Button(action: { self.isHidden.toggle() })
+                                    Button(action: { self.isHidden.toggle(); self.TestPass() })
                                     {
                                         Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
                                             .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
                                             .padding(.top, 30)
                                     }
                                     Button(action: {
+                                        self.TestPass()
                                         UIPasteboard.general.string = self.password
                                         self.showBanner = true
                                     })
@@ -112,7 +125,7 @@ struct ContentView: View
                                                     .padding(.top, 30).padding(.trailing, 25)
                                         
                                     }
-                            }.padding(.top, 50)
+                            }.padding(.top, 100)
                     }
 
                     Divider()
@@ -121,7 +134,11 @@ struct ContentView: View
                     // displays the password score. not for user viewing
                     //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
 
-                    // MARK: Wave Implementations
+                    /*
+                     ============================================================================================================================
+                     MARK: Wave Implementations
+                     ============================================================================================================================
+                    */
                     
                     ZStack
                         {
@@ -129,7 +146,7 @@ struct ContentView: View
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $weakRed, green: $weakGreen, blue: $weakBlue, opacity: $opacity)
 
-                                Text("Password is blank or too weak. Try make your password 6 characters minimum!")
+                                Text("Password is too weak. Try make your password 6 characters minimum!")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 20)
@@ -186,7 +203,7 @@ struct ContentView: View
                     }.padding(.top, 40)
             }
                 .tabItem {
-                        Image(systemName: "checkmark.shield")
+                    Image(systemName: "checkmark.shield")
                         Text("Strength Tester")
             }.tag(0)
             
@@ -202,8 +219,17 @@ struct ContentView: View
                         Text("TheVault")
             }.tag(2)
             
-        }.banner(data: $bannerData, show: $showBanner)
+        }
+        .banner(data: $bannerData, show: $showBanner).sheet(isPresented: $isInfoView) {
+            InfoView()
+        }
     }
+    
+    /*
+     ================================================================================================================================
+     MARK: ContentView Functions
+     ================================================================================================================================
+    */
     
     func OneDecimal(number: Double) -> String
     {
@@ -249,6 +275,11 @@ struct ContentView: View
     
 }
 
+/*
+ ================================================================================================================================
+ MARK: Preview
+ ================================================================================================================================
+*/
 struct ContentView_Previews: PreviewProvider
 {
     static var previews: some View

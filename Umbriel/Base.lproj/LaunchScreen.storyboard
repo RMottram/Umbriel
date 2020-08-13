@@ -30,11 +30,13 @@
                                     <constraint firstAttribute="height" constant="240" id="XBM-ZD-Y7K"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security in complexity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-aQ-11p">
-                                <rect key="frame" x="95" y="580" width="226" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A7Q-aQ-11p">
+                                <rect key="frame" x="95" y="563" width="226" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="13P-91-0tN"/>
+                                    <constraint firstAttribute="height" constant="60" id="13P-91-0tN"/>
                                 </constraints>
+                                <string key="text">Security in
+complexity</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -49,7 +51,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ry4-h1-tY7" secondAttribute="bottom" constant="10" id="Y2p-Mo-dNh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A7Q-aQ-11p" secondAttribute="trailing" constant="93" id="hSr-bF-8fk"/>
                             <constraint firstItem="Ry4-h1-tY7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="hbP-87-XUj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="A7Q-aQ-11p" secondAttribute="bottom" constant="252" id="nky-Xk-5F5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="A7Q-aQ-11p" secondAttribute="bottom" constant="239" id="nky-Xk-5F5"/>
                             <constraint firstItem="rzD-Tp-Xvp" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" constant="87" id="rZP-oO-Piz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

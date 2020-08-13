@@ -13,25 +13,30 @@ import Combine
 
 struct VaultView: View {
     
+    // get Vault contents and sort them
     @Environment(\.managedObjectContext) var context
-    
-    @FetchRequest(
-        entity: Vault.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \Vault.title, ascending: true)]
-    ) var createdPasswords: FetchedResults<Vault>
+    @FetchRequest(entity: Vault.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Vault.title, ascending: true)])
+    var createdPasswords: FetchedResults<Vault>
     
     @State private var noBiometrics:Bool = false
     @State private var isUnlocked: Bool = false
-    @State private var isAllInformationEntered:Bool = false
+    @State private var isAnyInfoMissing:Bool = false
+    @State var searchText = ""
     
     @State var passwordTitle:String = ""
     @State var loginItem:String = ""
     @State var passwordEntry:String = ""
+    @State var note:String = "thid id a note"
     
     var body: some View {
         
         ZStack {
             
+            /*
+             ====================================================================================================================================
+             MARK: Vault Unlocked View Start
+             ====================================================================================================================================
+            */
             if isUnlocked {
                 
                 VStack {
@@ -40,39 +45,62 @@ struct VaultView: View {
                         VStack {
                             VStack {
                                 
-                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and iOS.").font(.system(.footnote, design: .rounded)).fontWeight(.regular)
+                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and iOS.")
+                                    .font(.system(.footnote, design: .rounded)).fontWeight(.regular)
                                 
                                 Divider()
-                                
-                                TextField("*Password Description", text: self.$passwordTitle).font(.system(.title, design: .rounded))
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                TextField("Login Item", text: self.$loginItem).font(.system(.body, design: .rounded))
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                                TextField("*Password", text: self.$passwordEntry).font(.system(.body, design: .rounded))
+                                    .padding(.bottom, 10)
+                                /*
+                                 ================================================================================================================
+                                 MARK: Password Entry Details
+                                 ================================================================================================================
+                                */
+                                TextField("*Password Description", text: self.$passwordTitle)
+                                    .font(.system(.title, design: .rounded))
+                                    .autocapitalization(.words)
+                                    .disableAutocorrection(false)
+                                TextField("Login Item", text: self.$loginItem)
+                                    .font(.system(.body, design: .rounded))
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .keyboardType(.emailAddress)
+                                TextField("*Password", text: self.$passwordEntry)
+                                    .font(.system(.body, design: .rounded))
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                 
                             }.padding(.horizontal, 20)
                             
+                            SearchBar(text: $searchText)
+                                .padding(.top, 10)
+                            
+                            /*
+                             ====================================================================================================================
+                             MARK: Password Entries List
+                             ====================================================================================================================
+                            */
                             List {
-                                ForEach(createdPasswords){ passwords in
-                                    
+                                ForEach(self.createdPasswords.filter({ searchText.isEmpty ? true : $0.description.contains(searchText) })) { passwords in
                                     NavigationLink(destination: PasswordDetailView(description: passwords, loginItem: passwords, password: passwords)) {
                                         EntryRow(passwordEntry: passwords)
                                     }
-                                }.onDelete(perform: removePasswordEntry)
+                                }.onDelete(perform: self.removePasswordEntry)
                                 
                             }
                         }
-                            
+                        
+                            /*
+                             ====================================================================================================================
+                             MARK: NavBar Items
+                             ====================================================================================================================
+                            */
                         .navigationBarTitle("TheVault")
                         .navigationBarItems(leading: EditButton(), trailing:
+                            // if password description or password is empty, show alert
                             HStack {
                                 Button(action: {
                                     if self.passwordTitle == "" || self.passwordEntry == "" {
-                                        self.isAllInformationEntered = true
+                                        self.isAnyInfoMissing = true
                                     } else {
                                         self.addPassword()
                                     }
@@ -81,38 +109,56 @@ struct VaultView: View {
                                     Image(systemName: "plus.circle.fill")
                                         .font(.largeTitle)
                                 }.foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255))
-                                    .alert(isPresented: self.$isAllInformationEntered) {
+                                    .alert(isPresented: self.$isAnyInfoMissing) {
                                         Alert(title: Text("Missing Information"), message: Text("One or more required fields were left blank, please ensure to enter all required information"), dismissButton: .default(Text("OK")))
                                 }
                         })
                     }.onDisappear(perform: lockVault)
                     
                 }
-            } else {
+                /*
+                 ================================================================================================================================
+                 MARK: Vault Unlocked View End
+                 ================================================================================================================================
+                */
                 
+                /*
+                 ================================================================================================================================
+                 MARK: Vault Locked View Start
+                 ================================================================================================================================
+                */
+            } else {
+
                 VStack {
-                    
+
                     Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
                         .multilineTextAlignment(.center).padding(10).font(.system(.body, design: .rounded))
-                    
+
                     ZStack {
                         VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
                         .edgesIgnoringSafeArea(.all)
                         .frame(width: UIScreen.main.bounds.size.width/1.6, height: UIScreen.main.bounds.size.height/12)
                         .background(Color.init(red: 58/255, green: 146/255, blue: 236/255))
                         .cornerRadius(16)
-                        
+                        .onTapGesture {
+                                self.authenticate()
+                        }
+
                         Text("Unlock TheVault")
                         .font(.system(.title, design: .rounded))
                         .onTapGesture {
                                 self.authenticate()
                         }
                     }
-                    
+
                 }
             }
-        }
-        .alert(isPresented: $noBiometrics) {
+            /*
+             ====================================================================================================================================
+             MARK: Vault Locked View End
+             ====================================================================================================================================
+            */
+        }.alert(isPresented: $noBiometrics) {
             Alert(title: Text("No biometrics available"), message: Text("This device has no biometric security setup. Please setup biometrics in device settings to use TheVault."), dismissButton: .default(Text("OK")))
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             
@@ -120,6 +166,11 @@ struct VaultView: View {
         }
     }
     
+    /*
+     ============================================================================================================================================
+     MARK: Vault Functions
+     ============================================================================================================================================
+    */
     func addPassword() {
         
         let newPassword = Vault(context: context)
@@ -129,6 +180,7 @@ struct VaultView: View {
         newPassword.loginItem = loginItem
         newPassword.password = passwordEntry
         newPassword.dateCreated = Date()
+        newPassword.notes = note
         
         do {
             try context.save()
@@ -183,6 +235,11 @@ struct VaultView: View {
     }
 }
 
+/*
+ ================================================================================================================================================
+ MARK: Vault EntryRowView
+ ================================================================================================================================================
+*/
 struct EntryRow: View {
     
     var passwordEntry: Vault
@@ -198,6 +255,75 @@ struct EntryRow: View {
     }
 }
 
+/*
+ ================================================================================================================================================
+ MARK: Vault SearchBarView
+ ================================================================================================================================================
+*/
+struct SearchBar: View {
+    @Binding var text: String
+ 
+    @State private var isEditing = false
+ 
+    var body: some View {
+        HStack {
+ 
+            TextField("Search...", text: $text)
+                .font(.system(.body, design: .rounded))
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(16)
+                .overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 8)
+                 
+                        if isEditing {
+                            Button(action: {
+                                self.text = ""
+                            }) {
+                                Image(systemName: "multiply.circle.fill")
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing, 8)
+                            }
+                        }
+                    }
+                )
+                .padding(.horizontal, 10)
+                .transition(AnyTransition.move(edge: .leading).combined(with: .opacity))
+                .animation(.easeInOut)
+                .onTapGesture {
+                    self.isEditing = true
+                }
+ 
+            if isEditing {
+                Button(action: {
+                    self.isEditing = false
+                    self.text = ""
+                    
+                    // dismiss keyboard
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+ 
+                }) {
+                    Text("Cancel")
+                    .font(.system(.body, design: .rounded))
+                }
+                .padding(.trailing, 10)
+                .transition(AnyTransition.move(edge: .trailing))
+                .animation(.easeInOut)
+            }
+        }
+    }
+}
+
+/*
+ ================================================================================================================================================
+ MARK: Preview
+ ================================================================================================================================================
+*/
 struct VaultView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
