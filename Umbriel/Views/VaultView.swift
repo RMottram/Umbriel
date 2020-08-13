@@ -69,7 +69,10 @@ struct VaultView: View {
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                 
+                                Divider().padding(.top, 10)
+                                
                             }.padding(.horizontal, 20)
+                            
                             
                             SearchBar(text: $searchText)
                                 .padding(.top, 10)
@@ -103,6 +106,9 @@ struct VaultView: View {
                                         self.isAnyInfoMissing = true
                                     } else {
                                         self.addPassword()
+                                        
+                                        // dismiss keyboard
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                     }
                                     
                                 }) {
@@ -171,6 +177,7 @@ struct VaultView: View {
      MARK: Vault Functions
      ============================================================================================================================================
     */
+    
     func addPassword() {
         
         let newPassword = Vault(context: context)

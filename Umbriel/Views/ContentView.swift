@@ -69,83 +69,86 @@ struct ContentView: View
              ================================================================================================================================
              MARK: Text Fields and Buttons
              ================================================================================================================================
-            */
+             */
             VStack
                 {
                     ZStack(alignment: .leading) {
                         
                         Button(action: {
                             self.isInfoView = true
+                            
+                            // dismiss keyboard
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         })
                         {
                             Image(systemName: "info.circle").font(.title).foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
                         }
                         .offset(x: 20, y: -40)
                         
-                            HStack
+                        HStack
+                            {
+                                if self.isHidden
                                 {
-                                    if self.isHidden
-                                    {
-                                        SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
-                                            self.TestPass()
-                                        })
-                                            .padding(10)
-                                            .padding(.horizontal, 10).padding(.top, 20)
-                                            .font(.system(size: 20, design: .rounded))
-                                            .disableAutocorrection(true)
-                                            .autocapitalization(.none)
-                                            .keyboardType(.webSearch)
-                                    } else
-                                    {
-                                        TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
-                                            self.TestPass()
-                                        })
-                                            .padding(10)
-                                            .padding(.horizontal, 10).padding(.top, 20)
-                                            .font(.system(size: 20, design: .rounded))
-                                            .disableAutocorrection(true)
-                                            .autocapitalization(.none)
-                                            .keyboardType(.webSearch)
-                                    }
-
-                                    Button(action: { self.isHidden.toggle(); self.TestPass() })
-                                    {
-                                        Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
-                                            .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
-                                            .padding(.top, 30)
-                                    }
-                                    Button(action: {
+                                    SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
                                         self.TestPass()
-                                        UIPasteboard.general.string = self.password
-                                        self.showBanner = true
                                     })
-                                    {
-                                                Image(systemName: "doc.on.clipboard")
-                                                    .foregroundColor(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
-                                                    .padding(.top, 30).padding(.trailing, 25)
-                                        
-                                    }
-                            }.padding(.top, 100)
+                                        .padding(10)
+                                        .padding(.horizontal, 10).padding(.top, 20)
+                                        .font(.system(size: 20, design: .rounded))
+                                        .disableAutocorrection(true)
+                                        .autocapitalization(.none)
+                                        .keyboardType(.webSearch)
+                                } else
+                                {
+                                    TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
+                                        self.TestPass()
+                                    })
+                                        .padding(10)
+                                        .padding(.horizontal, 10).padding(.top, 20)
+                                        .font(.system(size: 20, design: .rounded))
+                                        .disableAutocorrection(true)
+                                        .autocapitalization(.none)
+                                        .keyboardType(.webSearch)
+                                }
+                                
+                                Button(action: { self.isHidden.toggle(); self.TestPass() })
+                                {
+                                    Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
+                                        .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
+                                        .padding(.top, 30)
+                                }
+                                Button(action: {
+                                    self.TestPass()
+                                    UIPasteboard.general.string = self.password
+                                    self.showBanner = true
+                                })
+                                {
+                                    Image(systemName: "doc.on.clipboard")
+                                        .foregroundColor(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
+                                        .padding(.top, 30).padding(.trailing, 25)
+                                    
+                                }
+                        }.padding(.top, 100)
                     }
-
+                    
                     Divider()
                         .padding(.horizontal, 20)
-
+                    
                     // displays the password score. not for user viewing
                     //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
-
+                    
                     /*
                      ============================================================================================================================
                      MARK: Wave Implementations
                      ============================================================================================================================
-                    */
+                     */
                     
                     ZStack
                         {
                             if isWeak
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $weakRed, green: $weakGreen, blue: $weakBlue, opacity: $opacity)
-
+                                
                                 Text("Password is too weak. Try make your password 6 characters minimum!")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
@@ -156,43 +159,43 @@ struct ContentView: View
                             if isAverage
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $avgRed, green: $avgGreen, blue: $avgBlue, opacity: $opacity)
-
+                                
                                 Text("Your password is average, try mix upper, lower case letters, numbers and special symbols!")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 20)
                                     .animation(.easeInOut(duration: 1.2))
                                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-
+                                
                             }
                             if isStrong
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $strongRed, green: $strongGreen, blue: $strongBlue, opacity: $opacity)
-
+                                
                                 Text("Your password is strong but can be stronger. Try and incorporate more of what you already have done!")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 20)
                                     .animation(.easeInOut(duration: 1.2))
                                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-
+                                
                             }
                             if isVeryStrong
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $vstrongRed, green: $vstrongGreen, blue: $vstrongBlue, opacity: $opacity)
-
+                                
                                 Text("Well Done, This password is very strong!")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 20)
                                     .animation(.easeInOut(duration: 1.2))
                                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-
+                                
                             }
                             if isStandby
                             {
                                 WaveView(baselineAdjustment: $baseline, amplitudeAdjustment: $amplitude, animationDuration: $animationDuration, red: $stbRed, green: $stbGreen, blue: $stbBlue, opacity: $opacity)
-
+                                
                                 Text("Enter a password to test its strength")
                                     .font(.system(size: 25, design: .rounded))
                                     .multilineTextAlignment(.center)
@@ -202,21 +205,21 @@ struct ContentView: View
                             }
                     }.padding(.top, 40)
             }
-                .tabItem {
-                    Image(systemName: "checkmark.shield")
-                        Text("Strength Tester")
+            .tabItem {
+                Image(systemName: "checkmark.shield")
+                Text("Strength Tester")
             }.tag(0)
             
             PasswordGeneratorView()
                 .tabItem {
-                        Image(systemName: "wand.and.stars")
-                        Text("Password Generator")
+                    Image(systemName: "wand.and.stars")
+                    Text("Password Generator")
             }.tag(1)
             
             VaultView()
                 .tabItem {
-                        Image(systemName: "lock.shield")
-                        Text("TheVault")
+                    Image(systemName: "lock.shield")
+                    Text("TheVault")
             }.tag(2)
             
         }
@@ -229,7 +232,7 @@ struct ContentView: View
      ================================================================================================================================
      MARK: ContentView Functions
      ================================================================================================================================
-    */
+     */
     
     func OneDecimal(number: Double) -> String
     {
@@ -279,7 +282,7 @@ struct ContentView: View
  ================================================================================================================================
  MARK: Preview
  ================================================================================================================================
-*/
+ */
 struct ContentView_Previews: PreviewProvider
 {
     static var previews: some View

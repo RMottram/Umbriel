@@ -32,12 +32,14 @@ struct PasswordDetailView: View {
     //@State var passwordNotes:String = ""
     //@State private var value:CGFloat = 0
     
+    var newDescription = ""
     var newLog = ""
     var newPass = ""
     
     @State var isHidden:Bool = true
     @State var isEdit = false
     @State var isEditingNotes = false
+    @State var isDeleteAlert = false
     @State private var isCopied:Bool = false
     @State private var isBlank:Bool = false
     @State private var isWeak:Bool = false
@@ -324,13 +326,16 @@ struct PasswordDetailView: View {
                         .cornerRadius(16)
                     
                     Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                        self.deleteEntry()
+                        self.isDeleteAlert = true
                     })
                     {
                         Text("Delete")
                             .foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
                             .font(.system(.body, design: .rounded)).fontWeight(.bold)
+                    }.alert(isPresented: self.$isDeleteAlert) {
+                        Alert(title: Text("Are you sure you want to delete this entry?"), primaryButton: .destructive(Text("Delete")) {
+                            self.deleteEntry()
+                            }, secondaryButton: .cancel(Text("Cancel")))
                     }
                 }
             }.padding(.top, 40)
@@ -356,7 +361,7 @@ struct PasswordDetailView: View {
 //            }
 //        }
         .sheet(isPresented: self.$isEdit) {
-            EditView(description: self.description, loginItem: self.loginItem, password: self.password, newLogin: self.newLog, newPassword: self.newPass)
+            EditView(description: self.description, loginItem: self.loginItem, password: self.password, newDesc: self.newDescription, newLogin: self.newLog, newPassword: self.newPass)
         }
         .banner(data: $bannerData, show: $showBanner)
         
@@ -482,6 +487,7 @@ struct EditView: View {
     @State var loginItem:Vault
     @State var password:Vault
     
+    @State var newDesc:String
     @State var newLogin:String
     @State var newPassword:String
     
@@ -491,12 +497,21 @@ struct EditView: View {
             
             Form {
                 Section{
+                    TextField("New description", text: $newDesc)
                     TextField("New login", text: $newLogin)
                     TextField("New password", text: $newPassword)
                 }
                 
                 Button(action: {
-                    self.updateEntry(newLogin: self.newLogin, newPass: self.newPassword)
+                    
+                    if self.newLogin == "" {
+                        self.newLogin = self.loginItem.loginItem!
+                    }
+                    if self.newPassword == "" {
+                        self.newPassword = self.password.password!
+                    }
+                    
+                    self.updateEntry(newDesc: self.newDesc, newLogin: self.newLogin, newPass: self.newPassword)
                     self.presentationMode.wrappedValue.dismiss()
                 })
                 {
@@ -514,25 +529,30 @@ struct EditView: View {
      ================================================================================================================================
      */
     
-    func updateEntry(newLogin:String, newPass:String) {
+    func updateEntry(newDesc:String, newLogin:String, newPass:String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequestLogin:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         let fetchRequestPassword:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
+        let fetchRequestDescription:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         
         fetchRequestLogin.predicate = NSPredicate(format: "loginItem = %@", loginItem.loginItem!)
         fetchRequestPassword.predicate = NSPredicate(format: "password = %@", password.password!)
+        fetchRequestDescription.predicate = NSPredicate(format: "title = %@", description.title!)
         
         do {
             let fetchReturnLogin = try managedContext.fetch(fetchRequestLogin)
             let fetchReturnPassword = try managedContext.fetch(fetchRequestPassword)
+            let fetchReturnDescription = try managedContext.fetch(fetchRequestDescription)
             
             let loginUpdate = fetchReturnLogin[0] as! NSManagedObject
             let passwordUpdate = fetchReturnPassword[0] as! NSManagedObject
+            let descriptionUpdate = fetchReturnDescription[0] as! NSManagedObject
             
             loginUpdate.setValue(newLogin, forKey: "loginItem")
             passwordUpdate.setValue(newPass, forKey: "password")
+            descriptionUpdate.setValue(newDesc, forKey: "title")
             
             do {
                 try managedContext.save()
