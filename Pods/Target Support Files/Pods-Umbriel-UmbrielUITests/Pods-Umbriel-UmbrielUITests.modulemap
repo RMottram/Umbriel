@@ -1,0 +1,6 @@
+framework module Pods_Umbriel_UmbrielUITests {
+  umbrella header "Pods-Umbriel-UmbrielUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

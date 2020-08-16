@@ -7,8 +7,12 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct InfoView: View {
+    
+    let IAPProductID = "com.ryanmottram.Umbriel.AdFree"
+    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -26,6 +30,9 @@ struct InfoView: View {
                             .frame(width: UIScreen.main.bounds.size.width/6, height: UIScreen.main.bounds.size.height/24)
                             .background(Color.init(red: 48/255, green: 146/255, blue: 236/255))
                             .cornerRadius(16)
+                            .onTapGesture {
+                                self.presentationMode.wrappedValue.dismiss()
+                        }
                         
                         Button(action: {
                             self.presentationMode.wrappedValue.dismiss()
@@ -41,8 +48,13 @@ struct InfoView: View {
                 
                 Text("*TheVault requires you to have your fingerprint or face registered to your device in order to use TheVault. Register these in your device settings if not already.").font(.system(size: 10, design: .rounded)).foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255))
                     
+                Button(action: {
                     
-                    .navigationBarTitle("About")
+                }) {
+                    Text("Go Ad Free")
+                }
+                    
+                    
                     .navigationBarItems(trailing: Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
                     })
@@ -55,8 +67,9 @@ struct InfoView: View {
             
         }
         .offset(y: 20)
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 20)        
     }
+    
 }
 
 struct InfoView_Previews: PreviewProvider {

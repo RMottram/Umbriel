@@ -15,8 +15,8 @@ struct PasswordDetailView: View {
     @Environment(\.managedObjectContext) var context
     @Environment(\.presentationMode) var presentationMode
     
-    //@FetchRequest(entity: Vault.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Vault.notes, //ascending: true)])
-    //var passwordNote: FetchedResults<Vault>
+    @FetchRequest(entity: Vault.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Vault.notes, ascending: true)])
+    var createdNotes: FetchedResults<Vault>
     
     @State private var showBanner:Bool = false
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Copied to clipboard!", type: .Info)
@@ -25,18 +25,19 @@ struct PasswordDetailView: View {
     @State var description:Vault
     @State var loginItem:Vault
     @State var password:Vault
-    //@State var note:Vault
+    @State var note:Vault
     
-    //var notes:String = ""
+    var notes:String = ""
     
-    //@State var passwordNotes:String = ""
-    //@State private var value:CGFloat = 0
+    @State var passwordNotes:String = ""
+    @State private var keyboardHeight:CGFloat = 0
     
     var newDescription = ""
     var newLog = ""
     var newPass = ""
     
     @State var isHidden:Bool = true
+    @State var isKeyboardHidden:Bool = false
     @State var isEdit = false
     @State var isEditingNotes = false
     @State var isDeleteAlert = false
@@ -251,50 +252,42 @@ struct PasswordDetailView: View {
              MARK: New Notes Section
              ====================================================================================================================================
              */
-//            VStack {
-//                ZStack {
-//                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-//                        .edgesIgnoringSafeArea(.all)
-//                        .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/8)
-//                        .cornerRadius(16)
-//
-//                    TextField("Notes", text: $passwordNotes)
-//                        .frame(width: UIScreen.main.bounds.size.width/1.3, height: UIScreen.main.bounds.size.height/4)
-//                        .offset(y: -25)
-//                        .padding(.horizontal, 10)
-//                        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-//                        .animation(.easeInOut)
-//                        .onTapGesture {
-//                            self.isEditingNotes = true
-//                    }
-//
-//                    if isEditingNotes {
-//                        Button(action: {
-//                            self.isEditingNotes = false
-//
-//                            // dismiss keyboard
-//                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-//
-//                            self.addNote(newNote: self.passwordNotes)
-//
-//                        }) {
-//                            ZStack {
-//                                VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
-//                                    .edgesIgnoringSafeArea(.all)
-//                                    .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.height/14)
-//                                    .background(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
-//                                    .cornerRadius(16)
-//
-//                                Text("Cancel")
-//                                    .font(.system(.body, design: .rounded))
-//                            }
-//                        }
-//                        .offset(y: 90)
-//                        .transition(AnyTransition.move(edge: .top))
-//                        .animation(.easeInOut)
-//                    }
-//                }
-//            }.padding(.bottom, 60)
+            VStack(alignment: .leading) {
+                Text("Notes").font(.system(.headline, design: .rounded))
+                ZStack {
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/20)
+                        .cornerRadius(12)
+                    
+                    TextField("Enter notes here", text: $passwordNotes, onCommit: {
+                        print("DEBUG: Go pressed")
+                        self.addNote(newNote: self.passwordNotes)
+                        self.passwordNotes = ""
+                    })
+                        .frame(width: UIScreen.main.bounds.size.width/1.3, height: UIScreen.main.bounds.size.height/20)
+                        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                        .animation(.easeInOut)
+                        .keyboardType(.webSearch)
+                }
+                
+                // display the note
+                HStack(alignment: .center) {
+                    ZStack {
+                        VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                            .edgesIgnoringSafeArea(.all)
+                            .frame(width: UIScreen.main.bounds.size.width/1.2, height: UIScreen.main.bounds.size.height/8)
+                            .cornerRadius(16)
+                        
+                        Text("\(note.notes ?? "No note given")")
+                            .foregroundColor(.black)
+                            .minimumScaleFactor(0.0001)
+                            .lineLimit(10)
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                
+            }.padding(.top, 20)
             
             /*
              ====================================================================================================================================
@@ -308,6 +301,9 @@ struct PasswordDetailView: View {
                         .frame(width: UIScreen.main.bounds.size.width/3, height: UIScreen.main.bounds.size.height/14)
                         .background(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
                         .cornerRadius(16)
+                        .onTapGesture {
+                            self.isEdit = true
+                    }
                     
                     Button(action: {
                         self.isEdit = true
@@ -324,6 +320,9 @@ struct PasswordDetailView: View {
                         .frame(width: UIScreen.main.bounds.size.width/3, height: UIScreen.main.bounds.size.height/14)
                         .background(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
                         .cornerRadius(16)
+                        .onTapGesture {
+                            self.isDeleteAlert = true
+                    }
                     
                     Button(action: {
                         self.isDeleteAlert = true
@@ -335,33 +334,48 @@ struct PasswordDetailView: View {
                     }.alert(isPresented: self.$isDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this entry?"), primaryButton: .destructive(Text("Delete")) {
                             self.deleteEntry()
+                            self.presentationMode.wrappedValue.dismiss()
                             }, secondaryButton: .cancel(Text("Cancel")))
                     }
                 }
-            }.padding(.top, 40)
-            .onAppear() {
-                self.TestPass()
+            }.padding(.top, 60)
+                .onAppear() {
+                    self.TestPass()
+                    
+                    // try to reset password strength test when new password is entered
+                    //                var i = 0
+                    //                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                    //                    i += 1
+                    //                    self.TestPass()
+                    //
+                    //                    if i == 30 {
+                    //                        timer.invalidate()
+                    //                    }
+                    //                }
             }
             Spacer()
             
         }
-//        .offset(y: -self.value)
-//        .animation(.spring())
-//        .onAppear() {
-//            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
-//                let value = noti.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
-//                let height = value.height
-//
-//                self.value = height
-//            }
-//
-//            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
-//
-//                self.value = 0
-//            }
-//        }
+        .onTapGesture {
+            // dismiss keyboard
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
+        .offset(y: -self.keyboardHeight)
+        .animation(.easeInOut)
+        .onAppear() {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+                guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+                
+                self.keyboardHeight = keyboardFrame.height
+            }
+            
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+                
+                self.keyboardHeight = 0
+            }
+        }
         .sheet(isPresented: self.$isEdit) {
-            EditView(description: self.description, loginItem: self.loginItem, password: self.password, newDesc: self.newDescription, newLogin: self.newLog, newPassword: self.newPass)
+            EditView(description: self.description, loginItem: self.loginItem, password: self.password, /*newDesc: self.newDescription,*/ newLogin: self.newLog, newPassword: self.newPass)
         }
         .banner(data: $bannerData, show: $showBanner)
         
@@ -398,32 +412,32 @@ struct PasswordDetailView: View {
         }
     }
     
-//    func addNote(newNote: String) {
-//        
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-//
-//        let managedContext = appDelegate.persistentContainer.viewContext
-//        let fetchRequestNote:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
-//
-//        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes ?? "no note found")
-//
-//        do {
-//            let fetchReturnNote = try managedContext.fetch(fetchRequestNote)
-//            let noteUpdate = fetchReturnNote[0] as! NSManagedObject
-//
-//            noteUpdate.setValue(newNote, forKey: "notes")
-//
-//            do {
-//                try managedContext.save()
-//                print("DEBUG: Saved new note information")
-//            } catch let error as NSError {
-//                print("DEBUG: Could not save new note information \(error), \(error.userInfo)")
-//            }
-//        } catch let error as NSError {
-//            print("DEBUG: Could not fetch \(error), \(error.userInfo)")
-//        }
-//        
-//    }
+    func addNote(newNote: String) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        let fetchRequestNote:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
+        
+        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes ?? "no note found")
+        
+        do {
+            let fetchReturnNote = try managedContext.fetch(fetchRequestNote)
+            let noteUpdate = fetchReturnNote[0] as! NSManagedObject
+            
+            noteUpdate.setValue(newNote, forKey: "notes")
+            
+            do {
+                try managedContext.save()
+                print("DEBUG: Saved new note information")
+            } catch let error as NSError {
+                print("DEBUG: Could not save new note information \(error), \(error.userInfo)")
+            }
+        } catch let error as NSError {
+            print("DEBUG: Could not fetch \(error), \(error.userInfo)")
+        }
+        
+    }
     
     func TestPass() {
         
@@ -487,7 +501,7 @@ struct EditView: View {
     @State var loginItem:Vault
     @State var password:Vault
     
-    @State var newDesc:String
+    //@State var newDesc:String
     @State var newLogin:String
     @State var newPassword:String
     
@@ -496,14 +510,17 @@ struct EditView: View {
         NavigationView {
             
             Form {
-                Section{
-                    TextField("New description", text: $newDesc)
+                Section(header: Text("Blank fields will preserve current information for \"\(description.title!)\"")) {
+                    //TextField("New description", text: $newDesc)
                     TextField("New login", text: $newLogin)
                     TextField("New password", text: $newPassword)
                 }
                 
                 Button(action: {
                     
+                    //                    if self.newDesc == "" {
+                    //                        self.newDesc = self.description.title!
+                    //                    }
                     if self.newLogin == "" {
                         self.newLogin = self.loginItem.loginItem!
                     }
@@ -511,8 +528,9 @@ struct EditView: View {
                         self.newPassword = self.password.password!
                     }
                     
-                    self.updateEntry(newDesc: self.newDesc, newLogin: self.newLogin, newPass: self.newPassword)
+                    self.updateEntry(/*newDesc: self.newDesc,*/ newLogin: self.newLogin, newPass: self.newPassword)
                     self.presentationMode.wrappedValue.dismiss()
+                    
                 })
                 {
                     Text("Save")
@@ -520,6 +538,7 @@ struct EditView: View {
                 
             }
             .navigationBarTitle("Enter New Details")
+            .navigationBarItems(trailing: Button(action: { self.presentationMode.wrappedValue.dismiss() }) { Text("Cancel") })
         }
     }
     
@@ -529,30 +548,30 @@ struct EditView: View {
      ================================================================================================================================
      */
     
-    func updateEntry(newDesc:String, newLogin:String, newPass:String) {
+    func updateEntry(/*newDesc:String,*/ newLogin:String, newPass:String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequestLogin:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         let fetchRequestPassword:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
-        let fetchRequestDescription:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
+        //let fetchRequestDescription:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         
         fetchRequestLogin.predicate = NSPredicate(format: "loginItem = %@", loginItem.loginItem!)
         fetchRequestPassword.predicate = NSPredicate(format: "password = %@", password.password!)
-        fetchRequestDescription.predicate = NSPredicate(format: "title = %@", description.title!)
+        //fetchRequestDescription.predicate = NSPredicate(format: "title = %@", description.title!)
         
         do {
             let fetchReturnLogin = try managedContext.fetch(fetchRequestLogin)
             let fetchReturnPassword = try managedContext.fetch(fetchRequestPassword)
-            let fetchReturnDescription = try managedContext.fetch(fetchRequestDescription)
+            //let fetchReturnDescription = try managedContext.fetch(fetchRequestDescription)
             
             let loginUpdate = fetchReturnLogin[0] as! NSManagedObject
             let passwordUpdate = fetchReturnPassword[0] as! NSManagedObject
-            let descriptionUpdate = fetchReturnDescription[0] as! NSManagedObject
+            //let descriptionUpdate = fetchReturnDescription[0] as! NSManagedObject
             
             loginUpdate.setValue(newLogin, forKey: "loginItem")
             passwordUpdate.setValue(newPass, forKey: "password")
-            descriptionUpdate.setValue(newDesc, forKey: "title")
+            //descriptionUpdate.setValue(newDesc, forKey: "title")
             
             do {
                 try managedContext.save()

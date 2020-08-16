@@ -7,7 +7,25 @@
 		<key>Umbriel.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>9</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>940D025A247D5C1D00E17095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>940D0273247D5C1E00E17095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>940D027E247D5C1E00E17095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

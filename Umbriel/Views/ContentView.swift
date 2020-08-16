@@ -7,9 +7,12 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct ContentView: View
 {
+    
+    @State var interstital: GADInterstitial!
     
     @State private var selectedTab = 0
     
@@ -28,6 +31,8 @@ struct ContentView: View
     @State private var isAverage = false
     @State private var isStrong = false
     @State private var isVeryStrong = false
+    // used to show ad
+    @State private var passwordTestCounter = 0
     
     // wave properties
     @State private var baseline:CGFloat = UIScreen.main.bounds.height/50
@@ -63,8 +68,10 @@ struct ContentView: View
     
     var body: some View
     {
+        
         TabView(selection: $selectedTab)
         {
+            
             /*
              ================================================================================================================================
              MARK: Text Fields and Buttons
@@ -89,8 +96,18 @@ struct ContentView: View
                             {
                                 if self.isHidden
                                 {
-                                    SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
-                                        self.TestPass()
+                                    SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed"); self.TestPass()
+                                        self.passwordTestCounter += 1
+                                        // MARK: Interstital Ad
+                                        // interstital ad, comment to remove for own device
+                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
+                                            let root = UIApplication.shared.windows.first?.rootViewController
+                                            self.interstital.present(fromRootViewController: root!)
+                                            self.passwordTestCounter = 0
+                                        } else {
+                                            print("DEBUG: Ad not ready")
+                                        }
+                                        SKStoreReviewController.requestReview()
                                     })
                                         .padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
@@ -100,8 +117,17 @@ struct ContentView: View
                                         .keyboardType(.webSearch)
                                 } else
                                 {
-                                    TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed")
-                                        self.TestPass()
+                                    TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed"); self.TestPass()
+                                        self.passwordTestCounter += 1
+                                        // MARK: Interstital Ad
+                                        // interstital ad, comment to remove for own device
+                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
+                                            let root = UIApplication.shared.windows.first?.rootViewController
+                                            self.interstital.present(fromRootViewController: root!)
+                                            self.passwordTestCounter = 0
+                                        } else {
+                                            print("DEBUG: Ad not ready")
+                                        }
                                     })
                                         .padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
@@ -111,7 +137,17 @@ struct ContentView: View
                                         .keyboardType(.webSearch)
                                 }
                                 
-                                Button(action: { self.isHidden.toggle(); self.TestPass() })
+                                Button(action: { self.isHidden.toggle(); self.TestPass(); self.passwordTestCounter += 1
+                                    // interstital ad, comment to remove for own device
+                                    // MARK: Interstital Ad
+                                    if self.interstital.isReady && self.passwordTestCounter == 15 {
+                                        let root = UIApplication.shared.windows.first?.rootViewController
+                                        self.interstital.present(fromRootViewController: root!)
+                                        self.passwordTestCounter = 0
+                                    } else {
+                                        print("DEBUG: Ad not ready")
+                                    }
+                                })
                                 {
                                     Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
                                         .foregroundColor((self.isHidden == false ) ? Color.init(red: 117/255, green: 211/255, blue: 99/255) : (Color.init(red: 255/255, green: 101/255, blue: 101/255)))
@@ -204,6 +240,10 @@ struct ContentView: View
                                     .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                             }
                     }.padding(.top, 40)
+                    
+                    // MARK: Banner Ad
+                    // Google AdMob test banner, comment to remove from device
+                    BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
             }
             .tabItem {
                 Image(systemName: "checkmark.shield")
@@ -225,6 +265,11 @@ struct ContentView: View
         }
         .banner(data: $bannerData, show: $showBanner).sheet(isPresented: $isInfoView) {
             InfoView()
+        }
+        .onAppear() {
+            self.interstital =  GADInterstitial(adUnitID: "ca-app-pub-6476420126002907/6114102812")
+            let req = GADRequest()
+            self.interstital.load(req)
         }
     }
     
@@ -276,6 +321,41 @@ struct ContentView: View
         }
     }
     
+}
+
+struct BannerAdView: UIViewRepresentable {
+    var bannerID:String
+    let banner = GADBannerView(adSize: kGADAdSizeBanner)
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    func makeUIView(context: UIViewRepresentableContext<BannerAdView>) -> GADBannerView {
+        banner.adUnitID = bannerID
+        banner.rootViewController = UIApplication.shared.windows.first?.rootViewController
+        banner.load(GADRequest())
+        banner.delegate = context.coordinator
+        return banner
+    }
+    
+    func updateUIView(_ uiView: GADBannerView, context: UIViewRepresentableContext<BannerAdView>) {}
+    
+    class Coordinator: NSObject, GADBannerViewDelegate {
+        var parent: BannerAdView
+        
+        init(_ parent: BannerAdView) {
+            self.parent = parent
+        }
+        
+        func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+            print("DEBUG: Did receive ad")
+        }
+        
+        func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+            print("DEBUG: Failed to get ad")
+        }
+    }
 }
 
 /*
