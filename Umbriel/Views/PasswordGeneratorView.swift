@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
 
 struct PasswordGeneratorView: View {
     
@@ -118,10 +117,6 @@ struct PasswordGeneratorView: View {
                     }
                 }
             }.offset(y: 30)
-            
-            // MARK: Banner Ad
-            // Google AdMob test banner
-            BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
         }
         .banner(data: $bannerData, show: $showBanner)
     }

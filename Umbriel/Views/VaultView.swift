@@ -95,7 +95,7 @@ struct VaultView: View {
                             }
                             // MARK: banner Ad
                             // Google AdMob test banner
-                            BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
+                            //BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
                         }
                             
                             /*

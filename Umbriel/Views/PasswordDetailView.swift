@@ -73,6 +73,8 @@ struct PasswordDetailView: View {
     @State private var stbGreen:Double = 146
     @State private var stbBlue:Double = 236
     
+    let timer = Timer.publish(every: 2, tolerance: 3, on: .main, in: .common).autoconnect()
+    
     var body: some View {
         
         ScrollView(.vertical, showsIndicators: false) {
@@ -280,7 +282,6 @@ struct PasswordDetailView: View {
                             .cornerRadius(16)
                         
                         Text("\(note.notes ?? "No note given")")
-                            .foregroundColor(.black)
                             .minimumScaleFactor(0.0001)
                             .lineLimit(10)
                             .multilineTextAlignment(.center)
@@ -305,12 +306,10 @@ struct PasswordDetailView: View {
                             self.isEdit = true
                     }
                     
-                    Button(action: {
-                        self.isEdit = true
-                    })
-                    {
-                        Text("Edit Details")
-                            .font(.system(.body, design: .rounded)).fontWeight(.bold)
+                    Text("Edit Details").font(.system(.body, design: .rounded)).fontWeight(.bold)
+                    .foregroundColor((Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255)))
+                        .onTapGesture {
+                            self.isEdit = true
                     }
                 }
                 
@@ -324,13 +323,10 @@ struct PasswordDetailView: View {
                             self.isDeleteAlert = true
                     }
                     
-                    Button(action: {
-                        self.isDeleteAlert = true
-                    })
-                    {
-                        Text("Delete")
-                            .foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
-                            .font(.system(.body, design: .rounded)).fontWeight(.bold)
+                    Text("Delete").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
+                        .font(.system(.body, design: .rounded)).fontWeight(.bold)
+                        .onTapGesture {
+                            self.isEdit = true
                     }.alert(isPresented: self.$isDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this entry?"), primaryButton: .destructive(Text("Delete")) {
                             self.deleteEntry()
@@ -338,20 +334,22 @@ struct PasswordDetailView: View {
                             }, secondaryButton: .cancel(Text("Cancel")))
                     }
                 }
-            }.padding(.top, 60)
+            }
+            .padding(.top, 60)
                 .onAppear() {
+                    // test the password when view appears
                     self.TestPass()
                     
-                    // try to reset password strength test when new password is entered
-                    //                var i = 0
-                    //                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                    //                    i += 1
-                    //                    self.TestPass()
-                    //
-                    //                    if i == 30 {
-                    //                        timer.invalidate()
-                    //                    }
-                    //                }
+                    if self.isEdit == true {
+                        self.TestPass()
+                    } else if self.isEdit == false {
+                        self.TestPass()
+                    }
+                    
+                    if self.note.notes == nil {
+                        self.note.notes = "Notes appear here"
+                    }
+                    print(self.note.notes!)
             }
             Spacer()
             
@@ -359,9 +357,14 @@ struct PasswordDetailView: View {
         .onTapGesture {
             // dismiss keyboard
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            
+            self.TestPass()
+        }
+        .onReceive(timer) { time in
+            self.TestPass()
         }
         .offset(y: -self.keyboardHeight)
-        .animation(.easeInOut)
+        //.animation(.easeInOut)
         .onAppear() {
             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
                 guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
@@ -419,12 +422,16 @@ struct PasswordDetailView: View {
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequestNote:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         
-        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes ?? "no note found")
+        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes ?? "No note given")
         
         do {
-            let fetchReturnNote = try managedContext.fetch(fetchRequestNote)
-            let noteUpdate = fetchReturnNote[0] as! NSManagedObject
+            var fetchReturnNote = try managedContext.fetch(fetchRequestNote)
+            if fetchReturnNote.count == 0 {
+                fetchReturnNote.append(NSManagedObject(context: context))
+            }
+            print(fetchReturnNote[0])
             
+            let noteUpdate = fetchReturnNote[0] as! NSManagedObject
             noteUpdate.setValue(newNote, forKey: "notes")
             
             do {

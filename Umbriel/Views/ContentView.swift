@@ -100,13 +100,13 @@ struct ContentView: View
                                         self.passwordTestCounter += 1
                                         // MARK: Interstital Ad
                                         // interstital ad, comment to remove for own device
-                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
-                                            let root = UIApplication.shared.windows.first?.rootViewController
-                                            self.interstital.present(fromRootViewController: root!)
-                                            self.passwordTestCounter = 0
-                                        } else {
-                                            print("DEBUG: Ad not ready")
-                                        }
+//                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
+//                                            let root = UIApplication.shared.windows.first?.rootViewController
+//                                            self.interstital.present(fromRootViewController: root!)
+//                                            self.passwordTestCounter = 0
+//                                        } else {
+//                                            print("DEBUG: Ad not ready")
+//                                        }
                                         SKStoreReviewController.requestReview()
                                     })
                                         .padding(10)
@@ -121,13 +121,14 @@ struct ContentView: View
                                         self.passwordTestCounter += 1
                                         // MARK: Interstital Ad
                                         // interstital ad, comment to remove for own device
-                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
-                                            let root = UIApplication.shared.windows.first?.rootViewController
-                                            self.interstital.present(fromRootViewController: root!)
-                                            self.passwordTestCounter = 0
-                                        } else {
-                                            print("DEBUG: Ad not ready")
-                                        }
+//                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
+//                                            let root = UIApplication.shared.windows.first?.rootViewController
+//                                            self.interstital.present(fromRootViewController: root!)
+//                                            self.passwordTestCounter = 0
+//                                        } else {
+//                                            print("DEBUG: Ad not ready")
+//                                        }
+                                        SKStoreReviewController.requestReview()
                                     })
                                         .padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
@@ -140,13 +141,13 @@ struct ContentView: View
                                 Button(action: { self.isHidden.toggle(); self.TestPass(); self.passwordTestCounter += 1
                                     // interstital ad, comment to remove for own device
                                     // MARK: Interstital Ad
-                                    if self.interstital.isReady && self.passwordTestCounter == 15 {
-                                        let root = UIApplication.shared.windows.first?.rootViewController
-                                        self.interstital.present(fromRootViewController: root!)
-                                        self.passwordTestCounter = 0
-                                    } else {
-                                        print("DEBUG: Ad not ready")
-                                    }
+//                                    if self.interstital.isReady && self.passwordTestCounter == 15 {
+//                                        let root = UIApplication.shared.windows.first?.rootViewController
+//                                        self.interstital.present(fromRootViewController: root!)
+//                                        self.passwordTestCounter = 0
+//                                    } else {
+//                                        print("DEBUG: Ad not ready")
+//                                    }
                                 })
                                 {
                                     Image(systemName: self.isHidden ? "eye.slash.fill" : "eye.fill")
@@ -243,7 +244,7 @@ struct ContentView: View
                     
                     // MARK: Banner Ad
                     // Google AdMob test banner, comment to remove from device
-                    BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
+                    //BannerAdView(bannerID: "ca-app-pub-6476420126002907/6041826914").frame(width: UIScreen.main.bounds.width, height: 40)
             }
             .tabItem {
                 Image(systemName: "checkmark.shield")

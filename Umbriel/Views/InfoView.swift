@@ -52,7 +52,7 @@ struct InfoView: View {
                     
                 }) {
                     Text("Go Ad Free")
-                }
+                    }.buttonStyle(DefaultButtonStyle())
                     
                     
                     .navigationBarItems(trailing: Button(action: {
