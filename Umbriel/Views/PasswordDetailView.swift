@@ -27,7 +27,7 @@ struct PasswordDetailView: View {
     @State var password:Vault
     @State var note:Vault
     
-    var notes:String = ""
+    //var notes:String = ""
     
     @State var passwordNotes:String = ""
     @State private var keyboardHeight:CGFloat = 0
@@ -251,7 +251,7 @@ struct PasswordDetailView: View {
             
             /*
              ====================================================================================================================================
-             MARK: New Notes Section
+             MARK: Notes Section
              ====================================================================================================================================
              */
             VStack(alignment: .leading) {
@@ -268,6 +268,7 @@ struct PasswordDetailView: View {
                         self.passwordNotes = ""
                     })
                         .frame(width: UIScreen.main.bounds.size.width/1.3, height: UIScreen.main.bounds.size.height/20)
+                        .font(.system(.body, design: .rounded))
                         .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                         .animation(.easeInOut)
                         .keyboardType(.webSearch)
@@ -285,10 +286,39 @@ struct PasswordDetailView: View {
                             .minimumScaleFactor(0.0001)
                             .lineLimit(10)
                             .multilineTextAlignment(.center)
+                            .font(.system(.body, design: .rounded))
                     }
                 }
                 
             }.padding(.top, 20)
+            
+            HStack(alignment: .center) {
+                Spacer()
+                ZStack {
+                    /*
+                     ============================================================================================================================
+                     MARK: Copy Notes Button
+                     ============================================================================================================================
+                     */
+                    VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.size.width/4, height: UIScreen.main.bounds.size.height/14)
+                        .background(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
+                        .cornerRadius(16)
+                        .onTapGesture {
+                            UIPasteboard.general.string = self.note.notes
+                            self.showBanner = true
+                    }
+                    Image(systemName: "doc.on.clipboard")
+                        .foregroundColor(Color.init(red: stbRed/255, green: stbGreen/255, blue: stbBlue/255))
+                        .onTapGesture {
+                            UIPasteboard.general.string = self.note.notes
+                            self.showBanner = true
+                    }
+                }
+                
+                Spacer()
+            }
             
             /*
              ====================================================================================================================================
@@ -339,17 +369,6 @@ struct PasswordDetailView: View {
                 .onAppear() {
                     // test the password when view appears
                     self.TestPass()
-                    
-                    if self.isEdit == true {
-                        self.TestPass()
-                    } else if self.isEdit == false {
-                        self.TestPass()
-                    }
-                    
-                    if self.note.notes == nil {
-                        self.note.notes = "Notes appear here"
-                    }
-                    print(self.note.notes!)
             }
             Spacer()
             
@@ -362,7 +381,7 @@ struct PasswordDetailView: View {
             self.TestPass()
         }
         .offset(y: -self.keyboardHeight)
-        //.animation(.easeInOut)
+        .animation(.easeInOut)
         .onAppear() {
             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
                 guard let keyboardFrame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
@@ -376,7 +395,7 @@ struct PasswordDetailView: View {
             }
         }
         .sheet(isPresented: self.$isEdit) {
-            EditView(description: self.description, loginItem: self.loginItem, password: self.password, /*newDesc: self.newDescription,*/ newLogin: self.newLog, newPassword: self.newPass)
+            EditView(description: self.description, loginItem: self.loginItem, password: self.password, newDesc: self.newDescription, newLogin: self.newLog, newPassword: self.newPass)
         }
         .banner(data: $bannerData, show: $showBanner)
         
@@ -420,17 +439,15 @@ struct PasswordDetailView: View {
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequestNote:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         
-        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes ?? "No note given")
+        fetchRequestNote.predicate = NSPredicate(format: "notes = %@", note.notes!)
         
         do {
-            var fetchReturnNote = try managedContext.fetch(fetchRequestNote)
-            if fetchReturnNote.count == 0 {
-                fetchReturnNote.append(NSManagedObject(context: context))
-            }
-            print(fetchReturnNote[0])
-            
+            let fetchReturnNote = try managedContext.fetch(fetchRequestNote)
             let noteUpdate = fetchReturnNote[0] as! NSManagedObject
+            print("DEBUG: fetchReturnNote[0] = \(noteUpdate)")
+            
             noteUpdate.setValue(newNote, forKey: "notes")
+            print("DEBUG: noteUpdate.setValue() = \(noteUpdate)")
             
             do {
                 try managedContext.save()
@@ -455,6 +472,7 @@ struct PasswordDetailView: View {
                 self.isStrong = false
                 self.isVeryStrong = false
             case .Weak:
+                
                 self.isBlank = false
                 self.isWeak = true
                 self.isAverage = false
@@ -506,7 +524,7 @@ struct EditView: View {
     @State var loginItem:Vault
     @State var password:Vault
     
-    //@State var newDesc:String
+    @State var newDesc:String
     @State var newLogin:String
     @State var newPassword:String
     
@@ -516,16 +534,16 @@ struct EditView: View {
             
             Form {
                 Section(header: Text("Blank fields will preserve current information for \"\(description.title!)\"")) {
-                    //TextField("New description", text: $newDesc)
+                    TextField("New description", text: $newDesc)
                     TextField("New login", text: $newLogin)
                     TextField("New password", text: $newPassword)
                 }
                 
                 Button(action: {
                     
-                    //                    if self.newDesc == "" {
-                    //                        self.newDesc = self.description.title!
-                    //                    }
+                    if self.newDesc == "" {
+                        self.newDesc = self.description.title!
+                    }
                     if self.newLogin == "" {
                         self.newLogin = self.loginItem.loginItem!
                     }
@@ -533,7 +551,7 @@ struct EditView: View {
                         self.newPassword = self.password.password!
                     }
                     
-                    self.updateEntry(/*newDesc: self.newDesc,*/ newLogin: self.newLogin, newPass: self.newPassword)
+                    self.updateEntry(newDesc: self.newDesc, newLogin: self.newLogin, newPass: self.newPassword)
                     self.presentationMode.wrappedValue.dismiss()
                     
                 })
@@ -553,30 +571,31 @@ struct EditView: View {
      ================================================================================================================================
      */
     
-    func updateEntry(/*newDesc:String,*/ newLogin:String, newPass:String) {
+    func updateEntry(newDesc:String, newLogin:String, newPass:String) {
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let managedContext = appDelegate.persistentContainer.viewContext
         let fetchRequestLogin:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         let fetchRequestPassword:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
-        //let fetchRequestDescription:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
+        let fetchRequestDescription:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "Vault")
         
         fetchRequestLogin.predicate = NSPredicate(format: "loginItem = %@", loginItem.loginItem!)
         fetchRequestPassword.predicate = NSPredicate(format: "password = %@", password.password!)
-        //fetchRequestDescription.predicate = NSPredicate(format: "title = %@", description.title!)
+        fetchRequestDescription.predicate = NSPredicate(format: "title = %@", description.title!)
         
         do {
             let fetchReturnLogin = try managedContext.fetch(fetchRequestLogin)
             let fetchReturnPassword = try managedContext.fetch(fetchRequestPassword)
-            //let fetchReturnDescription = try managedContext.fetch(fetchRequestDescription)
+            let fetchReturnDescription = try managedContext.fetch(fetchRequestDescription)
             
             let loginUpdate = fetchReturnLogin[0] as! NSManagedObject
             let passwordUpdate = fetchReturnPassword[0] as! NSManagedObject
-            //let descriptionUpdate = fetchReturnDescription[0] as! NSManagedObject
+            let descriptionUpdate = fetchReturnDescription[0] as! NSManagedObject
             
             loginUpdate.setValue(newLogin, forKey: "loginItem")
             passwordUpdate.setValue(newPass, forKey: "password")
-            //descriptionUpdate.setValue(newDesc, forKey: "title")
+            descriptionUpdate.setValue(newDesc, forKey: "title")
             
             do {
                 try managedContext.save()

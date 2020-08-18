@@ -27,9 +27,11 @@ struct VaultView: View {
     @State var searchText = ""
     
     @State var passwordTitle:String = ""
+    // optional at first but added space so can be updated properly in future
     @State var loginItem:String = ""
     @State var passwordEntry:String = ""
-    @State var note:String = ""
+    // add note within PasswordDetailView, space is required to avoid erroneous errors
+    @State var note:String = " "
     
     var body: some View {
         
@@ -62,7 +64,7 @@ struct VaultView: View {
                                     .font(.system(.title, design: .rounded))
                                     .autocapitalization(.words)
                                     .disableAutocorrection(false)
-                                TextField("Login Item", text: self.$loginItem)
+                                TextField("*Login Item", text: self.$loginItem)
                                     .font(.system(.body, design: .rounded))
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
@@ -108,7 +110,7 @@ struct VaultView: View {
                                 // if password description or password is empty, show alert
                                 HStack {
                                     Button(action: {
-                                        if self.passwordTitle == "" || self.passwordEntry == "" {
+                                        if self.passwordTitle == "" || self.passwordEntry == "" || self.loginItem == "" {
                                             if self.getRecordsCount() == 48 {
                                                 print("DEBUG: 48 entries made")
                                             }

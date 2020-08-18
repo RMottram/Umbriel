@@ -79,7 +79,7 @@ struct BannerModifier: ViewModifier {
                         }
                     }
                 .onDisappear(perform: {
-                    withAnimation { self.show = false }
+                    self.show = false
                 })
                     .onAppear(perform:
                         {
