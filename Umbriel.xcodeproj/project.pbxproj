@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AE1AD90FB1C34B128C2D5EC /* Pods_Umbriel_UmbrielUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10DCE73CB2881838687266B4 /* Pods_Umbriel_UmbrielUITests.framework */; };
 		940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D025E247D5C1D00E17095 /* AppDelegate.swift */; };
 		940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0260247D5C1D00E17095 /* SceneDelegate.swift */; };
 		940D0264247D5C1D00E17095 /* Umbriel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */; };
@@ -17,8 +18,6 @@
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
 		9422B16E24E7FA0B00587C1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9422B16D24E7FA0B00587C1D /* StoreKit.framework */; };
-		9422B17024E8325700587C1D /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9422B16F24E8325700587C1D /* IAPManager.swift */; };
-		9422B17224E835B900587C1D /* IAP_ProductIDs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9422B17124E835B900587C1D /* IAP_ProductIDs.plist */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
 		944B2D8924D9A17200B4D60F /* PasswordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */; };
 		9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9491405F24D84F05005785E2 /* CloudKit.framework */; };
@@ -28,7 +27,8 @@
 		94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630824CB27CD005C67A3 /* VaultExtensions.swift */; };
 		94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */; };
 		94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF6C8249230E200E2E6A2 /* WaveView.swift */; };
-		AB4A664D787DE93604E0FD77 /* Pods_Umbriel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C26F13C4014A6322D7CD1782 /* Pods_Umbriel.framework */; };
+		B5408CF64E819128ECDB8A30 /* Pods_UmbrielTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BFFD56E9AD6AB5B77C3DE0E /* Pods_UmbrielTests.framework */; };
+		E1AAD7EBE5BDE20C277104F1 /* Pods_Umbriel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 432F8428075ECB0A398DE06A /* Pods_Umbriel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,9 +49,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E0C542255ECFF0C32DE1F03 /* Pods-Umbriel-UmbrielUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel-UmbrielUITests.release.xcconfig"; path = "Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests.release.xcconfig"; sourceTree = "<group>"; };
-		692870D980949010F73C0F6F /* Pods-UmbrielTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UmbrielTests.debug.xcconfig"; path = "Target Support Files/Pods-UmbrielTests/Pods-UmbrielTests.debug.xcconfig"; sourceTree = "<group>"; };
-		81116405A23BD2A7735C4B81 /* Pods-Umbriel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel.debug.xcconfig"; path = "Target Support Files/Pods-Umbriel/Pods-Umbriel.debug.xcconfig"; sourceTree = "<group>"; };
+		10DCE73CB2881838687266B4 /* Pods_Umbriel_UmbrielUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbriel_UmbrielUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A96C1C9D209603B7BA25700 /* Pods-UmbrielTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UmbrielTests.debug.xcconfig"; path = "Target Support Files/Pods-UmbrielTests/Pods-UmbrielTests.debug.xcconfig"; sourceTree = "<group>"; };
+		21A270936CCB2357215FC818 /* Pods-UmbrielTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UmbrielTests.release.xcconfig"; path = "Target Support Files/Pods-UmbrielTests/Pods-UmbrielTests.release.xcconfig"; sourceTree = "<group>"; };
+		3BFFD56E9AD6AB5B77C3DE0E /* Pods_UmbrielTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UmbrielTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		432F8428075ECB0A398DE06A /* Pods_Umbriel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbriel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BBBCFF6986CF3AC7A0E717A /* Pods-Umbriel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel.debug.xcconfig"; path = "Target Support Files/Pods-Umbriel/Pods-Umbriel.debug.xcconfig"; sourceTree = "<group>"; };
+		7CBA628DDC1F7C49A3D7389B /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel-UmbrielUITests.debug.xcconfig"; path = "Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		940D025B247D5C1D00E17095 /* Umbriel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Umbriel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		940D025E247D5C1D00E17095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		940D0260247D5C1D00E17095 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +72,6 @@
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9422B16D24E7FA0B00587C1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		9422B16F24E8325700587C1D /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
-		9422B17124E835B900587C1D /* IAP_ProductIDs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = IAP_ProductIDs.plist; sourceTree = "<group>"; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailView.swift; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -81,10 +83,8 @@
 		94B3630824CB27CD005C67A3 /* VaultExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultExtensions.swift; sourceTree = "<group>"; };
 		94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrengthLogic.swift; sourceTree = "<group>"; };
 		94FAF6C8249230E200E2E6A2 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
-		ADF444914E46097C455A0610 /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel-UmbrielUITests.debug.xcconfig"; path = "Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		C26F13C4014A6322D7CD1782 /* Pods_Umbriel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbriel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F08CE7E56BDCCE70E655FE41 /* Pods-Umbriel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel.release.xcconfig"; path = "Target Support Files/Pods-Umbriel/Pods-Umbriel.release.xcconfig"; sourceTree = "<group>"; };
-		FFDED960DC3B2563B2F2C418 /* Pods-UmbrielTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UmbrielTests.release.xcconfig"; path = "Target Support Files/Pods-UmbrielTests/Pods-UmbrielTests.release.xcconfig"; sourceTree = "<group>"; };
+		BED8365A291687BA270A7BAE /* Pods-Umbriel-UmbrielUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel-UmbrielUITests.release.xcconfig"; path = "Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DBD5E8C092FE0D43C886D94A /* Pods-Umbriel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel.release.xcconfig"; path = "Target Support Files/Pods-Umbriel/Pods-Umbriel.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +94,7 @@
 			files = (
 				9422B16E24E7FA0B00587C1D /* StoreKit.framework in Frameworks */,
 				9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */,
-				AB4A664D787DE93604E0FD77 /* Pods_Umbriel.framework in Frameworks */,
+				E1AAD7EBE5BDE20C277104F1 /* Pods_Umbriel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5408CF64E819128ECDB8A30 /* Pods_UmbrielTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE1AD90FB1C34B128C2D5EC /* Pods_Umbriel_UmbrielUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,14 +146,12 @@
 				94C2FDAB24B8C12D00E83BF0 /* Models */,
 				94C2FDAA24B8C10300E83BF0 /* Views */,
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
-				9422B16F24E8325700587C1D /* IAPManager.swift */,
 				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
 				94B3630824CB27CD005C67A3 /* VaultExtensions.swift */,
 				946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
 				940D026F247D5C1E00E17095 /* Info.plist */,
-				9422B17124E835B900587C1D /* IAP_ProductIDs.plist */,
 				940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */,
 				940D0269247D5C1E00E17095 /* Preview Content */,
 			);
@@ -189,7 +189,9 @@
 			children = (
 				9422B16D24E7FA0B00587C1D /* StoreKit.framework */,
 				9491405F24D84F05005785E2 /* CloudKit.framework */,
-				C26F13C4014A6322D7CD1782 /* Pods_Umbriel.framework */,
+				432F8428075ECB0A398DE06A /* Pods_Umbriel.framework */,
+				10DCE73CB2881838687266B4 /* Pods_Umbriel_UmbrielUITests.framework */,
+				3BFFD56E9AD6AB5B77C3DE0E /* Pods_UmbrielTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -219,12 +221,12 @@
 		D6B8D1FE79CC58891D63646F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				81116405A23BD2A7735C4B81 /* Pods-Umbriel.debug.xcconfig */,
-				F08CE7E56BDCCE70E655FE41 /* Pods-Umbriel.release.xcconfig */,
-				ADF444914E46097C455A0610 /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */,
-				2E0C542255ECFF0C32DE1F03 /* Pods-Umbriel-UmbrielUITests.release.xcconfig */,
-				692870D980949010F73C0F6F /* Pods-UmbrielTests.debug.xcconfig */,
-				FFDED960DC3B2563B2F2C418 /* Pods-UmbrielTests.release.xcconfig */,
+				6BBBCFF6986CF3AC7A0E717A /* Pods-Umbriel.debug.xcconfig */,
+				DBD5E8C092FE0D43C886D94A /* Pods-Umbriel.release.xcconfig */,
+				7CBA628DDC1F7C49A3D7389B /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */,
+				BED8365A291687BA270A7BAE /* Pods-Umbriel-UmbrielUITests.release.xcconfig */,
+				1A96C1C9D209603B7BA25700 /* Pods-UmbrielTests.debug.xcconfig */,
+				21A270936CCB2357215FC818 /* Pods-UmbrielTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -236,11 +238,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 940D0288247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "Umbriel" */;
 			buildPhases = (
-				6B8537F200A58D25F27CC9C9 /* [CP] Check Pods Manifest.lock */,
+				7C7B566435BAFD5A209EB9B0 /* [CP] Check Pods Manifest.lock */,
 				940D0257247D5C1D00E17095 /* Sources */,
 				940D0258247D5C1D00E17095 /* Frameworks */,
 				940D0259247D5C1D00E17095 /* Resources */,
-				C616868876C3907B2A6A4984 /* [CP] Embed Pods Frameworks */,
+				F961BFD08670E507B6A5EA9B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,7 +257,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 940D028B247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielTests" */;
 			buildPhases = (
-				240C883074A94424A78C2701 /* [CP] Check Pods Manifest.lock */,
+				702E9687EE3808E76DBCD504 /* [CP] Check Pods Manifest.lock */,
 				940D0270247D5C1E00E17095 /* Sources */,
 				940D0271247D5C1E00E17095 /* Frameworks */,
 				940D0272247D5C1E00E17095 /* Resources */,
@@ -274,11 +276,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 940D028E247D5C1E00E17095 /* Build configuration list for PBXNativeTarget "UmbrielUITests" */;
 			buildPhases = (
-				3A3B47AD7057A3DCEC6F10FE /* [CP] Check Pods Manifest.lock */,
+				E3928BD58A8B810C5774E8E3 /* [CP] Check Pods Manifest.lock */,
 				940D027B247D5C1E00E17095 /* Sources */,
 				940D027C247D5C1E00E17095 /* Frameworks */,
 				940D027D247D5C1E00E17095 /* Resources */,
-				82362CA12A08F8E30BC0AEC8 /* [CP] Embed Pods Frameworks */,
+				FBB9A097040FC3BA82BB0F21 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -338,7 +340,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9422B17224E835B900587C1D /* IAP_ProductIDs.plist in Resources */,
 				940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */,
 				940D026B247D5C1E00E17095 /* Preview Assets.xcassets in Resources */,
 				940D0268247D5C1E00E17095 /* Assets.xcassets in Resources */,
@@ -362,7 +363,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		240C883074A94424A78C2701 /* [CP] Check Pods Manifest.lock */ = {
+		702E9687EE3808E76DBCD504 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -384,29 +385,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3A3B47AD7057A3DCEC6F10FE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Umbriel-UmbrielUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6B8537F200A58D25F27CC9C9 /* [CP] Check Pods Manifest.lock */ = {
+		7C7B566435BAFD5A209EB9B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -428,24 +407,29 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		82362CA12A08F8E30BC0AEC8 /* [CP] Embed Pods Frameworks */ = {
+		E3928BD58A8B810C5774E8E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Umbriel-UmbrielUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C616868876C3907B2A6A4984 /* [CP] Embed Pods Frameworks */ = {
+		F961BFD08670E507B6A5EA9B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -462,6 +446,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Umbriel/Pods-Umbriel-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FBB9A097040FC3BA82BB0F21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -476,7 +477,6 @@
 				9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */,
 				94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
-				9422B17024E8325700587C1D /* IAPManager.swift in Sources */,
 				94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */,
 				94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */,
 				940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */,
@@ -644,7 +644,7 @@
 		};
 		940D0289247D5C1E00E17095 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 81116405A23BD2A7735C4B81 /* Pods-Umbriel.debug.xcconfig */;
+			baseConfigurationReference = 6BBBCFF6986CF3AC7A0E717A /* Pods-Umbriel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Umbriel/Umbriel.entitlements;
@@ -671,7 +671,7 @@
 		};
 		940D028A247D5C1E00E17095 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F08CE7E56BDCCE70E655FE41 /* Pods-Umbriel.release.xcconfig */;
+			baseConfigurationReference = DBD5E8C092FE0D43C886D94A /* Pods-Umbriel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Umbriel/Umbriel.entitlements;
@@ -698,7 +698,7 @@
 		};
 		940D028C247D5C1E00E17095 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 692870D980949010F73C0F6F /* Pods-UmbrielTests.debug.xcconfig */;
+			baseConfigurationReference = 1A96C1C9D209603B7BA25700 /* Pods-UmbrielTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -721,7 +721,7 @@
 		};
 		940D028D247D5C1E00E17095 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFDED960DC3B2563B2F2C418 /* Pods-UmbrielTests.release.xcconfig */;
+			baseConfigurationReference = 21A270936CCB2357215FC818 /* Pods-UmbrielTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -744,7 +744,7 @@
 		};
 		940D028F247D5C1E00E17095 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADF444914E46097C455A0610 /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */;
+			baseConfigurationReference = 7CBA628DDC1F7C49A3D7389B /* Pods-Umbriel-UmbrielUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -765,7 +765,7 @@
 		};
 		940D0290247D5C1E00E17095 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E0C542255ECFF0C32DE1F03 /* Pods-Umbriel-UmbrielUITests.release.xcconfig */;
+			baseConfigurationReference = BED8365A291687BA270A7BAE /* Pods-Umbriel-UmbrielUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

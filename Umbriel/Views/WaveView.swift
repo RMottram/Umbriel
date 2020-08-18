@@ -44,7 +44,16 @@ struct WaveView: View {
                 .offset(x: isAnimated ? -1 * (universalSize.width * 4) : 0)
                 .animation(Animation.linear(duration: animationDuration).repeatForever(autoreverses: false))
             
-        }.onAppear() { self.isAnimated = true }.onDisappear() { self.isAnimated = false}
+        }.onAppear() {
+            print("WaveView appears")
+            self.isAnimated = true
+            
+        }
+        .onDisappear() {
+            print("WaveView disappears")
+            self.isAnimated = false
+            
+        }
     }
 }
 

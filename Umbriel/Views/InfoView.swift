@@ -11,8 +11,6 @@ import StoreKit
 
 struct InfoView: View {
     
-    let IAPProductID = "com.ryanmottram.Umbriel.AdFree"
-    
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -48,12 +46,6 @@ struct InfoView: View {
                 
                 Text("*TheVault requires you to have your fingerprint or face registered to your device in order to use TheVault. Register these in your device settings if not already.").font(.system(size: 10, design: .rounded)).foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255))
                     
-                Button(action: {
-                    
-                }) {
-                    Text("Go Ad Free")
-                    }.buttonStyle(DefaultButtonStyle())
-                    
                     
                     .navigationBarItems(trailing: Button(action: {
                         self.presentationMode.wrappedValue.dismiss()
@@ -61,6 +53,7 @@ struct InfoView: View {
                     {
                         Text("Close").font(.system(.body, design: .rounded))
                     })
+                
             }.offset(y: 20)
                 
                 .frame(maxWidth: .infinity)

@@ -21,6 +21,7 @@ struct ContentView: View
     @State private var showBanner:Bool = false
     @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
     
+    @State private var isPurchased:Bool = false
     @State private var isInfoView = false
     @State private var showCopyNote = false
     @State private var password = ""
@@ -31,6 +32,7 @@ struct ContentView: View
     @State private var isAverage = false
     @State private var isStrong = false
     @State private var isVeryStrong = false
+    
     // used to show ad
     @State private var passwordTestCounter = 0
     

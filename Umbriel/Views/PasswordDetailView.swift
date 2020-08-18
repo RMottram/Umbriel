@@ -326,7 +326,7 @@ struct PasswordDetailView: View {
                     Text("Delete").foregroundColor(Color.init(red: weakRed/255, green: weakGreen/255, blue: weakBlue/255))
                         .font(.system(.body, design: .rounded)).fontWeight(.bold)
                         .onTapGesture {
-                            self.isEdit = true
+                            self.isDeleteAlert = true
                     }.alert(isPresented: self.$isDeleteAlert) {
                         Alert(title: Text("Are you sure you want to delete this entry?"), primaryButton: .destructive(Text("Delete")) {
                             self.deleteEntry()
@@ -357,8 +357,6 @@ struct PasswordDetailView: View {
         .onTapGesture {
             // dismiss keyboard
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            
-            self.TestPass()
         }
         .onReceive(timer) { time in
             self.TestPass()
@@ -448,7 +446,7 @@ struct PasswordDetailView: View {
     
     func TestPass() {
         
-        switch self.passwordTester.TestStrength(password: self.password.password!)
+        switch self.passwordTester.TestStrength(password: self.password.password ?? "No Password")
         {
             case .Blank:
                 self.isBlank = true
