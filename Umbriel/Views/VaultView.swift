@@ -182,7 +182,10 @@ struct VaultView: View {
                 
                 VStack {
                     Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
-                        .multilineTextAlignment(.center).padding(10).font(.system(.body, design: .rounded))
+                        .multilineTextAlignment(.center)
+                        .padding(.all, 10)
+                        .font(.system(.body, design: .rounded))
+                        .minimumScaleFactor(0.5)
                     
                     ZStack {
                         VisualEffectView(effect: UIBlurEffect(style: .systemMaterial))
@@ -200,7 +203,7 @@ struct VaultView: View {
                                 self.hapticGen.simpleImpactSoft()
                                 self.authenticate()
                         }
-                    }
+                    }.offset(y: 20)
                 }
             }
             /*
@@ -215,6 +218,8 @@ struct VaultView: View {
             
             self.lockVault()
         }
+            // removes split view for iPads
+            .navigationViewStyle(StackNavigationViewStyle())
     }
     
     /*

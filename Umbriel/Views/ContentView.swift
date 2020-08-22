@@ -10,7 +10,7 @@ import SwiftUI
 import GoogleMobileAds
 
 struct ContentView: View
-{
+{  
     @State var interstital: GADInterstitial!
     
     @State private var selectedTab = 0
@@ -113,6 +113,8 @@ struct ContentView: View
                                         self.hapticGen.simpleSuccess()
                                         self.passwordTestCounter += 1
                                         
+                                        
+                                        
                                         // MARK: Interstital Ad
                                         // interstital ad, comment to remove for own device
 //                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
@@ -122,7 +124,6 @@ struct ContentView: View
 //                                        } else {
 //                                            print("DEBUG: Ad not ready")
 //                                        }
-                                        SKStoreReviewController.requestReview()
                                     })
                                         .padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)
@@ -145,7 +146,6 @@ struct ContentView: View
 //                                        } else {
 //                                            print("DEBUG: Ad not ready")
 //                                        }
-                                        SKStoreReviewController.requestReview()
                                     })
                                         .padding(10)
                                         .padding(.horizontal, 10).padding(.top, 20)

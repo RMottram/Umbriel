@@ -17,6 +17,7 @@
 		940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */; };
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
+		94184B1524F1AD230090B1F8 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94184B1424F1AD230090B1F8 /* MailView.swift */; };
 		9422B16E24E7FA0B00587C1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9422B16D24E7FA0B00587C1D /* StoreKit.framework */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
 		943981DA24ED28C000266089 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943981D924ED28C000266089 /* Haptics.swift */; };
@@ -72,6 +73,7 @@
 		940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94184B1424F1AD230090B1F8 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MailView.swift; path = /Users/ryan/GitHub/Umbriel/Umbriel/Views/MailView.swift; sourceTree = "<absolute>"; };
 		9422B16D24E7FA0B00587C1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		943981D924ED28C000266089 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Haptics.swift; path = Umbriel/Haptics.swift; sourceTree = SOURCE_ROOT; };
@@ -204,6 +206,7 @@
 			children = (
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
 				9492157824A6019600E6F956 /* InfoView.swift */,
+				94184B1424F1AD230090B1F8 /* MailView.swift */,
 				94C2563A24F11A1B0093F491 /* NotificationBannerView.swift */,
 				944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */,
 				9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */,
@@ -482,6 +485,7 @@
 				94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,
 				9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */,
+				94184B1524F1AD230090B1F8 /* MailView.swift in Sources */,
 				94C2563B24F11A1B0093F491 /* NotificationBannerView.swift in Sources */,
 				94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
@@ -668,12 +672,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.Umbriel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -695,12 +699,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.1;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ryanmottram.Umbriel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
