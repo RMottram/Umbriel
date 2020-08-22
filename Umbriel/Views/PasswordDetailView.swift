@@ -642,7 +642,12 @@ struct EditView: View {
                 
             }
             .navigationBarTitle("Enter New Details")
-            .navigationBarItems(trailing: Button(action: { self.presentationMode.wrappedValue.dismiss() }) { Text("Cancel").font(.system(.body, design: .rounded)) })
+            .navigationBarItems(trailing: Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            })
+            {
+                Image(systemName: "x.circle.fill").foregroundColor(Color.init(red: 255/255, green: 101/255, blue: 101/255)).font(.system(.largeTitle, design: .rounded))
+            })
         }
     }
     
