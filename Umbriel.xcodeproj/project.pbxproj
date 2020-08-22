@@ -19,12 +19,13 @@
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
 		9422B16E24E7FA0B00587C1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9422B16D24E7FA0B00587C1D /* StoreKit.framework */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
+		943981DA24ED28C000266089 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943981D924ED28C000266089 /* Haptics.swift */; };
 		944B2D8924D9A17200B4D60F /* PasswordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */; };
 		9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9491405F24D84F05005785E2 /* CloudKit.framework */; };
 		9492157924A6019600E6F956 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9492157824A6019600E6F956 /* InfoView.swift */; };
-		94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A57A9D24A0C9F7001548F7 /* BannerView.swift */; };
 		94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630624CB1A6C005C67A3 /* VaultView.swift */; };
 		94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B3630824CB27CD005C67A3 /* VaultExtensions.swift */; };
+		94C2563B24F11A1B0093F491 /* NotificationBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2563A24F11A1B0093F491 /* NotificationBannerView.swift */; };
 		94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */; };
 		94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FAF6C8249230E200E2E6A2 /* WaveView.swift */; };
 		B5408CF64E819128ECDB8A30 /* Pods_UmbrielTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BFFD56E9AD6AB5B77C3DE0E /* Pods_UmbrielTests.framework */; };
@@ -73,14 +74,15 @@
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9422B16D24E7FA0B00587C1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
+		943981D924ED28C000266089 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Haptics.swift; path = Umbriel/Haptics.swift; sourceTree = SOURCE_ROOT; };
 		944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailView.swift; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9491405E24D84EFE005785E2 /* Umbriel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Umbriel.entitlements; sourceTree = "<group>"; };
 		9491405F24D84F05005785E2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		9492157824A6019600E6F956 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		94A57A9D24A0C9F7001548F7 /* BannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerView.swift; sourceTree = "<group>"; };
 		94B3630624CB1A6C005C67A3 /* VaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultView.swift; sourceTree = "<group>"; };
 		94B3630824CB27CD005C67A3 /* VaultExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaultExtensions.swift; sourceTree = "<group>"; };
+		94C2563A24F11A1B0093F491 /* NotificationBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerView.swift; sourceTree = "<group>"; };
 		94E774C22497D6D100F15797 /* PasswordStrengthLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordStrengthLogic.swift; sourceTree = "<group>"; };
 		94FAF6C8249230E200E2E6A2 /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		BED8365A291687BA270A7BAE /* Pods-Umbriel-UmbrielUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbriel-UmbrielUITests.release.xcconfig"; path = "Target Support Files/Pods-Umbriel-UmbrielUITests/Pods-Umbriel-UmbrielUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				94C2FDAB24B8C12D00E83BF0 /* Models */,
 				94C2FDAA24B8C10300E83BF0 /* Views */,
 				940D025E247D5C1D00E17095 /* AppDelegate.swift */,
+				943981D924ED28C000266089 /* Haptics.swift */,
 				940D0260247D5C1D00E17095 /* SceneDelegate.swift */,
 				94B3630824CB27CD005C67A3 /* VaultExtensions.swift */,
 				946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */,
@@ -199,13 +202,13 @@
 		94C2FDAA24B8C10300E83BF0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				94A57A9D24A0C9F7001548F7 /* BannerView.swift */,
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				9492157824A6019600E6F956 /* InfoView.swift */,
+				94C2563A24F11A1B0093F491 /* NotificationBannerView.swift */,
 				944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */,
 				9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */,
-				9492157824A6019600E6F956 /* InfoView.swift */,
-				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
 				94B3630624CB1A6C005C67A3 /* VaultView.swift */,
+				94FAF6C8249230E200E2E6A2 /* WaveView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,6 +252,8 @@
 			dependencies = (
 			);
 			name = Umbriel;
+			packageProductDependencies = (
+			);
 			productName = Umbriel;
 			productReference = 940D025B247D5C1D00E17095 /* Umbriel.app */;
 			productType = "com.apple.product-type.application";
@@ -324,6 +329,8 @@
 				Base,
 			);
 			mainGroup = 940D0252247D5C1D00E17095;
+			packageReferences = (
+			);
 			productRefGroup = 940D025C247D5C1D00E17095 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -475,10 +482,11 @@
 				94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,
 				9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */,
+				94C2563B24F11A1B0093F491 /* NotificationBannerView.swift in Sources */,
 				94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
+				943981DA24ED28C000266089 /* Haptics.swift in Sources */,
 				94FAF6C9249230E200E2E6A2 /* WaveView.swift in Sources */,
-				94A57A9E24A0C9F7001548F7 /* BannerView.swift in Sources */,
 				940D0261247D5C1D00E17095 /* SceneDelegate.swift in Sources */,
 				940D0266247D5C1D00E17095 /* ContentView.swift in Sources */,
 				940D0264247D5C1D00E17095 /* Umbriel.xcdatamodeld in Sources */,

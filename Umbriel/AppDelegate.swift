@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import GoogleMobileAds
+import Purchases
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
+        Purchases.debugLogsEnabled = true
+        Purchases.configure(withAPIKey: "IAlpYszxlPklFfPDMWKoQgbOcbTfIYRG")
         
         return true
     }

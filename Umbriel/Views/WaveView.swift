@@ -49,11 +49,6 @@ struct WaveView: View {
             self.isAnimated = true
             
         }
-        .onDisappear() {
-            print("WaveView disappears")
-            self.isAnimated = false
-            
-        }
     }
 }
 

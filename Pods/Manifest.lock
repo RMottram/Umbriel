@@ -32,9 +32,11 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.10)
+  - Purchases (3.5.2)
 
 DEPENDENCIES:
   - Google-Mobile-Ads-SDK
+  - Purchases (= 3.5.2)
 
 SPEC REPOS:
   trunk:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
+    - Purchases
 
 SPEC CHECKSUMS:
   Google-Mobile-Ads-SDK: aec52559ce73ddf1e6478d1904dd71a741f1bc61
@@ -52,7 +55,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
+  Purchases: 25f8a9949c1a2a05ae15987c574d52726f0f1b2a
 
-PODFILE CHECKSUM: e3ec480d2f2bea42e189f72581b3acbd8521b50e
+PODFILE CHECKSUM: a7ac34ea11fb24aae12fad6e10bd062b5db6d83e
 
 COCOAPODS: 1.9.3

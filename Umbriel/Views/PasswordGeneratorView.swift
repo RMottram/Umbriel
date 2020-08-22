@@ -10,9 +10,9 @@ import SwiftUI
 
 struct PasswordGeneratorView: View {
     
-    @State var showBanner:Bool = false
-    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
+    var hapticGen = Haptics()
     
+    @State var showCopyNote:Bool = false
     @State var generatedPassword = "Password generates here!"
     @State var passwordLength:Double = 8
     @State var numbersLength:Double = 2
@@ -28,6 +28,19 @@ struct PasswordGeneratorView: View {
     var body: some View {
         
         VStack {
+            
+            NotificationBannerView()
+                .offset(x: self.showCopyNote ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width)
+                .animation(.interpolatingSpring(mass: 1, stiffness: 80, damping: 10, initialVelocity: 1))
+                .onTapGesture {
+                    withAnimation {
+                        self.showCopyNote = false
+                    }
+            }
+            .onDisappear(perform: {
+                self.showCopyNote = false
+            })
+            
             /*
              ================================================================================================================================
              MARK: Password Generator Field
@@ -49,10 +62,10 @@ struct PasswordGeneratorView: View {
                  MARK: Password Length Slider
                  ================================================================================================================================
                 */
-                Section(header: Text("Length: \(NoDecimal(number: passwordLength))")) {
+                Section(header: Text("Length: \(NoDecimal(number: passwordLength))").font(.system(size: 12, design: .rounded))) {
                     
                     HStack {
-                        Text("8")
+                        Text("8").font(.system(.body, design: .rounded))
                         ZStack {
                             
                             LinearGradient(
@@ -61,11 +74,24 @@ struct PasswordGeneratorView: View {
                                 endPoint: .trailing
                             )
                                 .mask(Slider(value: $passwordLength, in: 8...40, step: 1))
-                            Slider(value: $passwordLength, in: 8...40, step: 1)
-                                .opacity(0.05)
+                            Slider(value: $passwordLength, in: 8...40, step: 1, onEditingChanged: {_ in
+                                self.buttonPressed = true
+                                self.generatedPassword = randomPasswordUpLow(length: Int(self.passwordLength))
+                                
+                                if self.isNumbers {
+                                    self.generatedPassword = randomPasswordWithNumbers(length: Int(self.passwordLength))
+                                }
+                                if self.isSymbols {
+                                    self.generatedPassword = randomPasswordWithSymbols(length: Int(self.passwordLength))
+                                }
+                                if self.isSymbols && self.isNumbers {
+                                    self.generatedPassword = randomPasswordWithAll(length: Int(self.passwordLength))
+                                }
+                            })
+                                .opacity(0.02)
                             
                         }
-                        Text("40")
+                        Text("40").font(.system(.body, design: .rounded))
                     }
                 }
                 /*
@@ -73,13 +99,42 @@ struct PasswordGeneratorView: View {
                  MARK: Password Options
                  ================================================================================================================================
                 */
-                Section(header: Text("Configurations")) {
+                Section(header: Text("Configurations").font(.system(size: 12, design: .rounded))) {
                     
                     Toggle(isOn: self.$isNumbers) {
-                        Text("Numbers")
+                        Text("Numbers").font(.system(.body, design: .rounded))
+                    }
+                    .onTapGesture {
+                        self.buttonPressed = true
+                        self.generatedPassword = randomPasswordUpLow(length: Int(self.passwordLength))
+                        
+                        if self.isNumbers {
+                            self.generatedPassword = randomPasswordWithNumbers(length: Int(self.passwordLength))
+                        }
+                        if self.isSymbols {
+                            self.generatedPassword = randomPasswordWithSymbols(length: Int(self.passwordLength))
+                        }
+                        if self.isSymbols && self.isNumbers {
+                            self.generatedPassword = randomPasswordWithAll(length: Int(self.passwordLength))
+                        }
+                        self.hapticGen.simpleSelectionFeedback()
                     }
                     Toggle(isOn: self.$isSymbols) {
-                        Text("Symbols")
+                        Text("Symbols").font(.system(.body, design: .rounded))
+                    }.onTapGesture {
+                        self.buttonPressed = true
+                        self.generatedPassword = randomPasswordUpLow(length: Int(self.passwordLength))
+                        
+                        if self.isNumbers {
+                            self.generatedPassword = randomPasswordWithNumbers(length: Int(self.passwordLength))
+                        }
+                        if self.isSymbols {
+                            self.generatedPassword = randomPasswordWithSymbols(length: Int(self.passwordLength))
+                        }
+                        if self.isSymbols && self.isNumbers {
+                            self.generatedPassword = randomPasswordWithAll(length: Int(self.passwordLength))
+                        }
+                        self.hapticGen.simpleSelectionFeedback()
                     }
                     
                 }
@@ -92,6 +147,7 @@ struct PasswordGeneratorView: View {
                     Button(action: {
                         
                         self.buttonPressed = true
+                        self.hapticGen.simpleSuccess()
                         
                         self.generatedPassword = randomPasswordUpLow(length: Int(self.passwordLength))
                         
@@ -106,19 +162,25 @@ struct PasswordGeneratorView: View {
                         }
                         
                     }) {
-                        Text("Generate")
+                        Text("Generate").font(.system(.body, design: .rounded))
                     }
                     Button(action: {
+                        self.hapticGen.simpleSuccess()
                         UIPasteboard.general.string = self.generatedPassword
-                        self.showBanner = true
+                        self.showCopyNote = true
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 4)
+                        {
+                            withAnimation { self.showCopyNote = false }
+                        }
+                        
                     })
                     {
-                        Text("Copy password")
+                        Text("Copy password").font(.system(.body, design: .rounded))
                     }
                 }
             }.offset(y: 30)
         }
-        .banner(data: $bannerData, show: $showBanner)
     }
 }
 

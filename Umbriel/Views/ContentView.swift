@@ -11,15 +11,12 @@ import GoogleMobileAds
 
 struct ContentView: View
 {
-    
     @State var interstital: GADInterstitial!
     
     @State private var selectedTab = 0
     
     var passwordTester = PasswordLogic()
-    
-    @State private var showBanner:Bool = false
-    @State var bannerData: BannerModifier.BannerData = BannerModifier.BannerData(detail: "Password copied!", type: .Info)
+    var hapticGen = Haptics()
     
     @State private var isPurchased:Bool = false
     @State private var isInfoView = false
@@ -81,25 +78,41 @@ struct ContentView: View
              */
             VStack
                 {
+                    NotificationBannerView()
+                        .offset(x: self.showCopyNote ? UIScreen.main.bounds.width/3 : UIScreen.main.bounds.width)
+                        .animation(.interpolatingSpring(mass: 1, stiffness: 80, damping: 10, initialVelocity: 1))
+                        .onTapGesture {
+                            withAnimation {
+                                self.showCopyNote = false
+                            }
+                    }
+                    .onDisappear(perform: {
+                        self.showCopyNote = false
+                    })
+                    
                     ZStack(alignment: .leading) {
                         
-                        Button(action: {
-                            self.isInfoView = true
-                            
-                            // dismiss keyboard
-                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        })
-                        {
-                            Image(systemName: "info.circle").font(.title).foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                        HStack {
+                            Button(action: {
+                                self.isInfoView = true
+                                
+                                // dismiss keyboard
+                                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                            })
+                            {
+                                Image(systemName: "info.circle").font(.largeTitle).foregroundColor(Color.init(red: 58/255, green: 146/255, blue: 236/255))
+                                }
+                            .offset(x: 20, y: -50)
                         }
-                        .offset(x: 20, y: -40)
                         
                         HStack
                             {
                                 if self.isHidden
                                 {
                                     SecureField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed"); self.TestPass()
+                                        self.hapticGen.simpleSuccess()
                                         self.passwordTestCounter += 1
+                                        
                                         // MARK: Interstital Ad
                                         // interstital ad, comment to remove for own device
 //                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
@@ -120,7 +133,9 @@ struct ContentView: View
                                 } else
                                 {
                                     TextField("Enter Password...", text: self.$password, onCommit: { print("DEBUG: Go pressed"); self.TestPass()
+                                        self.hapticGen.simpleSuccess()
                                         self.passwordTestCounter += 1
+                                        
                                         // MARK: Interstital Ad
                                         // interstital ad, comment to remove for own device
 //                                        if self.interstital.isReady && self.passwordTestCounter == 15 {
@@ -141,6 +156,7 @@ struct ContentView: View
                                 }
                                 
                                 Button(action: { self.isHidden.toggle(); self.TestPass(); self.passwordTestCounter += 1
+                                    self.hapticGen.simpleSelectionFeedback()
                                     // interstital ad, comment to remove for own device
                                     // MARK: Interstital Ad
 //                                    if self.interstital.isReady && self.passwordTestCounter == 15 {
@@ -157,9 +173,16 @@ struct ContentView: View
                                         .padding(.top, 30)
                                 }
                                 Button(action: {
+                                    self.hapticGen.simpleSelectionFeedback()
                                     self.TestPass()
                                     UIPasteboard.general.string = self.password
-                                    self.showBanner = true
+                                    self.showCopyNote = true
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 4)
+                                    {
+                                        withAnimation { self.showCopyNote = false }
+                                    }
+                                    
                                 })
                                 {
                                     Image(systemName: "doc.on.clipboard")
@@ -172,9 +195,6 @@ struct ContentView: View
                     
                     Divider()
                         .padding(.horizontal, 20)
-                    
-                    // displays the password score. not for user viewing
-                    //Text("\(OneDecimal(number: score))").font(.system(size: 30, design: .rounded))
                     
                     /*
                      ============================================================================================================================
@@ -266,7 +286,7 @@ struct ContentView: View
             }.tag(2)
             
         }
-        .banner(data: $bannerData, show: $showBanner).sheet(isPresented: $isInfoView) {
+        .sheet(isPresented: $isInfoView) {
             InfoView()
         }
         .onAppear() {
@@ -281,11 +301,6 @@ struct ContentView: View
      MARK: ContentView Functions
      ================================================================================================================================
      */
-    
-    func OneDecimal(number: Double) -> String
-    {
-        return String(format: "%.1f", number)
-    }
     
     func TestPass() {
         
@@ -323,7 +338,6 @@ struct ContentView: View
                 self.isVeryStrong = true
         }
     }
-    
 }
 
 struct BannerAdView: UIViewRepresentable {

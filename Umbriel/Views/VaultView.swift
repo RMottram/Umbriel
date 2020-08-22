@@ -15,23 +15,26 @@ import GoogleMobileAds
 
 struct VaultView: View {
     
+    var hapticGen = Haptics()
+    
     // get Vault contents and sort them
     @Environment(\.managedObjectContext) var context
     @FetchRequest(entity: Vault.entity(), sortDescriptors: [NSSortDescriptor(keyPath: \Vault.title, ascending: true)])
     var createdPasswords: FetchedResults<Vault>
     
-    @State private var isActionSheetShowing:Bool = false
+    @State private var vaultIsFull:Bool = false
+    @State private var showVaultIsFull:Bool = false
+    @State private var isEditing:Bool = false
+    @State private var isHidden:Bool = true
     @State private var noBiometrics:Bool = false
     @State private var isUnlocked: Bool = false
     @State private var isAnyInfoMissing:Bool = false
     @State var searchText = ""
     
     @State var passwordTitle:String = ""
-    // optional at first but added space so can be updated properly in future
     @State var loginItem:String = ""
     @State var passwordEntry:String = ""
-    // add note within PasswordDetailView, space is required to avoid erroneous errors
-    @State var note:String = " "
+    @State var note:String = "Notes appear here"
     
     var body: some View {
         
@@ -49,12 +52,7 @@ struct VaultView: View {
                         
                         VStack {
                             VStack {
-                                
-                                Text("TheVault is where you can safely store any passwords you may want to keep in a safe and secure environment using Apples own security built-in to every device and iOS.")
-                                    .font(.system(.footnote, design: .rounded)).fontWeight(.regular)
-                                
-                                Divider()
-                                    .padding(.bottom, 10)
+                                Divider().padding(.vertical, 10)
                                 /*
                                  ================================================================================================================
                                  MARK: Password Entry Details
@@ -64,36 +62,73 @@ struct VaultView: View {
                                     .font(.system(.title, design: .rounded))
                                     .autocapitalization(.words)
                                     .disableAutocorrection(false)
+                                
                                 TextField("*Login Item", text: self.$loginItem)
                                     .font(.system(.body, design: .rounded))
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
                                     .keyboardType(.emailAddress)
-                                TextField("*Password", text: self.$passwordEntry)
+                                
+                                TextField("*Password", text: self.$passwordEntry, onCommit: {
+                                    if self.passwordTitle == "" || self.passwordEntry == "" || self.loginItem == "" {
+                                        self.isAnyInfoMissing = true
+                                        self.hapticGen.simpleError()
+                                    } else {
+                                        self.hapticGen.simpleSuccess()
+                                        self.addPassword()
+                                        
+                                        // dismiss keyboard
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                    }
+                                })
                                     .font(.system(.body, design: .rounded))
                                     .disableAutocorrection(true)
                                     .autocapitalization(.none)
+                                    .keyboardType(.webSearch)
                                 
                                 Divider().padding(.top, 10)
                                 
                             }.padding(.horizontal, 20)
                             
-                            
-                            SearchBar(text: $searchText)
-                                .padding(.top, 10)
+                            /*
+                             ====================================================================================================================
+                             MARK: Search Bar
+                             ====================================================================================================================
+                             */
+                            VStack {
+                                SearchBar(text: $searchText)
+                                    .padding(.top, 10)
+                                HStack {
+                                    Spacer()
+                                    if self.createdPasswords.count == 1 {
+                                        Text("\(createdPasswords.count) entry").font(.system(.caption, design: .rounded)).foregroundColor(.secondary).fontWeight(.light)
+                                            .padding(.trailing, 12)
+                                    }
+                                    if self.createdPasswords.count >= 2 || self.createdPasswords.count == 0 {
+                                        Text("\(createdPasswords.count) entries").font(.system(.caption, design: .rounded)).foregroundColor(.secondary).fontWeight(.light)
+                                            .padding(.trailing, 12)
+                                    }
+                                }
+                            }
                             
                             /*
                              ====================================================================================================================
                              MARK: Password Entries List
                              ====================================================================================================================
                              */
-                            List {
-                                ForEach(self.createdPasswords.filter({ searchText.isEmpty ? true : $0.description.contains(searchText) })) { passwords in
-                                    NavigationLink(destination: PasswordDetailView(description: passwords, loginItem: passwords, password: passwords, note: passwords)) {
-                                        EntryRow(passwordEntry: passwords)
-                                    }
-                                }.onDelete(perform: self.removePasswordEntry)
-                                
+                            if createdPasswords.count == 0 {
+                                Spacer()
+                                Text("No entries found, fill out password information and press the \"+\" button").foregroundColor(.secondary)
+                                    .font(.system(.title, design: .rounded)).multilineTextAlignment(.center).padding(.horizontal, 20)
+                                Spacer()
+                            } else {
+                                List {
+                                    ForEach(self.createdPasswords.filter({ searchText.isEmpty ? true : $0.description.contains(searchText) })) { passwords in
+                                        NavigationLink(destination: PasswordDetailView(description: passwords, loginItem: passwords, password: passwords, note: passwords)) {
+                                            EntryRow(passwordEntry: passwords)
+                                        }
+                                    }.onDelete(perform: self.removePasswordEntry)
+                                }
                             }
                             // MARK: banner Ad
                             // Google AdMob test banner
@@ -111,24 +146,22 @@ struct VaultView: View {
                                 HStack {
                                     Button(action: {
                                         if self.passwordTitle == "" || self.passwordEntry == "" || self.loginItem == "" {
-                                            if self.getRecordsCount() == 48 {
-                                                print("DEBUG: 48 entries made")
-                                            }
                                             self.isAnyInfoMissing = true
+                                            self.hapticGen.simpleError()
                                         } else {
+                                            self.hapticGen.simpleSuccess()
                                             self.addPassword()
                                             
                                             // dismiss keyboard
                                             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                                         }
-                                        
                                     }) {
                                         Image(systemName: "plus.circle.fill")
-                                            .font(.largeTitle)
-                                    }.foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255))
-                                        .alert(isPresented: self.$isAnyInfoMissing) {
-                                            Alert(title: Text("Missing Information"), message: Text("One or more required fields were left blank, please ensure to enter all required information"), dismissButton: .default(Text("OK")))
+                                            .foregroundColor(Color.init(red: 117/255, green: 211/255, blue: 99/255)).font(.largeTitle)
                                     }
+                                }
+                                .alert(isPresented: self.$isAnyInfoMissing) {
+                                    Alert(title: Text("Missing Information"), message: Text("One or more required fields were left blank, please ensure to enter all required information"), dismissButton: .default(Text("OK")))
                             })
                     }.onDisappear(perform: lockVault)
                     
@@ -144,7 +177,8 @@ struct VaultView: View {
                  MARK: Vault Locked View Start
                  ================================================================================================================================
                  */
-            } else {
+            }
+            else {
                 
                 VStack {
                     Text("TheVault requires the use of your devices' TouchID or FaceID sensors to be used. If these have not been activated please activate them in your devices settings.")
@@ -163,6 +197,7 @@ struct VaultView: View {
                         Text("Unlock TheVault")
                             .font(.system(.title, design: .rounded))
                             .onTapGesture {
+                                self.hapticGen.simpleImpactSoft()
                                 self.authenticate()
                         }
                     }
@@ -175,7 +210,8 @@ struct VaultView: View {
              */
         }.alert(isPresented: $noBiometrics) {
             Alert(title: Text("No biometrics available"), message: Text("This device has no biometric security setup. Please setup biometrics in device settings to use TheVault."), dismissButton: .default(Text("OK")))
-        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             
             self.lockVault()
         }
@@ -208,7 +244,7 @@ struct VaultView: View {
         newPassword.loginItem = loginItem
         newPassword.password = passwordEntry
         newPassword.dateCreated = Date()
-        newPassword.notes = note
+        newPassword.notes = "\(passwordTitle) note"
         
         do {
             try context.save()
@@ -216,9 +252,9 @@ struct VaultView: View {
             print(error)
         }
         
-        passwordTitle = ""
-        loginItem = ""
-        passwordEntry = ""
+        passwordTitle.removeAll()
+        loginItem.removeAll()
+        passwordEntry.removeAll()
         
     }
     
@@ -277,7 +313,8 @@ struct EntryRow: View {
         
         HStack {
             VStack(alignment: .leading) {
-                Text(passwordEntry.title ?? "No title given").font(.system(.headline, design: .rounded)).bold()
+                Text(passwordEntry.title ?? "No title given").font(.system(.body, design: .rounded)).bold()
+                    .padding(.vertical, 15)
             }
         }
     }

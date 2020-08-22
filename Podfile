@@ -7,6 +7,7 @@ target 'Umbriel' do
 
   # Pods for Umbriel
   pod 'Google-Mobile-Ads-SDK'
+  pod 'Purchases', '3.5.2'
 
   target 'UmbrielTests' do
     inherit! :search_paths
