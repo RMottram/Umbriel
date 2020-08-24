@@ -1,6 +1,6 @@
 //
 //  MailView.swift
-//  
+//
 //
 //  Created by Ryan Mottram on 22/08/2020.
 //

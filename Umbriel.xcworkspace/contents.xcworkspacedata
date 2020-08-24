@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/ryan/GitHub/Umbriel/Umbriel/Views/MailView.swift">
-   </FileRef>
-   <FileRef
       location = "group:Umbriel.xcodeproj">
    </FileRef>
    <FileRef

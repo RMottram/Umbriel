@@ -48,7 +48,9 @@ struct InfoView: View {
                             .frame(width: UIScreen.main.bounds.size.width/2.5, height: UIScreen.main.bounds.size.height/14)
                             .cornerRadius(16)
                             .onTapGesture {
-                                self.presentationMode.wrappedValue.dismiss()
+                                guard let writeReviewURL = URL(string: "https://apps.apple.com/app/id1520674335?action=write-review")
+                                    else { fatalError("Expected a valid URL") }
+                                UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
                         }
                         
                         Button(action: {
@@ -70,7 +72,13 @@ struct InfoView: View {
                             .frame(width: UIScreen.main.bounds.size.width/2.5, height: UIScreen.main.bounds.size.height/14)
                             .cornerRadius(16)
                             .onTapGesture {
-                                self.presentationMode.wrappedValue.dismiss()
+                                if MFMailComposeViewController.canSendMail() {
+                                   self.isShowingMailView.toggle()
+                                } else if let emailUrl = MailView.createEmailUrl(subject: "Umbriel Feedback and Suggestions", body: "") {
+                                   UIApplication.shared.open(emailUrl)
+                                } else {
+                                   self.alertNoMail.toggle()
+                                }
                         }
                         
                         Button(action: {

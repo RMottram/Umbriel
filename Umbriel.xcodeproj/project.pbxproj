@@ -17,10 +17,11 @@
 		940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */; };
 		940D0279247D5C1E00E17095 /* UmbrielTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0278247D5C1E00E17095 /* UmbrielTests.swift */; };
 		940D0284247D5C1E00E17095 /* UmbrielUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940D0283247D5C1E00E17095 /* UmbrielUITests.swift */; };
-		94184B1524F1AD230090B1F8 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94184B1424F1AD230090B1F8 /* MailView.swift */; };
 		9422B16E24E7FA0B00587C1D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9422B16D24E7FA0B00587C1D /* StoreKit.framework */; };
 		9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */; };
 		943981DA24ED28C000266089 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943981D924ED28C000266089 /* Haptics.swift */; };
+		9440580824F2B72600EEFD1A /* iPadLaunchScreeen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9440580724F2B72600EEFD1A /* iPadLaunchScreeen.storyboard */; };
+		9440580C24F2BADB00EEFD1A /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9440580B24F2BADB00EEFD1A /* MailView.swift */; };
 		944B2D8924D9A17200B4D60F /* PasswordDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */; };
 		9491406024D84F05005785E2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9491405F24D84F05005785E2 /* CloudKit.framework */; };
 		9492157924A6019600E6F956 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9492157824A6019600E6F956 /* InfoView.swift */; };
@@ -73,10 +74,11 @@
 		940D027F247D5C1E00E17095 /* UmbrielUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UmbrielUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940D0283247D5C1E00E17095 /* UmbrielUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrielUITests.swift; sourceTree = "<group>"; };
 		940D0285247D5C1E00E17095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		94184B1424F1AD230090B1F8 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MailView.swift; path = /Users/ryan/GitHub/Umbriel/Umbriel/Views/MailView.swift; sourceTree = "<absolute>"; };
 		9422B16D24E7FA0B00587C1D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneratorView.swift; sourceTree = "<group>"; };
 		943981D924ED28C000266089 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Haptics.swift; path = Umbriel/Haptics.swift; sourceTree = SOURCE_ROOT; };
+		9440580724F2B72600EEFD1A /* iPadLaunchScreeen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = iPadLaunchScreeen.storyboard; sourceTree = "<group>"; };
+		9440580B24F2BADB00EEFD1A /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailView.swift; sourceTree = "<group>"; };
 		946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = TestingPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9491405E24D84EFE005785E2 /* Umbriel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Umbriel.entitlements; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				946F80CC24928B6600C6C9B4 /* TestingPlayground.playground */,
 				940D0267247D5C1E00E17095 /* Assets.xcassets */,
 				940D026C247D5C1E00E17095 /* LaunchScreen.storyboard */,
+				9440580724F2B72600EEFD1A /* iPadLaunchScreeen.storyboard */,
 				940D026F247D5C1E00E17095 /* Info.plist */,
 				940D0262247D5C1D00E17095 /* Umbriel.xcdatamodeld */,
 				940D0269247D5C1E00E17095 /* Preview Content */,
@@ -205,8 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				940D0265247D5C1D00E17095 /* ContentView.swift */,
+				9440580B24F2BADB00EEFD1A /* MailView.swift */,
 				9492157824A6019600E6F956 /* InfoView.swift */,
-				94184B1424F1AD230090B1F8 /* MailView.swift */,
 				94C2563A24F11A1B0093F491 /* NotificationBannerView.swift */,
 				944B2D8824D9A17200B4D60F /* PasswordDetailView.swift */,
 				9433503924A8A37500EBC680 /* PasswordGeneratorView.swift */,
@@ -351,6 +354,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				940D026E247D5C1E00E17095 /* LaunchScreen.storyboard in Resources */,
+				9440580824F2B72600EEFD1A /* iPadLaunchScreeen.storyboard in Resources */,
 				940D026B247D5C1E00E17095 /* Preview Assets.xcassets in Resources */,
 				940D0268247D5C1E00E17095 /* Assets.xcassets in Resources */,
 			);
@@ -485,7 +489,7 @@
 				94B3630724CB1A6C005C67A3 /* VaultView.swift in Sources */,
 				94E774C32497D6D100F15797 /* PasswordStrengthLogic.swift in Sources */,
 				9433503A24A8A37500EBC680 /* PasswordGeneratorView.swift in Sources */,
-				94184B1524F1AD230090B1F8 /* MailView.swift in Sources */,
+				9440580C24F2BADB00EEFD1A /* MailView.swift in Sources */,
 				94C2563B24F11A1B0093F491 /* NotificationBannerView.swift in Sources */,
 				94B3630924CB27CD005C67A3 /* VaultExtensions.swift in Sources */,
 				940D025F247D5C1D00E17095 /* AppDelegate.swift in Sources */,
